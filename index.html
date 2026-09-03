@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sống Cho Mình Mà Không Cảm Thấy Có Lỗi™ — Workshop 3 Buổi</title>
+<meta name="description" content="Workshop online 3 buổi giúp phụ nữ đang kiệt sức vì luôn đặt người khác lên trước học cách nhìn ra, thấu hiểu và sống theo lựa chọn của chính mình. Buổi 1 & 2 miễn phí.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Sống Cho Mình Mà Không Cảm Thấy Có Lỗi™">
+<meta property="og:description" content="3 buổi học online giúp bạn nhìn ra, thấu hiểu và sống theo lựa chọn của chính mình — không cần hy sinh gia đình, không cần trở thành người ích kỷ.">
+<meta property="og:image" content="assets/founder.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* ===== DNA-05 — Warm Copper Founder (nguyên bản, color-systems.md #5) ===== */
+  --bg: #FDE5D0;
+  --surface: #FFFFFF;
+  --surface-2: #FFF6EC;
+  --text: #3D2A1A;
+  --text-muted: #6B5340;
+  --accent: #C77539;
+  --accent-deep: #8F5226;
+  --accent-soft: rgba(199, 117, 57, 0.15);
+  --border: rgba(61, 42, 26, 0.12);
+
+  --font-h: 'Lora', Georgia, serif;
+  --font-b: 'Roboto', system-ui, sans-serif;
+
+  --max-w: 1100px;
+  --max-w-narrow: 760px;
+  --section-py: clamp(56px, 9vw, 112px);
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-b); background: var(--bg); color: var(--text);
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+h1, h2, h3, h4 { font-family: var(--font-h); line-height: 1.25; font-weight: 700; color: var(--text); }
+h1 { font-size: clamp(2rem, 5.5vw, 3.75rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.65rem, 3.8vw, 2.6rem); letter-spacing: -0.01em; }
+h3 { font-size: clamp(1.2rem, 2.4vw, 1.5rem); }
+p { color: var(--text-muted); }
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+.container-narrow { max-width: var(--max-w-narrow); margin: 0 auto; padding: 0 24px; }
+.section { padding: var(--section-py) 0; position: relative; }
+.section-alt { background: var(--surface); }
+
+.eyebrow {
+  display: inline-block; font-family: var(--font-h); font-style: italic;
+  font-size: 0.95rem; letter-spacing: 0.04em; color: var(--accent-deep);
+  font-weight: 600; margin-bottom: 14px;
+}
+.eyebrow::before { content: "✦ "; color: var(--accent); }
+
+.badge {
+  display: inline-block; padding: 8px 18px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent-deep);
+  font-size: 0.875rem; font-weight: 600; letter-spacing: 0.02em;
+  border: 1px solid var(--border);
+}
+.btn-primary {
+  display: inline-block; padding: 18px 36px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  color: #FFFFFF; border-radius: var(--radius);
+  font-weight: 700; font-size: 1.05rem; font-family: var(--font-h);
+  transition: all 0.2s; box-shadow: 0 6px 20px var(--accent-soft);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px var(--accent-soft); }
+.btn-secondary {
+  display: inline-block; padding: 16px 32px;
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius); font-weight: 600;
+}
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+
+.text-center { text-align: center; }
+.text-accent { color: var(--accent-deep); }
+.text-muted { color: var(--text-muted); }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
+.mt-8 { margin-top: 32px; } .mt-12 { margin-top: 48px; } .mt-16 { margin-top: 64px; }
+
+/* ===== HERO — 2-col with portrait (DNA-05) ===== */
+.hero { padding: clamp(64px, 10vw, 120px) 0 var(--section-py); }
+.hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+.hero-portrait {
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+  padding: 18px; max-width: 420px; margin: 0 auto; position: relative;
+}
+.hero-portrait img {
+  border-radius: 50%; aspect-ratio: 1/1; object-fit: cover;
+  border: 4px solid var(--accent); box-shadow: 0 16px 48px var(--accent-soft);
+}
+.hero-portrait::after {
+  content: ""; position: absolute; bottom: 8%; right: 6%;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); border: 3px solid var(--bg);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.hero-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; }
+.hero-info-card {
+  background: var(--surface-2); border: 1px solid var(--border);
+  padding: 16px 12px; border-radius: 10px; text-align: center;
+}
+.hero-info-card .icon { font-size: 1.3rem; margin-bottom: 6px; }
+.hero-info-card .label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+@media (max-width: 600px) { .hero-info { grid-template-columns: 1fr; } }
+
+/* ===== Audience checklist ===== */
+.audience-list { display: grid; gap: 14px; }
+.audience-item {
+  background: var(--surface-2); padding: 18px 24px 18px 56px;
+  border-radius: 10px; position: relative; color: var(--text);
+  border: 1px solid var(--border);
+}
+.audience-item::before {
+  content: "✓"; position: absolute; left: 20px; top: 18px;
+  width: 24px; height: 24px; background: var(--accent); color: #FFFFFF;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem;
+}
+
+/* ===== Story narrative ===== */
+.story-narrative p { font-size: 1.08rem; margin-bottom: 18px; color: var(--text); }
+.story-narrative p.muted { color: var(--text-muted); }
+.story-narrative .pull-quote {
+  font-family: var(--font-h); font-style: italic; font-size: 1.3rem; font-weight: 600;
+  color: var(--accent-deep); border-left: 3px solid var(--accent);
+  padding-left: 24px; margin: 32px 0;
+}
+.story-banner { margin: 40px auto; max-width: 380px; }
+.story-banner img {
+  border-radius: var(--radius); box-shadow: 0 16px 40px var(--accent-soft);
+  border: 1px solid var(--border);
+}
+
+/* ===== Pillar cards ===== */
+.pillar {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 40px 28px 32px; position: relative;
+}
+.pillar-num {
+  position: absolute; top: -16px; left: 28px;
+  background: var(--accent); color: #FFFFFF;
+  padding: 6px 16px; border-radius: 999px;
+  font-family: var(--font-h); font-weight: 700; font-size: 0.85rem;
+}
+.pillar-quote {
+  font-style: italic; color: var(--accent-deep);
+  font-family: var(--font-h); font-size: 1.05rem;
+  margin: 16px 0 16px; padding-left: 16px;
+  border-left: 2px solid var(--accent);
+}
+.pillar p { font-size: 0.96rem; }
+
+/* ===== Outcomes grid ===== */
+.outcomes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+.outcome-card {
+  background: var(--surface-2); border: 1px solid var(--border);
+  padding: 28px 24px; border-radius: var(--radius);
+}
+.outcome-card .num { font-family: var(--font-h); font-weight: 700; color: var(--accent); font-size: 1.1rem; margin-bottom: 8px; }
+.outcome-card h4 { font-family: var(--font-h); font-size: 1.1rem; margin-bottom: 8px; }
+.outcome-card p { font-size: 0.95rem; }
+
+/* ===== Curriculum sessions ===== */
+.session {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px 28px; position: relative;
+}
+.session.vip { border: 1.5px solid var(--accent); background: linear-gradient(180deg, var(--surface-2) 0%, var(--accent-soft) 140%); }
+.session-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px; background: var(--accent); color: #FFFFFF;
+  border-radius: 50%; font-family: var(--font-h); font-weight: 800; font-size: 1.35rem;
+  margin-bottom: 18px;
+}
+.session-date { color: var(--accent-deep); font-weight: 600; font-family: var(--font-h); margin-bottom: 14px; font-size: 0.95rem; }
+.session ul { list-style: none; padding: 0; margin-top: 8px; }
+.session ul li { padding: 8px 0 8px 26px; position: relative; color: var(--text); font-size: 0.94rem; }
+.session ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.vip-tag {
+  position: absolute; top: -13px; right: 24px; background: var(--accent-deep);
+  color: #FFFFFF; padding: 5px 14px; border-radius: 999px; font-size: 0.78rem; font-weight: 700;
+}
+
+/* ===== Founder section ===== */
+.founder-grid { display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+@media (max-width: 800px) { .founder-grid { grid-template-columns: 1fr; } }
+.founder-portrait { border-radius: 50%; overflow: hidden; border: 4px solid var(--accent); box-shadow: 0 14px 40px var(--accent-soft); max-width: 260px; margin: 0 auto; aspect-ratio: 1/1; }
+.founder-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.founder-bio-list { list-style: none; padding: 0; margin-top: 20px; }
+.founder-bio-list li { padding: 8px 0 8px 26px; position: relative; color: var(--text); font-size: 0.97rem; }
+.founder-bio-list li::before { content: "◆"; position: absolute; left: 0; top: 10px; color: var(--accent); font-size: 0.6rem; }
+.founder-quote {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px; margin-top: 28px;
+  font-family: var(--font-h); font-size: 1.1rem; color: var(--accent-deep); font-style: italic;
+}
+.placeholder-note { color: var(--accent-deep); font-size: 0.82rem; font-style: italic; }
+
+/* ===== Pricing ===== */
+.pricing-card {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 36px 32px; position: relative;
+}
+.pricing-card.featured { border: 2px solid var(--accent); box-shadow: 0 16px 48px var(--accent-soft); }
+.pricing-card .tier-badge {
+  position: absolute; top: -14px; left: 32px; background: var(--accent);
+  color: #FFFFFF; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
+}
+.pricing-card h3 { margin-bottom: 6px; }
+.pricing-card .price { font-family: var(--font-h); font-size: 2.2rem; font-weight: 800; color: var(--accent-deep); margin: 10px 0 4px; }
+.pricing-card .price-strike { color: var(--text-muted); text-decoration: line-through; font-size: 1rem; }
+.pricing-card ul { list-style: none; padding: 0; margin: 20px 0 28px; }
+.pricing-card ul li { padding: 8px 0 8px 28px; position: relative; color: var(--text); font-size: 0.95rem; }
+.pricing-card ul li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+.guarantee-box {
+  max-width: 560px; margin: 0 auto; text-align: center;
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px 32px;
+}
+.guarantee-box p { font-size: 0.92rem; color: var(--text); }
+
+/* ===== Final CTA ===== */
+.final-cta {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--accent-soft) 100%);
+  border-top: 1px solid var(--border);
+}
+
+/* ===== Sticky mobile CTA ===== */
+.sticky-cta {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0;
+  padding: 12px 16px; background: rgba(250, 243, 236, 0.97);
+  backdrop-filter: blur(12px); border-top: 1px solid var(--accent); z-index: 50;
+}
+.sticky-cta a { display: block; text-align: center; }
+@media (max-width: 700px) { .sticky-cta { display: block; } body { padding-bottom: 76px; } }
+
+footer {
+  padding: 32px 0; background: var(--bg); border-top: 1px solid var(--border);
+  text-align: center; color: var(--text-muted); font-size: 0.875rem;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Dành cho phụ nữ đang làm chủ mọi thứ — sự nghiệp, gia đình, hình ảnh trước mặt người khác — nhưng bên trong đã kiệt sức</span>
+        <h1 class="mt-6">Sống Cho Mình Mà Không Cảm Thấy Có Lỗi™</h1>
+        <p class="mt-6" style="font-size: 1.1rem; max-width: 560px;">
+          3 buổi học online chỉ cho bạn cách nhìn ra, thấu hiểu và sống đúng theo lựa chọn của chính mình. Không cần hy sinh gia đình. Không cần trở thành người ích kỷ. Kết thúc workshop, bạn cầm trong tay bản thiết kế hành động rõ ràng cho những ngày tiếp theo.
+        </p>
+        <div class="mt-8">
+          <span class="badge">Buổi 1 & 2 Miễn Phí · Vé VIP chỉ 99K</span>
+        </div>
+        <div class="hero-info">
+          <div class="hero-info-card"><div class="icon">🕗</div><div class="label">19h30 – 21h30</div></div>
+          <div class="hero-info-card"><div class="icon">📅</div><div class="label">3 buổi tối · định kỳ mỗi tháng</div></div>
+          <div class="hero-info-card"><div class="icon">💻</div><div class="label">Online qua Zoom</div></div>
+        </div>
+        <div class="mt-8">
+          <a href="dang-ky.html" class="btn-primary">Đăng Ký Giữ Chỗ Miễn Phí →</a>
+        </div>
+      </div>
+      <div class="hero-portrait">
+        <img src="assets/hero.jpg" alt="Người sáng lập chương trình Sống Cho Mình Mà Không Cảm Thấy Có Lỗi™">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROBLEM / CHECKLIST ===================== -->
+<section class="section section-alt" id="checklist">
+  <div class="container-narrow">
+    <span class="eyebrow">Bạn có đang gặp những điều này không?</span>
+    <h2>Nhiều năm qua, bạn lo cho sự nghiệp, cho gia đình, cho hình ảnh trước mặt người khác. Nhưng lựa chọn của chính bạn thì bị bỏ lại phía sau.</h2>
+    <p class="mt-6">Kiểm tra xem bạn có bao nhiêu dấu hiệu dưới đây:</p>
+    <div class="audience-list mt-8">
+      <div class="audience-item">Thức dậy đã thấy mệt, dù đêm hôm trước đã cố ngủ sớm.</div>
+      <div class="audience-item">Đã thử spa, thực phẩm chức năng, khóa học phát triển bản thân. Nhưng cảm giác kiệt sức vẫn quay lại.</div>
+      <div class="audience-item">Ra quyết định sắc bén trong công việc, nhưng loay hoay không biết mình có "được phép" nghỉ ngơi.</div>
+      <div class="audience-item">Cảm thấy áy náy, có lỗi mỗi khi định làm gì đó chỉ cho riêng mình.</div>
+      <div class="audience-item">Khó nói "không" với chính gia đình mình, dù ở công việc bạn từ chối rất dứt khoát.</div>
+      <div class="audience-item">Tự trấn an "đợi mọi thứ ổn hơn rồi tính cho mình sau". Nhưng "sau" đó chưa bao giờ đến.</div>
+      <div class="audience-item">Lo sợ nếu cứ tiếp tục như vậy, mình sẽ đánh mất chính mình trong chính ngôi nhà của mình.</div>
+    </div>
+    <p class="mt-8" style="color: var(--text); font-weight: 600;">Nếu bạn có từ 3 dấu hiệu trở lên, cuộc sống của bạn đang cần được nhìn lại theo cách khác.</p>
+    <p class="mt-4">Và quan trọng nhất: đây không phải lỗi của bạn. Cũng không phải "tại có quá nhiều trách nhiệm".</p>
+  </div>
+</section>
+
+<!-- ===================== SỰ THẬT + PHƯƠNG PHÁP ===================== -->
+<section class="section" id="method">
+  <div class="container-narrow story-narrative">
+    <span class="eyebrow">Sự thật là</span>
+    <p><strong style="color: var(--text);">Bạn không kiệt sức vì có quá nhiều trách nhiệm.</strong></p>
+    <p>Trong nhiều năm, những niềm tin cũ đã âm thầm thay bạn đưa ra mọi lựa chọn.</p>
+    <p>Đó là lý do bạn càng cố chịu đựng giỏi hơn càng mệt. Càng học thêm mẹo quản lý thời gian càng rối. Càng cố theo cách cũ, kết quả càng kém.</p>
+    <p class="pull-quote">Bạn không thiếu ý chí. Bạn chỉ chưa từng nhìn thấy gốc rễ đang điều khiển lựa chọn của mình.</p>
+    <p>Và đó chính xác là thứ bạn sẽ nhận được trong workshop này:</p>
+  </div>
+
+  <div class="container mt-12">
+    <h2 class="text-center">Phương Pháp 3 Bước<br>Nhìn Ra — Thấu Hiểu — Sống Theo Lựa Chọn</h2>
+    <p class="text-center mt-4" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+      Cách tái thiết kế lựa chọn được thiết kế riêng cho phụ nữ đang kiệt sức vì luôn đặt người khác lên trước.
+    </p>
+    <div class="grid-3 mt-12">
+      <div class="pillar">
+        <span class="pillar-num">Bước 01</span>
+        <h3 class="mt-6">NHÌN RA</h3>
+        <p class="pillar-quote">"Không phải chuyện tìm thêm mẹo quản lý thời gian."</p>
+        <p>Nhìn thẳng vào những gì đang thật sự làm thất thoát sức khỏe, năng lượng và thời gian của bạn mỗi ngày.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">Bước 02</span>
+        <h3 class="mt-6">THẤU HIỂU</h3>
+        <p class="pillar-quote">"Hiểu vì sao cảm giác có lỗi luôn xuất hiện đúng lúc."</p>
+        <p>Truy đến tận gốc niềm tin đang điều khiển lựa chọn của bạn, ngay khi bạn định chọn điều gì cho bản thân.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">Bước 03</span>
+        <h3 class="mt-6">SỐNG THEO LỰA CHỌN</h3>
+        <p class="pillar-quote">"Bước quyết định bạn có thực sự thay đổi được hay không."</p>
+        <p>Xây một lộ trình chuyển hóa đầu tiên, cụ thể, phù hợp với đúng hoàn cảnh sống của bạn.</p>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+      <a href="dang-ky.html" class="btn-primary">Đăng Ký Giữ Chỗ Ngay →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BẠN NHẬN ĐƯỢC GÌ ===================== -->
+<section class="section section-alt" id="benefits">
+  <div class="container">
+    <h2 class="text-center">Sau 3 buổi học, bạn sẽ có:</h2>
+    <div class="outcomes-grid mt-12">
+      <div class="outcome-card">
+        <div class="num">01</div>
+        <h4>Bản Đồ 6 Điểm Rò Rỉ Năng Lượng™</h4>
+        <p>Xác định chính xác 6 điểm đang làm thất thoát sức khỏe, năng lượng và thời gian của bạn mỗi ngày — thay vì mơ hồ nghĩ "chắc tại mình bận".</p>
+      </div>
+      <div class="outcome-card">
+        <div class="num">02</div>
+        <h4>Bảng Chẩn Đoán Niềm Tin Rào Cản™</h4>
+        <p>Gọi tên đúng niềm tin giới hạn đang khiến bạn luôn đặt bản thân sau cùng, và truy ngược từ một cảm giác có lỗi cụ thể về đúng gốc rễ của nó.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="num">03</div>
+        <h4>Bộ bài tập Nhìn Ra và Thấu Hiểu</h4>
+        <p>Có sẵn khung thực hành ngắn, làm được ngay trong buổi học, không cần chuẩn bị gì trước.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="num">04</div>
+        <h4>Bản Thiết Kế Sống Theo Lựa Chọn™ V1</h4>
+        <p>Rời buổi học cuối với kế hoạch cụ thể: xác định 4 cột mốc hành vi đầu tiên và cam kết một hành động thực hiện ngay trong 24 giờ.</p>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+      <a href="dang-ky.html" class="btn-primary">Đăng Ký Giữ Chỗ →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LỘ TRÌNH 3 BUỔI ===================== -->
+<section class="section" id="curriculum">
+  <div class="container">
+    <span class="eyebrow">Nội dung 3 buổi học</span>
+    <h2>Lộ trình workshop</h2>
+    <p class="mt-4">3 buổi online qua Zoom, mỗi buổi 120 phút — tổ chức định kỳ mỗi tháng theo lịch cố định dưới đây.</p>
+    <div class="grid-3 mt-12">
+      <div class="session">
+        <div class="session-num">1</div>
+        <h3>NHÌN RA</h3>
+        <p class="session-date">Thứ Ba · 19h30 – 21h30</p>
+        <p style="font-style: italic; color: var(--text);">Điều gì đang thật sự lấy đi năng lượng của bạn</p>
+        <ul>
+          <li>Điều gì thật sự khiến phụ nữ hiện đại kiệt sức, giải thích dễ hiểu, không thuật ngữ tâm lý học.</li>
+          <li>3 phản xạ khiến bạn luôn đặt người khác lên trước: sợ bị đánh giá, sợ làm người khác thất vọng, sợ bị coi là ích kỷ.</li>
+          <li>Cách nhìn ra những điểm đang làm "rò rỉ" sức khỏe, năng lượng và thời gian của bạn mỗi ngày.</li>
+          <li>Thực hành ngay: hoàn thành Bản Đồ 6 Điểm Rò Rỉ Năng Lượng™ của chính bạn.</li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-num">2</div>
+        <h3>THẤU HIỂU</h3>
+        <p class="session-date">Thứ Năm · 19h30 – 21h30</p>
+        <p style="font-style: italic; color: var(--text);">Vì sao bạn luôn quay lại lựa chọn cũ, dù biết rõ điều mình cần</p>
+        <ul>
+          <li>Nguyên tắc nhận diện niềm tin giới hạn đang điều khiển các lựa chọn hằng ngày của bạn.</li>
+          <li>Vì sao chỉ nhận thức thôi chưa đủ để thay đổi cuộc sống.</li>
+          <li>Cách truy ngược từ một cảm giác có lỗi cụ thể về đúng niềm tin gốc đã tạo ra nó.</li>
+          <li>Thực hành ngay: hoàn thành Bảng Chẩn Đoán Niềm Tin Rào Cản™, và giới thiệu Phiên Thực Hành Chuyên Sâu (Vé VIP).</li>
+        </ul>
+      </div>
+      <div class="session vip">
+        <span class="vip-tag">Vé VIP</span>
+        <div class="session-num">✦</div>
+        <h3>SỐNG THEO LỰA CHỌN</h3>
+        <p class="session-date">Thứ Ba tuần kế tiếp · 19h30 – 21h30</p>
+        <p style="font-style: italic; color: var(--text);">Phiên Thực Hành Chuyên Sâu — hoàn thiện Bản Thiết Kế Sống Theo Lựa Chọn™ V1</p>
+        <ul>
+          <li>Vì sao một cuộc sống mới không đến từ một quyết định lớn, mà từ việc biết chính xác con đường mình cần đi.</li>
+          <li>Chuyển hóa những gì đã nhìn ra và thấu hiểu thành kế hoạch hành động, bắt đầu ngay từ tuần này.</li>
+          <li>Cách dành thời gian cho bản thân mà không thấy áy náy với gia đình.</li>
+          <li>Hoàn thiện Bản Thiết Kế Sống Theo Lựa Chọn™ V1: xác định 4 cột mốc hành vi đầu tiên và cam kết một hành động thực hiện trong 24 giờ.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+      <a href="dang-ky.html" class="btn-primary">Đăng Ký Giữ Chỗ Ngay →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NGƯỜI HƯỚNG DẪN ===================== -->
+<section class="section section-alt" id="founder">
+  <div class="container">
+    <span class="eyebrow">Người hướng dẫn của bạn</span>
+    <h2>Người sáng lập chương trình</h2>
+    <div class="founder-grid mt-12">
+      <div>
+        <div class="founder-portrait">
+          <img src="assets/founder.jpg" alt="Người sáng lập">
+        </div>
+      </div>
+      <div>
+        <h3>Thắm</h3>
+        <p style="font-style: italic; color: var(--accent-deep); margin-top: 4px;">Kiến trúc sư · HLV Dinh Dưỡng &amp; Wellness Coach · Họa sĩ — Người sáng lập Sống Theo Lựa Chọn™</p>
+        <ul class="founder-bio-list">
+          <li>Tốt nghiệp Kiến trúc, có kinh nghiệm hành nghề thực tế; tốt nghiệp và có chứng chỉ HLV Dinh Dưỡng &amp; Wellness Coach; biết vẽ tranh chì, màu nước và tranh tường</li>
+          <li>Từng khởi nghiệp kinh doanh vườn kiểng từ thời sinh viên, tự tay xây dựng từ con số nhỏ</li>
+          <li>Người xây dựng <strong style="color: var(--text);">Phương Pháp 3 Bước Nhìn Ra, Thấu Hiểu, Sống Theo Lựa Chọn</strong> dành riêng cho phụ nữ đang kiệt sức vì luôn đặt người khác lên trước</li>
+          <li>Từng trải qua giai đoạn kiệt sức toàn diện — sức khỏe suy sụp, mất phương hướng — và tự phục hồi hoàn toàn bằng chính phương pháp mình xây dựng: sức khỏe ổn định, tinh thần vững vàng, lấy lại quyền lựa chọn cuộc sống của chính mình</li>
+          <li>Câu chuyện cá nhân: từng cố làm tròn mọi vai trò cho đến khi sức khỏe lên tiếng — xem đầy đủ hành trình bên dưới</li>
+        </ul>
+        <div class="founder-quote">
+          "Thắm từng sống đúng vị trí của học viên hôm nay — cố gắng làm tròn mọi vai trò cho đến khi cơ thể lên tiếng. Vì vậy chị hiểu rõ cảm giác muốn sống cho mình nhưng không biết bắt đầu từ đâu. Workshop này là những gì chị ước ai đó đã chỉ cho mình từ nhiều năm trước."
+        </div>
+        <div class="mt-8">
+          <a href="dang-ky.html" class="btn-primary">Đăng Ký Giữ Chỗ Ngay →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-narrow story-narrative mt-16">
+      <span class="eyebrow">Câu chuyện của tôi</span>
+      <p>Nhìn từ bên ngoài, tôi từng là một người phụ nữ "có tất cả". Vai trò nào tôi cũng cố làm tròn — một người vợ chu đáo, một người mẹ tận tâm, một người làm nghề với tinh thần trách nhiệm cao. Tôi tin rằng chỉ cần cố thêm một chút, hy sinh thêm một chút, thì gia đình sẽ hạnh phúc và mọi thứ rồi sẽ ổn.</p>
+      <p>Nhưng đằng sau lớp vỏ "ổn" đó là một sự thật khác. Sau khi sinh con, sức khỏe tôi xuống dốc: mất cân bằng nội tiết, tăng mỡ bụng, dị ứng, rụng tóc, và những buổi sáng thức dậy trong trạng thái mệt mỏi trước cả khi ngày mới bắt đầu. Tôi biết mình cần nghỉ ngơi, cần chăm sóc bản thân — nhưng tôi vẫn luôn chọn người khác trước. Tôi học dinh dưỡng, đổi chế độ ăn, đọc sách phát triển bản thân. Mỗi cách đều giúp tôi khá hơn một thời gian ngắn, rồi tôi lại quay về đúng lối cũ — và bắt đầu tin rằng mình thiếu kỷ luật, thiếu quyết tâm.</p>
+      <p class="pull-quote">Bước ngoặt đến khi tôi lần đầu tiên tự hỏi một câu mà trước giờ tôi chưa từng dám hỏi: điều gì thật sự đang quyết định những lựa chọn của mình mỗi ngày — chứ không phải tôi đang thiếu kiến thức gì.</p>
+      <p>Câu hỏi đó dẫn tôi đến một nhận ra: tôi đã sống quá lâu theo những niềm tin và vai trò được hình thành từ gia đình, xã hội, quá khứ — rằng một người phụ nữ tốt phải hy sinh, rằng gia đình luôn phải đứng trước, rằng ưu tiên bản thân là ích kỷ. Chính những niềm tin đó tạo ra cảm giác có lỗi, lo lắng, sợ hãi mỗi khi tôi muốn chọn điều gì tốt cho mình — và cái vòng lặp vô thức giữa niềm tin và cảm xúc ấy mới là thứ âm thầm điều khiển mọi lựa chọn của tôi, không phải vì tôi có quá nhiều trách nhiệm.</p>
+      <div class="story-banner">
+        <img src="assets/story.jpg" alt="Khoảnh khắc tĩnh tại, chữa lành">
+      </div>
+      <p>Tôi không tiếp tục cố gắng nhiều hơn. Tôi bắt đầu thay đổi từ gốc — từ cách tôi nhìn nhận bản thân, từ những niềm tin đang dẫn dắt cảm xúc và lựa chọn hằng ngày. Tôi không còn chăm sóc bản thân vì ép buộc, mà vì hiểu đó là nền tảng để có đủ năng lượng và sự bình an cho những người mình yêu thương.</p>
+      <p>Sức khỏe tôi dần phục hồi, giấc ngủ sâu hơn, tinh thần ổn định hơn. Nhưng thay đổi lớn nhất không phải là cơ thể — mà là tôi lấy lại được quyền lựa chọn cuộc sống của chính mình.</p>
+      <p>Chính trải nghiệm đó khiến tôi nhận ra: rất nhiều phụ nữ không kiệt sức vì có quá nhiều trách nhiệm, mà vì trong nhiều năm, những niềm tin cũ đã âm thầm thay họ đưa ra mọi lựa chọn. Tôi hệ thống hóa hành trình đó thành Phương Pháp Tái Thiết Kế Cuộc Sống Theo Lựa Chọn™, và từ đó xây dựng workshop "Sống Cho Mình Mà Không Cảm Thấy Có Lỗi™" — để những người phụ nữ khác không phải mất nhiều năm loay hoay như tôi mới chạm được đến gốc rễ vấn đề.</p>
+      <div class="text-center mt-12">
+        <a href="dang-ky.html" class="btn-primary">Đăng Ký Giữ Chỗ Ngay →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CHỨNG THỰC =====================
+  Chưa có testimonial thật từ học viên (workshop chưa triển khai lần nào).
+  Theo skill: KHÔNG bịa lời chia sẻ — ẩn section này ở lần chạy đầu tiên,
+  câu chuyện trước/sau của founder đã được lồng vào section "Người Hướng Dẫn" ở trên.
+  Khi có học viên thật, bổ sung lại section theo khung: Trước đây / Điều thay đổi / Bây giờ.
+================================================================= -->
+
+<!-- ===================== HẠNG VÉ ===================== -->
+<section class="section" id="pricing">
+  <div class="container-narrow">
+    <h2 class="text-center">Chọn Hạng Vé Của Bạn</h2>
+    <div class="grid-2 mt-12">
+      <div class="pricing-card">
+        <h3>Vé Tiêu Chuẩn</h3>
+        <div class="price">Miễn phí</div>
+        <ul>
+          <li>Tham gia đủ Buổi 1 & Buổi 2 trực tuyến cùng Thắm</li>
+          <li>Học trực tiếp Phương Pháp 3 Bước: Nhìn Ra, Thấu Hiểu, Sống Theo Lựa Chọn</li>
+          <li>Hỏi đáp trực tiếp trong buổi học</li>
+        </ul>
+        <a href="dang-ky.html" class="btn-secondary" style="width: 100%; text-align: center;">Đăng Ký Vé Miễn Phí</a>
+      </div>
+      <div class="pricing-card featured">
+        <span class="tier-badge">Phổ biến nhất</span>
+        <h3>Vé VIP</h3>
+        <div class="price">99.000đ <span class="price-strike" style="font-size: 1rem;">699.000đ</span></div>
+        <p style="font-size: 0.85rem;">Gồm tất cả quyền lợi của vé tiêu chuẩn, cộng thêm:</p>
+        <ul>
+          <li>Tham gia Phiên Thực Hành Chuyên Sâu™</li>
+          <li>Được hướng dẫn hoàn thiện Bản Thiết Kế Sống Theo Lựa Chọn™ V1</li>
+          <li>Được hướng dẫn xây dựng lộ trình hành động 90 ngày đầu tiên</li>
+          <li>Được phản hồi và giải đáp trực tiếp trong quá trình thực hành</li>
+          <li>Được định hướng các bước tiếp theo để duy trì kết quả sau workshop</li>
+        </ul>
+        <a href="dang-ky.html" class="btn-primary" style="width: 100%; text-align: center;">Đăng Ký Vé VIP (99K)</a>
+      </div>
+    </div>
+    <p class="text-center mt-6" style="font-size: 0.85rem;">
+      Workbook và bài tập của Buổi 1 &amp; Buổi 2 được cung cấp cho toàn bộ học viên. Vé VIP không bán tài liệu — mà mang đến trải nghiệm thực hành chuyên sâu, cá nhân hóa và đồng hành để giúp bạn tạo ra kết quả thực tế.
+    </p>
+    <p class="text-center mt-8" style="font-size: 0.88rem;">
+      Giá VIP giữ nguyên 99K — mức giá cố tình thấp để xóa rào cản tiếp cận, không phải để tối đa doanh thu.
+    </p>
+    <div class="guarantee-box mt-8">
+      <span class="badge">Cam kết hài lòng 100%</span>
+      <p class="mt-4">Nếu bạn tham gia đầy đủ Phiên Thực Hành Chuyên Sâu™, hoàn thành các bài tập thực hành theo hướng dẫn, mà vẫn cảm thấy workshop không mang lại giá trị như cam kết — bạn được hoàn lại 100% giá Vé VIP trong vòng 7 ngày kể từ ngày kết thúc workshop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LỜI KẾT + FORM ===================== -->
+<section class="section final-cta" id="final-cta">
+  <div class="container-narrow text-center">
+    <h2>3 buổi tối cho một cuộc sống bạn thật sự chọn</h2>
+    <p class="mt-6" style="font-size: 1.05rem;">
+      Bạn đã sống vì người khác nhiều năm rồi.<br>
+      3 buổi tối này là dành cho bạn.<br>
+      Hẹn gặp bạn trong workshop.
+    </p>
+    <div class="mt-12">
+      <a href="dang-ky.html" class="btn-primary" style="font-size: 1.15rem;">Đăng Ký Giữ Chỗ Ngay →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STICKY MOBILE CTA ===================== -->
+<div class="sticky-cta">
+  <a href="dang-ky.html" class="btn-primary">Đăng Ký Giữ Chỗ Miễn Phí →</a>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container text-center text-muted">
+    <p>© 2026 Sống Cho Mình Mà Không Cảm Thấy Có Lỗi™. All rights reserved.</p>
+    <p class="mt-4">
+      <a href="https://www.facebook.com/profile.php?id=61577145553348" target="_blank" rel="noopener" style="color: var(--accent-deep); font-weight: 600;">Fanpage</a>
+      <span style="margin: 0 8px;">·</span>
+      <a href="https://www.tiktok.com/@thamnguyengiammo" target="_blank" rel="noopener" style="color: var(--accent-deep); font-weight: 600;">TikTok</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
