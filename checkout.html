@@ -210,16 +210,35 @@
 
   updateQR(BASE_PRICE);
 
+  let shortageShown = false;
+
   async function pollStatus() {
     try {
       const res = await fetch(GAS_URL + '?action=getStatus&orderId=' + encodeURIComponent(order.orderId));
       const json = await res.json();
+
       if (json.status === 'PAID') {
         const box = document.getElementById('statusBox');
         box.className = 'status paid';
         document.getElementById('statusText').textContent = '✓ Đã nhận giao dịch · Đang chuyển trang...';
         setTimeout(() => { window.location.href = '/xac-nhan'; }, 1500);
         return;
+      }
+
+      if (json.status === 'THIẾU TIỀN') {
+        const received = Number(json.amountReceived) || 0;
+        const expected = Number(json.amountExpected) || BASE_PRICE;
+        const missing = Math.max(0, expected - received);
+
+        const box = document.getElementById('statusBox');
+        box.className = 'status pending';
+        document.getElementById('statusText').textContent =
+          'Đã nhận ' + formatVnd(received) + 'đ — còn thiếu ' + formatVnd(missing) + 'đ. Chuyển thêm đúng số tiền này, giữ nguyên nội dung CK.';
+
+        if (!shortageShown) {
+          shortageShown = true;
+          updateQR(missing); // QR/số tiền hiển thị đổi sang đúng phần còn thiếu
+        }
       }
     } catch (err) { console.error('poll failed', err); }
     setTimeout(pollStatus, 5000);

@@ -30,6 +30,10 @@
   .step-desc { font-size: 14px; color: var(--text-muted); }
   .step-desc a { color: var(--accent-deep); text-decoration: none; font-weight: 600; }
   footer { text-align: center; margin-top: 24px; font-size: 13px; color: var(--text-muted); }
+  .overage-note {
+    background: #FDF3E3; border: 1px solid var(--accent); border-radius: 10px;
+    padding: 14px 16px; margin: 16px 0; text-align: left; font-size: 13.5px; display: none;
+  }
 </style>
 </head>
 <body>
@@ -43,6 +47,10 @@
     <div class="info-row"><span>Họ tên</span><strong id="orderName">—</strong></div>
     <div class="info-row"><span>Email</span><strong id="orderEmail">—</strong></div>
     <div class="info-row"><span>Số tiền</span><strong id="orderAmount">—</strong></div>
+  </div>
+
+  <div class="overage-note" id="overageNote">
+    Bạn đã chuyển dư <strong id="overageAmount">—</strong> so với giá Vé VIP. Vé của bạn vẫn được xác nhận đầy đủ — nhắn tin <a href="https://www.facebook.com/profile.php?id=61577145553348" target="_blank" rel="noopener" style="color: var(--accent-deep); font-weight: 600;">Fanpage</a> kèm mã đơn hàng để được hoàn lại phần chênh lệch.
   </div>
 
   <div class="steps">
@@ -75,13 +83,31 @@
 </div>
 
 <script>
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
   const order = JSON.parse(sessionStorage.getItem('order') || '{}');
+
+  function formatVnd(n) { return Number(n).toLocaleString('en-US').replace(/,/g, '.'); }
+
   if (order.orderId) {
     document.getElementById('orderId').textContent = order.orderId;
     document.getElementById('orderName').textContent = order.name || '—';
     document.getElementById('orderEmail').textContent = order.email || '—';
-    const amt = Number(order.totalAmount || 0).toLocaleString('en-US').replace(/,/g, '.');
-    document.getElementById('orderAmount').textContent = amt + 'đ';
+    document.getElementById('orderAmount').textContent = formatVnd(order.totalAmount || 0) + 'đ';
+
+    // Lấy số tiền thực nhận từ backend để kiểm tra có chuyển dư không
+    fetch(GAS_URL + '?action=getStatus&orderId=' + encodeURIComponent(order.orderId))
+      .then(res => res.json())
+      .then(json => {
+        if (!json.success) return;
+        const received = Number(json.amountReceived) || 0;
+        const expected = Number(json.amountExpected) || 0;
+        document.getElementById('orderAmount').textContent = formatVnd(received) + 'đ';
+        if (received > expected + 1000) {
+          document.getElementById('overageAmount').textContent = formatVnd(received - expected) + 'đ';
+          document.getElementById('overageNote').style.display = 'block';
+        }
+      })
+      .catch(err => console.error('getStatus failed', err));
   }
 </script>
 </body>
