@@ -75,7 +75,7 @@
 
   <div class="info-box">
     <div class="info-row"><span>Ngân hàng</span><strong>BIDV — Ngân hàng TMCP Đầu tư &amp; Phát triển Việt Nam</strong></div>
-    <div class="info-row"><span>Số TK</span><strong>1350914404</strong></div>
+    <div class="info-row"><span>Số TK</span><strong>96247SCMTHAM01</strong></div>
     <div class="info-row"><span>Chủ TK</span><strong>NGUYEN THI HONG THAM</strong></div>
     <div class="info-row"><span>Nội dung CK</span><strong id="ckContent">—</strong></div>
     <div class="info-row"><span>Số tiền</span><strong id="amount">—</strong></div>
@@ -116,7 +116,7 @@
   }
 
   function updateQR(amount) {
-    const url = 'https://qr.sepay.vn/img?acc=1350914404&bank=BIDV&amount=' + amount + '&des=' + encodeURIComponent(order.ckContent);
+    const url = 'https://vietqr.app/img?acc=96247SCMTHAM01&bank=BIDV&amount=' + amount + '&des=' + encodeURIComponent(order.ckContent);
     document.getElementById('qrImg').src = url;
     document.getElementById('amount').textContent = formatVnd(amount) + 'đ';
     document.getElementById('total').textContent = formatVnd(amount) + 'đ';
