@@ -33,23 +33,23 @@
   <p class="lead">Điền thông tin để giữ chỗ — nếu chọn Vé VIP, bạn sẽ được chuyển đến trang thanh toán.</p>
 
   <form id="orderForm">
-    <label>Họ tên *</label>
-    <input type="text" name="name" required>
+    <label>Họ và tên của bạn *</label>
+    <input type="text" name="name" required placeholder="Nhập họ và tên...">
 
     <label>Số điện thoại (có Zalo) *</label>
-    <input type="tel" name="phone" required pattern="[0-9]{10,11}">
+    <input type="tel" name="phone" required pattern="[0-9]{10,11}" placeholder="Nhập số điện thoại để nhận link phòng học...">
 
-    <label>Email *</label>
-    <input type="email" name="email" required>
+    <label>Địa chỉ Email *</label>
+    <input type="email" name="email" required placeholder="Nhập địa chỉ Email của bạn...">
 
     <label>Chọn hạng vé *</label>
     <select name="goal" required>
       <option value="">-- Chọn hạng vé --</option>
-      <option value="Vé Tiêu Chuẩn (Miễn phí)">Vé Tiêu Chuẩn (Miễn phí)</option>
-      <option value="Vé VIP (99K)">Vé VIP — 99.000đ (Phiên Thực Hành Chuyên Sâu + Bản Thiết Kế V1)</option>
+      <option value="Vé Tiêu Chuẩn (Miễn phí)">Vé Tiêu Chuẩn — Buổi 1-2 (Miễn phí)</option>
+      <option value="Vé VIP (99K)">Vé VIP — Mở khóa Buổi 3 (99K — Giá ưu đãi ra mắt)</option>
     </select>
 
-    <button type="submit" class="cta" id="submitBtn">Xác Nhận Đăng Ký →</button>
+    <button type="submit" class="cta" id="submitBtn">Xác Nhận Đăng Ký Giữ Chỗ →</button>
     <p class="error" id="error"></p>
   </form>
 </div>
@@ -110,7 +110,7 @@
       errEl.textContent = 'Lỗi: ' + err.message + '. Vui lòng thử lại.';
       errEl.style.display = 'block';
       btn.disabled = false;
-      btn.textContent = 'Xác Nhận Đăng Ký →';
+      btn.textContent = 'Xác Nhận Đăng Ký Giữ Chỗ →';
     }
   });
 </script>
