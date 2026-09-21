@@ -57,6 +57,16 @@
 <script>
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
 
+  // Tự chọn sẵn hạng vé nếu đến từ link ?ve=free hoặc ?ve=vip (2 nút hạng vé ở trang chủ)
+  (function preselectTicket() {
+    const params = new URLSearchParams(window.location.search);
+    const ve = params.get('ve');
+    const select = document.querySelector('select[name="goal"]');
+    if (!select) return;
+    if (ve === 'vip') select.value = 'Vé VIP (99K)';
+    else if (ve === 'free') select.value = 'Vé Tiêu Chuẩn (Miễn phí)';
+  })();
+
   document.getElementById('orderForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
@@ -94,8 +104,8 @@
         goal: data.goal
       }));
 
-      // Vé miễn phí không cần thanh toán — sepay-funnel cần bổ sung nhánh rẽ tại đây
-      window.location.href = '/checkout';
+      // Vé miễn phí: email xác nhận đã được gửi ngay khi tạo đơn (server-side) — không cần thanh toán
+      window.location.href = json.free ? '/giu-cho-thanh-cong' : '/checkout';
     } catch (err) {
       errEl.textContent = 'Lỗi: ' + err.message + '. Vui lòng thử lại.';
       errEl.style.display = 'block';
