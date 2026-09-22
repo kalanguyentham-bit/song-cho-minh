@@ -234,21 +234,35 @@ p { color: var(--text-muted); }
 }
 .placeholder-note { color: var(--accent-deep); font-size: 0.82rem; font-style: italic; }
 
-/* ===== Before / After ===== */
-.ba-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-.ba-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 26px; }
-.ba-card.after { border: 1.5px solid var(--accent); }
-.ba-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; margin-bottom: 18px; border: 1px solid var(--border); }
-.ba-label { font-family: var(--font-h); font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; margin-bottom: 14px; }
-.ba-card.after .ba-label { color: var(--accent-deep); }
-.ba-card ul { list-style: none; padding: 0; }
-.ba-card ul li { padding: 6px 0 6px 22px; position: relative; color: var(--text); font-size: 0.95rem; }
-.ba-card ul li::before { content: "—"; position: absolute; left: 0; color: var(--text-muted); }
-.ba-card.after ul li::before { content: "✓"; color: var(--accent); font-weight: 700; }
-.ba-note { text-align: center; font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-top: -6px; margin-bottom: 18px; }
-.body-result { max-width: 320px; margin: 40px auto 0; text-align: center; }
-.body-result img { border-radius: var(--radius); box-shadow: 0 16px 40px var(--accent-soft); border: 1px solid var(--border); aspect-ratio: 3/4; object-fit: cover; object-position: center 20%; }
-.body-result p { margin-top: 12px; font-size: 0.85rem; font-style: italic; }
+/* ===== Before / After (3 cặp ảnh + khung tổng kết) ===== */
+.ba-pair-label {
+  text-align: center; font-family: var(--font-h); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.82rem;
+  color: var(--accent-deep); margin-bottom: 10px;
+}
+.ba-pair-row { display: flex; gap: 12px; }
+.ba-photo-wrap { position: relative; width: 50%; }
+.ba-photo-wrap img {
+  width: 100%; height: 260px; object-fit: cover; border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.ba-badge {
+  position: absolute; top: 10px; left: 10px; font-size: 0.7rem; font-weight: 700;
+  padding: 4px 12px; border-radius: 999px; color: #FFFFFF;
+}
+.ba-badge.before { background: rgba(61, 42, 26, 0.75); }
+.ba-badge.after { background: var(--accent); }
+.ba-summary {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px 26px;
+}
+.ba-summary-label {
+  font-size: 0.82rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 12px;
+}
+.ba-summary ul { list-style: none; padding: 0; }
+.ba-summary ul li { padding: 6px 0 6px 22px; position: relative; color: var(--text); font-size: 0.95rem; }
+.ba-summary ul li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
 
 /* ===== Certificate inline image ===== */
 .cert-block { margin-top: 24px; display: flex; align-items: center; gap: 16px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
@@ -573,29 +587,55 @@ footer {
 <section class="section section-alt" id="testimonial">
   <div class="container-narrow">
     <h2 class="text-center">Hành Trình Trước – Sau Của Nguyễn Thắm</h2>
-    <div class="ba-grid mt-12">
-      <div class="ba-card">
-        <img class="ba-photo" src="assets/before-hand.jpg" alt="Da tay Thắm trước khi phục hồi — thâm sạm, không đều màu">
-        <div class="ba-label">Trước đây</div>
-        <ul>
-          <li>Vấn đề tiêu hóa kéo dài, mệt mỏi thường xuyên</li>
-          <li>Da xuống sắc, thiếu sức sống</li>
-          <li>Cân nặng không ổn định</li>
-        </ul>
-      </div>
-      <div class="ba-card after">
-        <img class="ba-photo" src="assets/after-hand.jpg" alt="Da tay Thắm sau khi phục hồi — đều màu, khỏe khoắn hơn">
-        <div class="ba-label">Bây giờ</div>
-        <ul>
-          <li>Hệ tiêu hóa và năng lượng ổn định trở lại</li>
-          <li>Làn da khỏe, cân nặng duy trì bền vững</li>
-          <li>Tìm ra phương pháp để chia sẻ lại cho những phụ nữ khác đang ở đúng vị trí mình từng trải qua</li>
-        </ul>
+    <div class="mt-12">
+      <div class="ba-pair-label">Vóc Dáng &amp; Vòng Eo</div>
+      <div class="ba-pair-row">
+        <div class="ba-photo-wrap">
+          <img src="assets/ba-body-before.jpg" alt="Vóc dáng Thắm trước đây">
+          <span class="ba-badge before">Trước</span>
+        </div>
+        <div class="ba-photo-wrap">
+          <img src="assets/body-result.jpg" alt="Vóc dáng Thắm hiện tại" style="object-position: center 20%;">
+          <span class="ba-badge after">Bây giờ</span>
+        </div>
       </div>
     </div>
-    <div class="body-result">
-      <img src="assets/body-result.jpg" alt="Vóc dáng hiện tại của Thắm sau khi áp dụng Phương Pháp 3 Lớp Chuyển Hóa">
-      <p>Vóc dáng hiện tại của Thắm</p>
+
+    <div class="mt-8">
+      <div class="ba-pair-label">Làn Da &amp; Năng Lượng</div>
+      <div class="ba-pair-row">
+        <div class="ba-photo-wrap">
+          <img src="assets/ba-skin-before.jpg" alt="Làn da và năng lượng của Thắm năm 2022" style="object-position: top;">
+          <span class="ba-badge before">Trước · 2022</span>
+        </div>
+        <div class="ba-photo-wrap">
+          <img src="assets/ba-skin-after.jpg" alt="Làn da và năng lượng của Thắm hiện tại" style="object-position: top;">
+          <span class="ba-badge after">Hiện tại</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <div class="ba-pair-label">Mái Tóc</div>
+      <div class="ba-pair-row">
+        <div class="ba-photo-wrap">
+          <img src="assets/hair-loss.jpg" alt="Tóc rụng nhiều trong lòng bàn tay">
+          <span class="ba-badge before">Trước</span>
+        </div>
+        <div class="ba-photo-wrap">
+          <img src="assets/ba-hair-after.jpg" alt="Mái tóc khỏe mạnh hiện tại của Thắm" style="object-position: top;">
+          <span class="ba-badge after">Bây giờ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ba-summary mt-8">
+      <div class="ba-summary-label">Bây giờ</div>
+      <ul>
+        <li>Hệ tiêu hóa và năng lượng ổn định trở lại</li>
+        <li>Làn da khỏe, cân nặng duy trì bền vững</li>
+        <li>Tìm ra phương pháp để chia sẻ lại cho những phụ nữ khác đang ở đúng vị trí mình từng trải qua</li>
+      </ul>
     </div>
   </div>
 </section>
