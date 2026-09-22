@@ -135,6 +135,13 @@ p { color: var(--text-muted); }
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: 0.85rem;
 }
+.audience-item.with-photo { padding-left: 100px; min-height: 76px; display: flex; align-items: center; }
+.audience-item.with-photo::before { top: 50%; transform: translateY(-50%); }
+.audience-item.with-photo img {
+  position: absolute; left: 56px; top: 50%; transform: translateY(-50%);
+  width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--accent); flex-shrink: 0;
+}
 
 /* ===== Evidence photo strip (checklist section) ===== */
 .evidence-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; max-width: 480px; margin: 32px auto 0; }
@@ -355,15 +362,18 @@ footer {
     <h2>Nhiều năm qua, bạn lo cho cả nhà. Nhưng sức khỏe, năng lượng và cả những điều bạn thật sự muốn cho bản thân thì bị bỏ lại phía sau.</h2>
     <div class="audience-list mt-8">
       <div class="audience-item">Sáng ngủ dậy vẫn mệt dù đã ngủ đủ 7–8 tiếng, đến 3–4 giờ chiều là kiệt sức, phải dựa vào cà phê hoặc đồ ngọt để trụ tiếp</div>
-      <div class="audience-item">Da xỉn màu, tóc rụng nhiều hơn, vòng eo thay đổi dù ăn uống không khác trước là mấy — nhưng không biết vì sao</div>
+      <div class="audience-item with-photo">
+        <img src="assets/hero.jpg" alt="Thắm">
+        Da xỉn màu, tóc rụng nhiều hơn, vòng eo thay đổi dù ăn uống không khác trước là mấy — nhưng không biết vì sao
+      </div>
       <div class="audience-item">Thấy áy náy mỗi khi dành thời gian hoặc tiền bạc chăm sóc riêng cho bản thân, đã quen đặt nhu cầu của mình xuống cuối cùng</div>
       <div class="audience-item">Dễ cáu gắt vô cớ với chồng con rồi lại tự trách mình, và mỗi lần định thay đổi thói quen lại ngại vì sợ gia đình không ủng hộ</div>
       <div class="audience-item">Không có một góc nào trong nhà thực sự là "của riêng mình"</div>
     </div>
     <div class="evidence-strip">
       <div class="evidence-item">
-        <img src="assets/before-hand.jpg" alt="Da tay thâm sạm, không đều màu">
-        <p>Da xỉn màu, thâm sạm</p>
+        <img src="assets/waist-tape.jpg" alt="Đo vòng eo bằng thước dây">
+        <p>Vòng eo thay đổi</p>
       </div>
       <div class="evidence-item">
         <img src="assets/hair-loss.jpg" alt="Tóc rụng nhiều trong lòng bàn tay">
