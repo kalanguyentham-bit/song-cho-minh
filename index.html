@@ -136,6 +136,12 @@ p { color: var(--text-muted); }
   font-weight: 700; font-size: 0.85rem;
 }
 
+/* ===== Evidence photo strip (checklist section) ===== */
+.evidence-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; max-width: 480px; margin: 32px auto 0; }
+.evidence-item { text-align: center; }
+.evidence-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 8px 24px rgba(61,42,26,0.1); }
+.evidence-item p { margin-top: 8px; font-size: 0.78rem; color: var(--text-muted); font-style: italic; }
+
 /* ===== Story narrative ===== */
 .story-narrative p { font-size: 1.08rem; margin-bottom: 18px; color: var(--text); }
 .story-narrative p.muted { color: var(--text-muted); }
@@ -353,6 +359,16 @@ footer {
       <div class="audience-item">Thấy áy náy mỗi khi dành thời gian hoặc tiền bạc chăm sóc riêng cho bản thân, đã quen đặt nhu cầu của mình xuống cuối cùng</div>
       <div class="audience-item">Dễ cáu gắt vô cớ với chồng con rồi lại tự trách mình, và mỗi lần định thay đổi thói quen lại ngại vì sợ gia đình không ủng hộ</div>
       <div class="audience-item">Không có một góc nào trong nhà thực sự là "của riêng mình"</div>
+    </div>
+    <div class="evidence-strip">
+      <div class="evidence-item">
+        <img src="assets/before-hand.jpg" alt="Da tay thâm sạm, không đều màu">
+        <p>Da xỉn màu, thâm sạm</p>
+      </div>
+      <div class="evidence-item">
+        <img src="assets/hair-loss.jpg" alt="Tóc rụng nhiều trong lòng bàn tay">
+        <p>Tóc rụng nhiều hơn</p>
+      </div>
     </div>
     <p class="mt-8" style="color: var(--text); font-weight: 600;">Nếu bạn thấy mình trong từ 3 dấu hiệu trở lên, nguyên nhân rất có thể không nằm ở tuổi tác hay ý chí — mà ở sức khỏe đường ruột, nội tiết tố và cách cơ thể bạn đang được nuôi dưỡng mỗi ngày.</p>
     <p class="mt-4">Đây là điều rất ít người nói cho bạn biết, và không phải lỗi của bạn.</p>
