@@ -343,35 +343,39 @@
 
   <!-- ============ SECTION 8: HẠNG VÉ ============ -->
   <div style="width: 100%; background: #FFFFFF; padding: 72px 24px;">
-    <div style="max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+    <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
       <h2 style="font-size: 28px; text-align: center;">Chọn Hạng Vé Của Bạn</h2>
 
-      <div style="border: 1.5px solid #EFE2D6; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 14px;">
-        <div>
-          <div style="font-size: 19px; font-weight: 700; color: #2E2420;">VÉ TIÊU CHUẨN</div>
-          <div style="font-size: 22px; font-weight: 700; color: #7C8A6E; margin-top: 2px;">Miễn phí</div>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: stretch;">
+        <div style="flex: 1; min-width: 260px; border: 1.5px solid #EFE2D6; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 14px;">
+          <div>
+            <div style="font-size: 19px; font-weight: 700; color: #2E2420;">VÉ TIÊU CHUẨN</div>
+            <div style="font-size: 22px; font-weight: 700; color: #7C8A6E; margin-top: 2px;">Miễn phí</div>
+          </div>
+          <div style="height: 1px; background: #EFE2D6;"></div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Tham gia Buổi 1 và Buổi 2</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Học trực tiếp Lớp 1 (phục hồi năng lượng) và Lớp 2 (tháo gỡ niềm tin giới hạn) của Phương Pháp 3 Lớp Chuyển Hóa</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Hỏi đáp trực tiếp trong 2 buổi học</div>
+          <div style="flex-grow: 1;"></div>
+          <a href="#form" onclick="preselectTicket('free')" class="btn" style="margin-top: 8px; background: #2E2420; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Đăng Ký Vé Miễn Phí (Buổi 1-2)</a>
         </div>
-        <div style="height: 1px; background: #EFE2D6;"></div>
-        <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Tham gia Buổi 1 và Buổi 2</div>
-        <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Học trực tiếp Lớp 1 (phục hồi năng lượng) và Lớp 2 (tháo gỡ niềm tin giới hạn) của Phương Pháp 3 Lớp Chuyển Hóa</div>
-        <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Hỏi đáp trực tiếp trong 2 buổi học</div>
-        <a href="#form" onclick="preselectTicket('free')" class="btn" style="margin-top: 8px; background: #2E2420; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Đăng Ký Vé Miễn Phí (Buổi 1-2)</a>
-      </div>
 
-      <div style="border: 2px solid #C0654A; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 14px; background: #FFF5EE; position: relative;">
-        <div style="position: absolute; top: -12px; right: 24px; background: #C0654A; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 5px 14px; border-radius: 100px;">GIÁ RA MẮT</div>
-        <div>
-          <div style="font-size: 19px; font-weight: 700; color: #2E2420;">VÉ VIP</div>
-          <div style="font-size: 22px; font-weight: 700; color: #C0654A; margin-top: 2px;">99.000đ</div>
+        <div style="flex: 1; min-width: 260px; border: 2px solid #C0654A; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 14px; background: #FFF5EE; position: relative;">
+          <div style="position: absolute; top: -12px; right: 24px; background: #C0654A; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 5px 14px; border-radius: 100px;">GIÁ RA MẮT</div>
+          <div>
+            <div style="font-size: 19px; font-weight: 700; color: #2E2420;">VÉ VIP</div>
+            <div style="font-size: 22px; font-weight: 700; color: #C0654A; margin-top: 2px;">99.000đ</div>
+          </div>
+          <div style="height: 1px; background: #E6C4B4;"></div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">Gồm tất cả quyền lợi vé tiêu chuẩn, cộng thêm:</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Mở khóa Buổi 3 — Lớp 3 (Không Gian), nội dung chuyên sâu, chỉ dành riêng cho vé VIP</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Bảng Tự Đánh Giá Toàn Diện</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Video xem lại cả 3 buổi học</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Tham gia nhóm kín Zalo VIP để được hỗ trợ sau workshop</div>
+          <div style="flex-grow: 1;"></div>
+          <a href="#form" onclick="preselectTicket('vip')" class="btn" style="margin-top: 8px; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Mở Khóa Buổi 3 — Đăng Ký Vé VIP (99K)</a>
         </div>
-        <div style="height: 1px; background: #E6C4B4;"></div>
-        <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">Gồm tất cả quyền lợi vé tiêu chuẩn, cộng thêm:</div>
-        <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Mở khóa Buổi 3 — Lớp 3 (Không Gian), nội dung chuyên sâu, chỉ dành riêng cho vé VIP</div>
-        <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</div>
-        <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Bảng Tự Đánh Giá Toàn Diện</div>
-        <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Video xem lại cả 3 buổi học</div>
-        <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Tham gia nhóm kín Zalo VIP để được hỗ trợ sau workshop</div>
-        <a href="#form" onclick="preselectTicket('vip')" class="btn" style="margin-top: 8px; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Mở Khóa Buổi 3 — Đăng Ký Vé VIP (99K)</a>
       </div>
     </div>
   </div>
