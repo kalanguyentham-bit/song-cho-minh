@@ -18,13 +18,6 @@
   .container { max-width: 560px; margin: 0 auto; background: var(--surface); padding: 36px 32px; border-radius: 14px; box-shadow: 0 8px 32px rgba(54,42,34,0.08); }
   h1 { font-family: var(--font-h); font-size: 22px; margin-bottom: 4px; }
   .lead { color: var(--text-muted); margin-bottom: 24px; font-size: 14px; }
-  .bumps { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 20px; }
-  .bump { display: flex; align-items: flex-start; padding: 10px 0; cursor: pointer; }
-  .bump input { margin-right: 12px; margin-top: 4px; }
-  .bump-info { flex: 1; }
-  .bump-name { font-weight: 600; font-size: 14px; }
-  .bump-price { color: var(--accent-deep); font-weight: 700; font-size: 14px; }
-  .bump-desc { font-size: 13px; color: var(--text-muted); }
   .summary { background: var(--text); color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
   .summary-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 14px; }
   .summary-total { font-size: 22px; font-weight: 800; font-family: var(--font-h); color: #E8B87A; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 8px; }
@@ -56,27 +49,8 @@
   <h1>Hoàn tất thanh toán</h1>
   <p class="lead">Chuyển khoản theo thông tin dưới đây — đơn được xác nhận tự động trong 30 giây.</p>
 
-  <div class="bumps" id="bumpsSection">
-    <div class="bump" data-bump="1" style="display:none">
-      <input type="checkbox" id="bump1">
-      <div class="bump-info">
-        <div><span class="bump-name">__BUMP1_NAME__</span> · <span class="bump-price">+__BUMP1_DISPLAY__đ</span></div>
-        <div class="bump-desc">Tài liệu bổ sung — chỉ thêm vào đơn này</div>
-      </div>
-    </div>
-    <div class="bump" data-bump="2" style="display:none">
-      <input type="checkbox" id="bump2">
-      <div class="bump-info">
-        <div><span class="bump-name">__BUMP2_NAME__</span> · <span class="bump-price">+__BUMP2_DISPLAY__đ</span></div>
-        <div class="bump-desc">Tài liệu bổ sung — chỉ thêm vào đơn này</div>
-      </div>
-    </div>
-  </div>
-
   <div class="summary">
     <div class="summary-row"><span>Vé VIP — Buổi 3 (Lớp 3 - Không Gian)</span><span id="base">99.000đ</span></div>
-    <div class="summary-row" id="bump1Row" style="display:none"><span>__BUMP1_NAME__</span><span>+__BUMP1_DISPLAY__đ</span></div>
-    <div class="summary-row" id="bump2Row" style="display:none"><span>__BUMP2_NAME__</span><span>+__BUMP2_DISPLAY__đ</span></div>
     <div class="summary-row summary-total"><span>Tổng</span><span id="total">99.000đ</span></div>
   </div>
 
@@ -122,14 +96,9 @@
 <script>
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
   const BASE_PRICE = 99000;
-  const BUMP1_PRICE = 0;
-  const BUMP2_PRICE = 0;
 
   const order = JSON.parse(sessionStorage.getItem('order') || '{}');
   if (!order.orderId) { window.location.href = '/'; }
-
-  if (BUMP1_PRICE > 0) document.querySelector('[data-bump="1"]').style.display = 'flex';
-  if (BUMP2_PRICE > 0) document.querySelector('[data-bump="2"]').style.display = 'flex';
 
   document.getElementById('ckContent').textContent = order.ckContent;
 
@@ -174,45 +143,12 @@
 
   function formatVnd(n) { return Number(n).toLocaleString('en-US').replace(/,/g, '.'); }
 
-  function calcTotal() {
-    let total = BASE_PRICE;
-    const b1 = document.getElementById('bump1').checked;
-    const b2 = document.getElementById('bump2').checked;
-    if (b1) total += BUMP1_PRICE;
-    if (b2) total += BUMP2_PRICE;
-    return { total, b1, b2 };
-  }
-
   function updateQR(amount) {
     const url = 'https://vietqr.app/img?acc=96247SCMTHAM01&bank=BIDV&amount=' + amount + '&des=' + encodeURIComponent(order.ckContent);
     document.getElementById('qrImg').src = url;
     document.getElementById('amount').textContent = formatVnd(amount) + 'đ';
     document.getElementById('total').textContent = formatVnd(amount) + 'đ';
   }
-
-  async function updateOrderAPI(b1, b2, total) {
-    try {
-      await fetch(GAS_URL, {
-        method: 'POST',
-        body: JSON.stringify({
-          action: 'updateOrder',
-          orderId: order.orderId,
-          data: { bump1: b1, bump2: b2, totalAmount: total }
-        })
-      });
-    } catch (err) { console.error('updateOrder failed', err); }
-  }
-
-  ['bump1', 'bump2'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('change', () => {
-      const { total, b1, b2 } = calcTotal();
-      document.getElementById('bump1Row').style.display = b1 ? 'flex' : 'none';
-      document.getElementById('bump2Row').style.display = b2 ? 'flex' : 'none';
-      updateQR(total);
-      updateOrderAPI(b1, b2, total);
-    });
-  });
 
   updateQR(BASE_PRICE);
 
