@@ -121,6 +121,15 @@
     e.preventDefault();
     const btn = e.currentTarget;
     if (btn.disabled) return; // chặn bấm nhiều lần tạo trùng đơn
+
+    // Đã có đơn VIP từ trước trong phiên này (vd. bấm lại sau khi quay lại trang) —
+    // dùng lại đúng đơn cũ, không tạo đơn mới để mã CK không bao giờ đổi.
+    const current = JSON.parse(sessionStorage.getItem('order') || '{}');
+    if (current.goal === 'Vé VIP (99K)' && current.orderId) {
+      window.location.href = '/checkout';
+      return;
+    }
+
     btn.disabled = true;
     btn.textContent = 'Đang xử lý...';
 
