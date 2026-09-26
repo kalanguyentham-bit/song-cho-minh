@@ -19,8 +19,27 @@
   .check { width: 64px; height: 64px; background: var(--accent); color: #fff; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 16px; }
   h1 { font-family: var(--font-h); font-size: 26px; margin-bottom: 8px; }
   .lead { color: var(--text-muted); margin-bottom: 24px; font-size: 15px; }
-  .info { background: var(--surface-2); border: 1px solid var(--border); padding: 16px; border-radius: 10px; text-align: left; margin: 20px 0; }
-  .info-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; }
+
+  .highlight-box { display: flex; gap: 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 12px; margin: 20px 0 12px; }
+  .highlight-item { flex: 1; }
+  .highlight-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+  .highlight-value { font-family: var(--font-h); font-size: 19px; font-weight: 700; color: var(--accent-deep); }
+
+  .info { background: var(--surface-2); border: 1px solid var(--border); padding: 14px 16px; border-radius: 10px; text-align: left; margin: 0 0 20px; }
+  .info-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 14px; }
+
+  .zalo-card { background: var(--surface); border: 1.5px solid var(--accent); border-radius: 12px; padding: 24px 20px; margin: 20px 0; }
+  .zalo-title { font-family: var(--font-h); font-weight: 700; font-size: 18px; color: var(--accent-deep); margin-bottom: 8px; }
+  .zalo-desc { font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px; }
+  .zalo-btn { display: block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px; border-radius: 8px; font-size: 15px; text-decoration: none; }
+  .zalo-btn:hover { background: var(--accent-deep); }
+
+  .overage-note {
+    background: #FDF3E3; border: 1px solid var(--accent); border-radius: 10px;
+    padding: 14px 16px; margin: 0 0 20px; text-align: left; font-size: 13.5px; display: none;
+  }
+
+  .steps-heading { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); text-align: center; margin-bottom: 14px; }
   .steps { text-align: left; margin: 24px 0; }
   .step { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .step:last-child { border-bottom: none; }
@@ -29,37 +48,52 @@
   .step-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
   .step-desc { font-size: 14px; color: var(--text-muted); }
   .step-desc a { color: var(--accent-deep); text-decoration: none; font-weight: 600; }
+
+  .benefits { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 24px 0; text-align: left; }
+  .benefits-title { font-family: var(--font-h); font-weight: 700; font-size: 15px; color: var(--accent-deep); margin-bottom: 10px; }
+  .benefits-list { list-style: none; }
+  .benefits-list li { font-size: 14px; padding: 5px 0; color: var(--text); }
+
   footer { text-align: center; margin-top: 24px; font-size: 13px; color: var(--text-muted); }
-  .overage-note {
-    background: #FDF3E3; border: 1px solid var(--accent); border-radius: 10px;
-    padding: 14px 16px; margin: 16px 0; text-align: left; font-size: 13.5px; display: none;
-  }
+
+  .back-btn { display: block; text-align: center; margin-top: 24px; padding: 14px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text); font-weight: 600; text-decoration: none; font-size: 14px; }
+  .back-btn:hover { background: var(--bg); }
 </style>
 </head>
 <body>
 <div class="container">
   <div class="check">✓</div>
-  <h1>Đã nhận thanh toán!</h1>
+  <h1>Thanh Toán Thành Công!</h1>
   <p class="lead">Cảm ơn bạn đã chọn Vé VIP. Đơn hàng đã được xác nhận và thông tin buổi học đã gửi qua email.</p>
 
-  <div class="info">
-    <div class="info-row"><span>Mã đơn</span><strong id="orderId">—</strong></div>
-    <div class="info-row"><span>Họ tên</span><strong id="orderName">—</strong></div>
-    <div class="info-row"><span>Email</span><strong id="orderEmail">—</strong></div>
-    <div class="info-row"><span>Số tiền</span><strong id="orderAmount">—</strong></div>
+  <div class="highlight-box">
+    <div class="highlight-item">
+      <div class="highlight-label">Mã đơn</div>
+      <div class="highlight-value" id="orderId">—</div>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-label">Đã thanh toán</div>
+      <div class="highlight-value" id="orderAmount">—</div>
+    </div>
   </div>
 
-  <div style="background: var(--surface-2); border: 1.5px solid var(--accent); border-radius: 10px; padding: 16px; margin: 20px 0; text-align: center;">
-    <div style="font-weight: 700; color: var(--accent-deep); font-size: 14px; margin-bottom: 6px;">Tham gia nhóm Zalo VIP ngay bây giờ</div>
-    <p style="font-size: 13px; margin-bottom: 10px;">Vào nhóm trước để không bỏ lỡ thông tin lớp học — không cần đợi email xác nhận.</p>
-    <a href="https://zalo.me/g/hh6v7z42bcuiz7jio8au" target="_blank" rel="noopener" style="display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 10px 20px; border-radius: 8px; font-size: 14px; text-decoration: none;">Vào Nhóm Zalo VIP →</a>
+  <div class="info">
+    <div class="info-row"><span>Họ tên</span><strong id="orderName">—</strong></div>
+    <div class="info-row"><span>Email</span><strong id="orderEmail">—</strong></div>
   </div>
 
   <div class="overage-note" id="overageNote">
     Bạn đã chuyển dư <strong id="overageAmount">—</strong> so với giá Vé VIP. Vé của bạn vẫn được xác nhận đầy đủ — nhắn tin <a href="https://www.facebook.com/profile.php?id=61577145553348" target="_blank" rel="noopener" style="color: var(--accent-deep); font-weight: 600;">Fanpage</a> kèm mã đơn hàng để được hoàn lại phần chênh lệch.
   </div>
 
+  <div class="zalo-card">
+    <div class="zalo-title">Tham Gia Nhóm Zalo VIP</div>
+    <p class="zalo-desc">Đây là nơi bạn nhận link Zoom, video xem lại và hỗ trợ trực tiếp cùng Thắm trong suốt workshop.</p>
+    <a href="https://zalo.me/g/hh6v7z42bcuiz7jio8au" target="_blank" rel="noopener" class="zalo-btn">Vào Nhóm Zalo VIP Ngay →</a>
+  </div>
+
   <div class="steps">
+    <div class="steps-heading">Các Bước Tiếp Theo</div>
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-text">
@@ -71,7 +105,7 @@
       <div class="step-num">2</div>
       <div class="step-text">
         <div class="step-title">Tham gia nhóm Zalo VIP</div>
-        <div class="step-desc">Link nhóm VIP có trong email xác nhận — nhớ tham gia để nhận hỗ trợ riêng trước và sau workshop.</div>
+        <div class="step-desc">Vào nhóm ngay để không bỏ lỡ thông báo và nhận hỗ trợ riêng trước, trong và sau workshop.</div>
       </div>
     </div>
     <div class="step">
@@ -83,9 +117,22 @@
     </div>
   </div>
 
+  <div class="benefits">
+    <div class="benefits-title">Vé VIP Của Bạn Bao Gồm</div>
+    <ul class="benefits-list">
+      <li>✓ Tham gia trực tiếp Buổi 1, Buổi 2 và Buổi 3 (Lớp 3 — Không Gian)</li>
+      <li>✓ Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</li>
+      <li>✓ Bảng Tự Đánh Giá Toàn Diện</li>
+      <li>✓ Video xem lại cả 3 buổi học</li>
+      <li>✓ Tham gia nhóm kín Zalo VIP để được hỗ trợ sau workshop</li>
+    </ul>
+  </div>
+
   <footer>
     Cần hỗ trợ? Nhắn tin cho <a href="https://www.facebook.com/profile.php?id=61577145553348" target="_blank" rel="noopener" style="color: var(--accent-deep); font-weight: 600;">Fanpage</a>
   </footer>
+
+  <a href="/" class="back-btn">Quay Lại Trang Chương Trình</a>
 </div>
 
 <script>
