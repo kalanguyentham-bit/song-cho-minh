@@ -105,10 +105,18 @@
     document.getElementById('orderEmail').textContent = order.email || '—';
   }
 
-  document.getElementById('upgradeBtn').addEventListener('click', async (e) => {
+  const upgradeBtn = document.getElementById('upgradeBtn');
+  const upgradeBtnDefaultText = upgradeBtn.textContent;
+
+  // Nếu khách bấm Back của trình duyệt sau khi đã bấm nâng cấp, trang có thể được
+  // phục hồi từ bfcache đúng lúc nút đang kẹt ở chữ "Đang xử lý..." — reset lại.
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) upgradeBtn.textContent = upgradeBtnDefaultText;
+  });
+
+  upgradeBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     const btn = e.currentTarget;
-    const originalText = btn.textContent;
     btn.textContent = 'Đang xử lý...';
 
     try {
@@ -142,7 +150,7 @@
 
       window.location.href = '/checkout';
     } catch (err) {
-      btn.textContent = originalText;
+      btn.textContent = upgradeBtnDefaultText;
       alert('Có lỗi xảy ra, vui lòng thử lại: ' + err.message);
     }
   });

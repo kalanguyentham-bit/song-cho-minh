@@ -448,11 +448,25 @@
   }
 
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
+  const submitBtn = document.getElementById('submitBtn');
+  const errEl = document.getElementById('error');
+  const SUBMIT_BTN_DEFAULT_TEXT = submitBtn.textContent;
+
+  function resetSubmitBtn() {
+    submitBtn.disabled = false;
+    submitBtn.textContent = SUBMIT_BTN_DEFAULT_TEXT;
+    errEl.style.display = 'none';
+  }
+
+  // Nếu khách bấm nút Back của trình duyệt để quay lại sửa thông tin sau khi đã submit,
+  // trang có thể được phục hồi từ bfcache đúng lúc nút đang khóa ở trạng thái "ĐANG XỬ LÝ..." — reset lại cho khách sửa được.
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) resetSubmitBtn();
+  });
 
   document.getElementById('orderForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    const errEl = document.getElementById('error');
+    const btn = submitBtn;
     errEl.style.display = 'none';
     btn.disabled = true;
     btn.textContent = 'ĐANG XỬ LÝ...';
@@ -488,10 +502,9 @@
 
       window.location.href = json.free ? '/giu-cho-thanh-cong' : '/checkout';
     } catch (err) {
+      resetSubmitBtn();
       errEl.textContent = 'Lỗi: ' + err.message + '. Vui lòng thử lại.';
       errEl.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'XÁC NHẬN ĐĂNG KÝ GIỮ CHỖ';
     }
   });
 </script>
