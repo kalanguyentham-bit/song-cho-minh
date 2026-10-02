@@ -753,7 +753,9 @@
       if (json.free) {
         fireLead('ve-mien-phi');
         document.getElementById('orderForm').style.display = 'none';
-        document.getElementById('thankyou').style.display = 'flex';
+        var thankyouEl = document.getElementById('thankyou');
+        thankyouEl.style.display = 'flex';
+        thankyouEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         fireLead('ve-vip');
         window.location.href = '/checkout';
