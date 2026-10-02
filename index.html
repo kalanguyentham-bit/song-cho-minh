@@ -10,18 +10,8 @@
 <meta property="og:image" content="assets/hero-tham-og.jpg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap">
 
-<script>
-  // ============================================================
-  // CẤU HÌNH DÙNG CHUNG CHO TOÀN TRANG — sửa 1 chỗ, đổi toàn trang
-  // ============================================================
-  window.APP_CONFIG = {
-    NGAY_BUOI_1: 'Thứ Ba, 27/10',
-    NGAY_BUOI_2: 'Thứ Tư, 28/10',
-    NGAY_BUOI_3: 'Thứ Năm, 29/10',
-    LINK_NHOM_LOP: 'https://zalo.me/g/afweoiaxvoywcsm4nsxh',
-    PIXEL_ID: '3416020051935979'
-  };
-</script>
+<!-- Cấu hình + hàm tính lịch học: sửa trong config.js -->
+<script src="config.js"></script>
 
 <!-- Meta Pixel -->
 <script>
@@ -490,7 +480,7 @@
           <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Video xem lại cả 3 buổi học</div>
           <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Nhóm Zalo VIP — Thắm hỗ trợ trực tiếp 21 ngày sau workshop</div>
           <div style="flex-grow: 1;"></div>
-          <a href="#form" onclick="preselectTicket('free')" class="btn" style="margin-top: 8px; background: #2E2420; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Đăng Ký Vé Miễn Phí (Buổi 1–2)</a>
+          <a href="#form" data-ticket="free" class="btn" style="margin-top: 8px; background: #2E2420; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Đăng Ký Vé Miễn Phí (Buổi 1–2)</a>
         </div>
 
         <div style="flex: 1; min-width: 260px; border: 2px solid #C0654A; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 14px; background: #FFF5EE; position: relative;">
@@ -509,7 +499,7 @@
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Video xem lại cả 3 buổi học</div>
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Nhóm Zalo VIP — Thắm hỗ trợ trực tiếp 21 ngày sau workshop</div>
           <div style="flex-grow: 1;"></div>
-          <a href="#form" onclick="preselectTicket('vip')" class="btn" style="margin-top: 8px; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Mở Khóa Buổi 3 — Đăng Ký Vé VIP (99K)</a>
+          <a href="#form" data-ticket="vip" class="btn" style="margin-top: 8px; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Mở Khóa Buổi 3 — Đăng Ký Vé VIP (99K)</a>
           <div style="background: #EAF2E7; border: 1.5px dashed #7C8A6E; border-radius: 10px; padding: 12px 14px; font-size: 13px; line-height: 1.55; color: #44513C;">🎥 Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày trong nhóm VIP.</div>
         </div>
       </div>
@@ -557,6 +547,10 @@
       </div>
 
       <form id="orderForm" style="background: #FFFFFF; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 16px;">
+        <input type="hidden" name="dot" id="f-dot">
+        <input type="hidden" name="ngay_buoi_1" id="f-ngay1">
+        <input type="hidden" name="ngay_buoi_2" id="f-ngay2">
+        <input type="hidden" name="ngay_buoi_3" id="f-ngay3">
         <div style="display: flex; flex-direction: column; gap: 6px;">
           <label for="fullname" style="font-size: 13px; font-weight: 600; color: #5A4B44;">Họ và tên của bạn</label>
           <input id="fullname" name="name" required type="text" placeholder="Nhập họ và tên..." style="border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 14.5px; font-family: 'Work Sans', sans-serif;">
@@ -605,25 +599,52 @@
 
 <!-- Thanh CTA dính trên điện thoại -->
 <div id="stickyCta">
-  <a href="#form" onclick="preselectTicket('free')" class="btn" style="flex: 1; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 13px; border-radius: 100px;">Đăng Ký Giữ Chỗ Miễn Phí</a>
+  <a href="#form" data-ticket="free" class="btn" style="flex: 1; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 13px; border-radius: 100px;">Đăng Ký Giữ Chỗ Miễn Phí</a>
 </div>
 
 <script>
   var CONFIG = window.APP_CONFIG;
 
+  // ============ Chọn hạng vé: viền theo lựa chọn + nút CTA cuộn mượt xuống form ============
+  function syncTicketBorders() {
+    ['free', 'vip'].forEach(function (t) {
+      var label = document.getElementById('label-' + t);
+      label.style.borderColor = label.querySelector('input').checked ? '#C0654A' : '#E6D6C9';
+    });
+  }
+  document.querySelectorAll('#orderForm input[name="goal"]').forEach(function (r) {
+    r.addEventListener('change', syncTicketBorders);
+  });
+
   function preselectTicket(type) {
-    var free = document.querySelector('#label-free input');
-    var vip = document.querySelector('#label-vip input');
-    if (type === 'free') { free.checked = true; document.getElementById('label-free').style.borderColor = '#C0654A'; }
-    if (type === 'vip') { vip.checked = true; document.getElementById('label-vip').style.borderColor = '#C0654A'; }
+    document.querySelector('#label-' + type + ' input').checked = true;
+    syncTicketBorders();
   }
 
-  // Ngày học — lấy từ CONFIG, chỉ cần sửa 1 chỗ ở đầu file cho đợt sau
-  document.getElementById('hero-info-line').textContent =
-    '3 buổi tối · 20h · Zoom · Buổi 1–2 miễn phí · Bắt đầu ' + CONFIG.NGAY_BUOI_1;
-  document.getElementById('date-buoi1').textContent = '20h ' + CONFIG.NGAY_BUOI_1 + ' · 90 phút qua Zoom';
-  document.getElementById('date-buoi2').textContent = '20h ' + CONFIG.NGAY_BUOI_2 + ' · 90 phút qua Zoom';
-  document.getElementById('date-vip').textContent = '20h ' + CONFIG.NGAY_BUOI_3 + ' · 90 phút qua Zoom';
+  // Mọi nút "Đăng Ký…" → cuộn mượt xuống form; nút VIP chọn sẵn vé VIP, các nút khác chọn sẵn vé miễn phí
+  document.querySelectorAll('a[href="#form"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      preselectTicket(a.getAttribute('data-ticket') === 'vip' ? 'vip' : 'free');
+      document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // ============ Lịch học: tự tính đợt kế tiếp (giờ Việt Nam), xem config.js ============
+  var DOT = window.tinhDotKeTiep(new Date());
+  var GIO = CONFIG.GIO_HOC || '20h';
+  if (DOT) {
+    document.getElementById('hero-info-line').textContent =
+      '3 buổi tối · ' + GIO + ' · Zoom · Buổi 1–2 miễn phí · Bắt đầu ' + DOT.label[0];
+    document.getElementById('date-buoi1').textContent = GIO + ' ' + DOT.label[0] + ' · 90 phút qua Zoom';
+    document.getElementById('date-buoi2').textContent = GIO + ' ' + DOT.label[1] + ' · 90 phút qua Zoom';
+    document.getElementById('date-vip').textContent = GIO + ' ' + DOT.label[2] + ' · 90 phút qua Zoom';
+    // Trường ẩn gửi kèm đơn đăng ký
+    document.getElementById('f-dot').value = DOT.dot;
+    document.getElementById('f-ngay1').value = DOT.ngay[0];
+    document.getElementById('f-ngay2').value = DOT.ngay[1];
+    document.getElementById('f-ngay3').value = DOT.ngay[2];
+  }
   document.getElementById('thankyouZaloBtn').href = CONFIG.LINK_NHOM_LOP;
 
   // ============ Section 2: dấu hiệu bấm chọn được ============
@@ -701,6 +722,10 @@
       phone: form.get('phone'),
       email: form.get('email'),
       goal: form.get('goal'),
+      dot: form.get('dot'),
+      ngay_buoi_1: form.get('ngay_buoi_1'),
+      ngay_buoi_2: form.get('ngay_buoi_2'),
+      ngay_buoi_3: form.get('ngay_buoi_3'),
       bump1: false,
       bump2: false,
       totalAmount: 99000
