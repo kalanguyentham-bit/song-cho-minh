@@ -3,12 +3,44 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bí Mật Giúp Phụ Nữ Lấy Lại Sự Tươi Trẻ, Thu Hút Và Tràn Đầy Năng Lượng | Sống Cho Mình Mà Không Cảm Thấy Có Lỗi™</title>
-<meta name="description" content="Dành cho phụ nữ 35+ muốn lấy lại sự tươi trẻ và thu hút từ trong ra ngoài. 3 buổi học online khám phá Phương Pháp 3 Lớp Chuyển Hóa — Cơ Thể, Niềm Tin, Không Gian. Buổi 1 & 2 miễn phí.">
-<meta property="og:title" content="Bí Mật Giúp Phụ Nữ Lấy Lại Sự Tươi Trẻ, Thu Hút Và Tràn Đầy Năng Lượng Chỉ Sau 21 Ngày">
-<meta property="og:description" content="3 buổi học online khám phá Phương Pháp 3 Lớp Chuyển Hóa — điều chỉnh giấc ngủ, ăn uống và vận động hàng ngày để lấy lại sự tươi trẻ và năng lượng.">
-<meta property="og:image" content="assets/founder-new.jpg">
+<title>Ngôi Nhà 3 Lớp — Hiểu Cơ Thể, Chọn Lại Cách Sống · Sống Theo Lựa Chọn</title>
+<meta name="description" content="3 buổi tối online cùng Nguyễn Thắm. Buổi 1–2 miễn phí. Hiểu điều đang rút cạn năng lượng và bắt đầu chăm sóc lại sự tươi tắn với Kế Hoạch 21 Ngày.">
+<meta property="og:title" content="Bí Mật Giúp Phụ Nữ Lấy Lại Sự Tươi Trẻ, Thu Hút Và Tràn Đầy Năng Lượng — Với Kế Hoạch 21 Ngày">
+<meta property="og:description" content="3 buổi tối online cùng Nguyễn Thắm. Buổi 1–2 miễn phí. Hiểu điều đang rút cạn năng lượng và bắt đầu chăm sóc lại sự tươi tắn với Kế Hoạch 21 Ngày.">
+<meta property="og:image" content="assets/hero-tham-og.jpg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap">
+
+<script>
+  // ============================================================
+  // CẤU HÌNH DÙNG CHUNG CHO TOÀN TRANG — sửa 1 chỗ, đổi toàn trang
+  // ============================================================
+  window.APP_CONFIG = {
+    NGAY_BUOI_1: 'Thứ Ba, 27/10',
+    NGAY_BUOI_2: 'Thứ Tư, 28/10',
+    NGAY_BUOI_3: 'Thứ Năm, 29/10',
+    LINK_NHOM_LOP: 'https://zalo.me/g/afweoiaxvoywcsm4nsxh',
+    PIXEL_ID: '3416020051935979'
+  };
+</script>
+
+<!-- Meta Pixel -->
+<script>
+  (function (cfg) {
+    if (!cfg.PIXEL_ID) return;
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', cfg.PIXEL_ID);
+    fbq('track', 'PageView');
+  })(window.APP_CONFIG);
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=3416020051935979&ev=PageView&noscript=1" /></noscript>
+
 <style>
   body { margin: 0; background: #FAF3EC; font-family: 'Work Sans', sans-serif; color: #2E2420; }
   h1, h2, h3 { font-family: 'Fraunces', serif; margin: 0; }
@@ -17,11 +49,35 @@
   .btn { display: inline-block; text-decoration: none; text-align: center; cursor: pointer; }
   ul { margin: 0; padding: 0; list-style: none; }
   input:focus { outline: none; border-color: #C0654A; }
+  input[type="checkbox"], input[type="radio"] { accent-color: #C0654A; }
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   img { max-width: 100%; }
   @media (max-width: 620px) {
     .flex-row-wrap { flex-direction: column !important; }
     .flex-row-wrap > * { min-width: 0 !important; width: 100% !important; }
+  }
+
+  /* Ô bấm chọn — Section 2 */
+  .sign-card { cursor: pointer; transition: background 0.15s, border-color 0.15s; border: 1.5px solid transparent; }
+  .sign-card:hover { border-color: #E6C4B4; }
+  .sign-card.selected { background: #FFF5EE !important; border-color: #C0654A; }
+  .sign-check { width: 26px; height: 26px; border-radius: 50%; background: #C0654A; color: #FFFFFF; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.15s; }
+  .sign-card.selected .sign-check { transform: scale(1.08); }
+  #section2-conclusion.highlighted { background: #E7B79A !important; font-weight: 600; }
+
+  /* FAQ accordion */
+  details.faq { background: #FFFFFF; border-radius: 14px; padding: 18px 22px; border: 1px solid #EFE2D6; }
+  details.faq + details.faq { margin-top: 12px; }
+  details.faq summary { cursor: pointer; font-weight: 600; font-size: 15.5px; color: #2E2420; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  details.faq summary::-webkit-details-marker { display: none; }
+  details.faq summary::after { content: '+'; font-size: 22px; color: #C0654A; flex-shrink: 0; transition: transform 0.15s; }
+  details.faq[open] summary::after { content: '–'; }
+  details.faq .faq-answer { font-size: 14.5px; line-height: 1.65; color: #5A4B44; margin-top: 12px; }
+
+  /* Thanh CTA dính trên điện thoại */
+  #stickyCta { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: #FFFFFF; padding: 10px 16px; box-shadow: 0 -4px 16px rgba(46,36,32,0.12); }
+  @media (max-width: 680px) {
+    #stickyCta.show { display: flex; }
   }
 </style>
 </head>
@@ -32,17 +88,25 @@
   <div style="position: relative; width: 100%; min-height: 640px; display: flex; align-items: stretch; background: linear-gradient(160deg, #3A2A22 0%, #6B3B2C 55%, #C0654A 100%); overflow: hidden;">
     <div style="position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,0.06);"></div>
     <div style="position: absolute; bottom: -120px; left: -60px; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,0.05);"></div>
-    <div style="position: relative; z-index: 1; width: 100%; max-width: 720px; margin: 0 auto; padding: 64px 6px 56px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;">
-      <div style="font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #F1D9CE; font-weight: 600; margin-top: 8px;">Dành cho phụ nữ 35+ muốn lấy lại sự tươi trẻ và thu hút từ trong ra ngoài</div>
-      <h1 style="font-size: 40px; line-height: 1.25; color: #FFFFFF; font-weight: 600;">Bí Mật Giúp Phụ Nữ Lấy Lại Sự Tươi Trẻ, Thu Hút Và Tràn Đầy Năng Lượng Chỉ Sau 21 Ngày</h1>
-      <p style="font-size: 17px; line-height: 1.7; color: #F3E9E1; max-width: 600px;">Trong 3 buổi học online, bạn sẽ khám phá <b>Phương Pháp 3 Lớp Chuyển Hóa</b> — điều chỉnh giấc ngủ, cách ăn uống và vận động hàng ngày để lấy lại sự tươi trẻ và năng lượng, mà không cần nhịn ăn khắc nghiệt hay hy sinh thời gian cho gia đình.</p>
-      <a href="#form" class="btn" style="margin-top: 8px; background: #FFFFFF; color: #B5482F; font-weight: 600; font-size: 16px; padding: 16px 36px; border-radius: 100px;">Đăng Ký Giữ Chỗ Miễn Phí</a>
-    </div>
-  </div>
+    <div style="position: relative; z-index: 1; width: 100%; max-width: 720px; margin: 0 auto; padding: 48px 6px 56px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px;">
+      <div style="font-size: 12.5px; letter-spacing: 2px; text-transform: uppercase; color: #F1D9CE; font-weight: 700; background: rgba(255,255,255,0.1); padding: 6px 16px; border-radius: 100px;">Workshop Ngôi Nhà 3 Lớp</div>
+      <div style="font-size: 13px; letter-spacing: 0.5px; color: #F1D9CE; font-weight: 600;">Dành cho phụ nữ 35+ muốn chăm sóc lại sự tươi tắn và năng lượng từ trong ra ngoài</div>
+      <h1 style="font-size: 38px; line-height: 1.25; color: #FFFFFF; font-weight: 600;">Bí Mật Giúp Phụ Nữ Lấy Lại Sự Tươi Trẻ, Thu Hút Và Tràn Đầy Năng Lượng — Với Kế Hoạch 21 Ngày</h1>
+      <p style="font-size: 16px; line-height: 1.7; color: #F3E9E1; max-width: 600px;"><b>Buổi 1–2 miễn phí:</b> hiểu điều đang rút cạn năng lượng của bạn. <b>Vé VIP:</b> bắt đầu thay đổi ngay với Kế Hoạch 21 Ngày làm theo tình trạng của riêng bạn.</p>
 
-  <!-- ============ HERO IMAGE ============ -->
-  <div style="width: 100%; background: #FAF3EC; padding: 24px 6px;">
-    <img src="assets/hero-new.jpg" style="display: block; width: 100%; max-width: 672px; height: auto; margin: 0 auto; border-radius: 16px;">
+      <img src="assets/hero-tham.webp" alt="Nguyễn Thắm — người hướng dẫn workshop Ngôi Nhà 3 Lớp" loading="eager" style="display: block; width: 100%; max-width: 560px; height: auto; border-radius: 16px; margin: 4px 0;">
+
+      <p style="font-size: 16px; line-height: 1.7; color: #F3E9E1; max-width: 600px;">Trong 3 buổi học online, bạn sẽ khám phá <b>Phương Pháp 3 Lớp Chuyển Hóa</b> — cách điều chỉnh giấc ngủ, ăn uống và vận động hằng ngày để chăm sóc năng lượng và sự tươi tắn, mà không cần nhịn ăn khắc nghiệt hay hy sinh thời gian cho gia đình.</p>
+      <div id="hero-info-line" style="font-size: 13.5px; letter-spacing: 0.3px; color: #F1D9CE; font-weight: 600;">3 buổi tối · 20h · Zoom · Buổi 1–2 miễn phí · Bắt đầu Thứ Ba, 27/10</div>
+
+      <div style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
+        <img src="assets/avatar-tham.webp" alt="Nguyễn Thắm" loading="lazy" style="width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.5);">
+        <div style="font-size: 14px; color: #FFFFFF; text-align: left;">Cùng <b>Nguyễn Thắm</b><br><span style="color: #E6C4B4; font-size: 13px;">Coach Chuyển Hóa Sức Khỏe</span></div>
+      </div>
+
+      <a href="#form" class="btn" style="margin-top: 8px; background: #FFFFFF; color: #B5482F; font-weight: 600; font-size: 16px; padding: 16px 36px; border-radius: 100px;">Đăng Ký Giữ Chỗ Miễn Phí</a>
+      <div style="font-size: 12.5px; color: #E6C4B4; font-style: italic;">Link phòng học gửi qua email và nhóm Zalo của lớp ngay sau khi đăng ký.</div>
+    </div>
   </div>
 
   <!-- ============ SECTION 2: NÓI ĐÚNG TÌNH TRẠNG ============ -->
@@ -51,41 +115,39 @@
       <div style="text-align: center; display: flex; flex-direction: column; gap: 12px;">
         <h2 style="font-size: 30px; color: #2E2420;">Bạn có đang gặp những điều này không?</h2>
         <p style="font-size: 16px; line-height: 1.7; color: #5A4B44;">Nhiều năm qua, bạn lo cho cả nhà. Nhưng sức khỏe, năng lượng và cả những điều bạn thật sự muốn cho bản thân thì bị bỏ lại phía sau.</p>
+        <p style="font-size: 14px; color: #8A756A; font-style: italic;">Chạm vào những dòng đúng với bạn:</p>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div style="display: flex; gap: 14px; align-items: flex-start; background: #FFFFFF; border-radius: 16px; padding: 20px 22px;">
-          <div style="width: 26px; height: 26px; border-radius: 50%; background: #C0654A; color: #FFFFFF; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+      <div id="signList" style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="sign-card" data-sign="1" style="display: flex; gap: 14px; align-items: flex-start; background: #FFFFFF; border-radius: 16px; padding: 20px 22px;">
+          <div class="sign-check">1</div>
           <div style="font-size: 15.5px; line-height: 1.65; color: #3A2E2A;">Sáng ngủ dậy vẫn mệt dù đã ngủ đủ 7-8 tiếng, đến 3-4 giờ chiều là kiệt sức, phải dựa vào cà phê hoặc đồ ngọt để trụ tiếp</div>
         </div>
 
-        <div style="display: flex; gap: 14px; align-items: flex-start; background: #FFFFFF; border-radius: 16px; padding: 20px 22px;">
-          <div style="width: 26px; height: 26px; border-radius: 50%; background: #C0654A; color: #FFFFFF; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+        <div class="sign-card" data-sign="2" style="display: flex; gap: 14px; align-items: flex-start; background: #FFFFFF; border-radius: 16px; padding: 20px 22px;">
+          <div class="sign-check">2</div>
           <div style="font-size: 15.5px; line-height: 1.65; color: #3A2E2A;">Da xỉn màu, tóc rụng nhiều hơn, vòng eo thay đổi dù ăn uống không khác trước là mấy — nhưng không biết vì sao</div>
         </div>
 
-        <div style="display: flex; gap: 14px; align-items: flex-start; background: #FFFFFF; border-radius: 16px; padding: 20px 22px;">
-          <div style="width: 26px; height: 26px; border-radius: 50%; background: #C0654A; color: #FFFFFF; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
+        <div class="sign-card" data-sign="3" style="display: flex; gap: 14px; align-items: flex-start; background: #FFFFFF; border-radius: 16px; padding: 20px 22px;">
+          <div class="sign-check">3</div>
           <div style="font-size: 15.5px; line-height: 1.65; color: #3A2E2A;">Thấy áy náy mỗi khi dành thời gian hoặc tiền bạc chăm sóc riêng cho bản thân, đã quen đặt nhu cầu của mình xuống cuối cùng</div>
         </div>
 
-        <div style="display: flex; gap: 14px; align-items: flex-start; background: #FFFFFF; border-radius: 16px; padding: 20px 22px;">
-          <div style="width: 26px; height: 26px; border-radius: 50%; background: #C0654A; color: #FFFFFF; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">4</div>
+        <div class="sign-card" data-sign="4" style="display: flex; gap: 14px; align-items: flex-start; background: #FFFFFF; border-radius: 16px; padding: 20px 22px;">
+          <div class="sign-check">4</div>
           <div style="font-size: 15.5px; line-height: 1.65; color: #3A2E2A;">Dễ cáu gắt vô cớ với chồng con rồi lại tự trách mình, và mỗi lần định thay đổi thói quen lại ngại vì sợ gia đình không ủng hộ</div>
         </div>
 
-        <div style="display: flex; gap: 14px; align-items: flex-start; background: #FFFFFF; border-radius: 16px; padding: 20px 22px;">
-          <div style="width: 26px; height: 26px; border-radius: 50%; background: #C0654A; color: #FFFFFF; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">5</div>
+        <div class="sign-card" data-sign="5" style="display: flex; gap: 14px; align-items: flex-start; background: #FFFFFF; border-radius: 16px; padding: 20px 22px;">
+          <div class="sign-check">5</div>
           <div style="font-size: 15.5px; line-height: 1.65; color: #3A2E2A;">Không có một góc nào trong nhà thực sự là "của riêng mình"</div>
         </div>
       </div>
 
-      <div style="display: flex; gap: 12px; margin-top: 4px;">
-        <img src="assets/waist-tape.jpg" style="width: 50%; height: 190px; object-fit: cover; border-radius: 14px;">
-        <img src="assets/hair-loss.jpg" style="width: 50%; height: 190px; object-fit: cover; border-radius: 14px;">
-      </div>
+      <div id="signCounter" style="text-align: center; font-size: 14px; font-weight: 600; color: #C0654A;">Bạn đã chọn 0/5 dấu hiệu</div>
 
-      <div style="background: #F1D9CE; border-radius: 16px; padding: 24px 26px; font-size: 15.5px; line-height: 1.7; color: #5A2E20;">Nếu bạn thấy mình trong từ 3 dấu hiệu trở lên, nguyên nhân rất có thể không nằm ở tuổi tác hay ý chí — mà ở <b>sức khỏe đường ruột, nội tiết tố và cách cơ thể bạn đang được nuôi dưỡng mỗi ngày</b>. Đây là điều rất ít người nói cho bạn biết, và không phải lỗi của bạn.</div>
+      <div id="section2-conclusion" style="background: #F1D9CE; border-radius: 16px; padding: 24px 26px; font-size: 15.5px; line-height: 1.7; color: #5A2E20; transition: background 0.2s;">Nếu bạn thấy mình trong từ 3 dấu hiệu trở lên, nguyên nhân rất có thể không nằm ở tuổi tác hay ý chí — mà ở <b>cách cơ thể bạn đang được nuôi dưỡng mỗi ngày</b>: ăn uống, giấc ngủ, nhịp sinh hoạt và cả những điều bạn đang âm thầm gánh. Và điều quan trọng: đó không phải lỗi của bạn.</div>
     </div>
   </div>
 
@@ -94,37 +156,39 @@
     <div style="max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;">
       <div style="text-align: center; display: flex; flex-direction: column; gap: 12px;">
         <h2 style="font-size: 28px;">Đây Không Chỉ Là Chuyện Tuổi Tác</h2>
-        <p style="font-size: 15.5px; line-height: 1.75; color: #5A4B44;">Rất nhiều người nghĩ rằng mệt mỏi, khó ngủ, tăng cân là "quy luật tự nhiên" khi bước vào giai đoạn bận rộn nhất của cuộc sống — vừa lo sự nghiệp, vừa lo gia đình. Nhưng nếu chỉ là chuyện tự nhiên, tại sao có người ở cùng hoàn cảnh vẫn tràn đầy năng lượng và rạng rỡ, còn người khác thì không?</p>
-        <p style="font-size: 15.5px; line-height: 1.75; color: #5A4B44;">Sự khác biệt không nằm ở tuổi tác — mà nằm ở <b>sức khỏe đường ruột, nội tiết tố và tốc độ chuyển hóa</b> của bạn: ba yếu tố quyết định trực tiếp năng lượng, làn da và vóc dáng, nhưng lại là thứ mà các phương pháp ăn kiêng hay chăm da thông thường không chạm tới được.</p>
+        <p style="font-size: 15.5px; line-height: 1.75; color: #5A4B44;">Rất nhiều người nghĩ rằng mệt mỏi, khó ngủ, tăng cân là "quy luật tự nhiên" khi bước vào giai đoạn bận rộn của cuộc sống — vừa lo sự nghiệp, vừa lo gia đình. Nhưng nếu chỉ là chuyện tự nhiên, tại sao có người ở cùng hoàn cảnh vẫn tràn đầy năng lượng và rạng rỡ, còn người khác thì không?</p>
+        <p style="font-size: 15.5px; line-height: 1.75; color: #5A4B44;">Sự khác biệt không chỉ nằm ở tuổi tác — mà còn ở <b>thói quen ăn uống, giấc ngủ, vận động và môi trường sống hằng ngày</b>, những yếu tố có liên quan đến tiêu hóa, nội tiết và năng lượng của cơ thể. Đó lại là phần mà nhiều cách ăn kiêng hay chăm da thông thường chưa để ý tới.</p>
       </div>
 
-      <div style="background: #FAF3EC; border-radius: 20px; padding: 32px 26px; display: flex; flex-direction: column; gap: 8px; text-align: center;">
+      <img src="assets/tham-ve-tranh.webp" alt="Nguyễn Thắm vẽ tranh" loading="lazy" style="display: block; width: 100%; max-width: 560px; height: auto; margin: 0 auto; border-radius: 16px;">
+
+      <div style="background: #FAF3EC; border-radius: 20px; padding: 32px 26px; display: flex; flex-direction: column; gap: 10px; text-align: center;">
         <div style="font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: #C0654A; font-weight: 600;">Phương Pháp</div>
         <h3 style="font-size: 24px; color: #2E2420;">3 Lớp Chuyển Hóa</h3>
+        <p style="font-size: 14.5px; line-height: 1.65; color: #5A4B44; font-style: italic; margin-top: 4px;">Giống như xây một ngôi nhà: làm móng trước, dựng khung sau, rồi mới hoàn thiện ngôi nhà bao bọc bạn. Đó cũng là thứ tự của 3 buổi học.</p>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 16px;">
         <div style="background: #FAF3EC; border-radius: 16px; padding: 24px;">
           <div style="font-size: 13px; letter-spacing: 1px; color: #C0654A; font-weight: 700; text-transform: uppercase;">Lớp 1 — Cơ Thể</div>
-          <div style="font-size: 18px; font-weight: 600; margin-top: 4px; color: #2E2420;">Phục hồi nền tảng sức khỏe</div>
-          <div style="font-size: 14.5px; color: #5A4B44; margin-top: 4px;">Đường ruột, nội tiết tố, giấc ngủ</div>
+          <div style="font-size: 18px; font-weight: 600; margin-top: 4px; color: #2E2420;">Chăm sóc nền tảng: ăn uống, giấc ngủ, vận động</div>
           <div style="height: 1px; background: #E6D6C9; margin: 14px 0;"></div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;"><b>Vai trò:</b> Đây là lớp ngoài cùng và cũng là nền — mọi vấn đề về vóc dáng, làn da và năng lượng đều bắt nguồn từ đây, nên phải xử lý trước khi đi sâu hơn</div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A; margin-top: 8px;"><b>Kết quả:</b> Năng lượng phục hồi tự nhiên, ngủ sâu hơn, vóc dáng ổn định trở lại — không cần nhịn ăn cực đoan hay tập luyện quá sức</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;"><b>Vai trò:</b> Nền móng — vóc dáng, làn da và năng lượng có liên quan nhiều đến cách cơ thể được nuôi dưỡng mỗi ngày. Móng vững thì những thay đổi khác mới đứng được, nên bắt đầu từ đây</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A; margin-top: 8px;"><b>Hướng tới:</b> Thói quen ăn – ngủ – vận động phù hợp hơn với cơ thể và lịch sinh hoạt của bạn — không cần nhịn ăn cực đoan hay tập luyện quá sức</div>
         </div>
         <div style="background: #FAF3EC; border-radius: 16px; padding: 24px;">
           <div style="font-size: 13px; letter-spacing: 1px; color: #C0654A; font-weight: 700; text-transform: uppercase;">Lớp 2 — Niềm Tin</div>
-          <div style="font-size: 18px; font-weight: 600; margin-top: 4px; color: #2E2420;">Tháo gỡ niềm tin khiến bạn luôn đặt mình sau cùng</div>
+          <div style="font-size: 18px; font-weight: 600; margin-top: 4px; color: #2E2420;">Tháo gỡ những niềm tin khiến bạn luôn đặt mình sau cùng</div>
           <div style="height: 1px; background: #E6D6C9; margin: 14px 0;"></div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;"><b>Vai trò:</b> Dù cơ thể đã khỏe hơn, nếu lớp niềm tin bên trong còn nguyên, bạn sẽ quay lại thói quen cũ chỉ sau một thời gian ngắn</div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A; margin-top: 8px;"><b>Kết quả:</b> Bạn học cách ưu tiên bản thân mà không còn cảm giác áy náy hay tội lỗi — nền tảng tâm lý cho một thay đổi thật sự bền vững</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;"><b>Vai trò:</b> Kết cấu — như khung của ngôi nhà. Nếu lớp niềm tin bên trong còn nguyên, rất dễ quay lại thói quen cũ sau một thời gian ngắn</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A; margin-top: 8px;"><b>Hướng tới:</b> Học cách ưu tiên bản thân với ít áy náy hơn — nền tảng để thay đổi được lâu hơn</div>
         </div>
         <div style="background: #FAF3EC; border-radius: 16px; padding: 24px;">
           <div style="font-size: 13px; letter-spacing: 1px; color: #C0654A; font-weight: 700; text-transform: uppercase;">Lớp 3 — Không Gian</div>
           <div style="font-size: 18px; font-weight: 600; margin-top: 4px; color: #2E2420;">Tái thiết môi trường sống và ranh giới gia đình</div>
           <div style="height: 1px; background: #E6D6C9; margin: 14px 0;"></div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;"><b>Vai trò:</b> Lớp sâu nhất — môi trường sống và ranh giới với người thân quyết định bạn có giữ được thói quen mới hay lại bị cuốn về nếp cũ</div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A; margin-top: 8px;"><b>Kết quả:</b> Sự thay đổi được duy trì lâu dài — không chỉ trong vài tuần workshop, mà trở thành lối sống mới</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;"><b>Vai trò:</b> Ngôi nhà bao bọc — môi trường sống và ranh giới với người thân ảnh hưởng lớn đến việc bạn giữ được thói quen mới hay bị cuốn về nếp cũ</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A; margin-top: 8px;"><b>Hướng tới:</b> Một không gian và nếp sinh hoạt hỗ trợ bạn duy trì thói quen mới sau workshop</div>
         </div>
       </div>
 
@@ -140,16 +204,17 @@
       <div style="display: flex; gap: 16px; background: #FFFFFF; border-radius: 16px; padding: 22px;">
         <div style="font-family: 'Fraunces', serif; font-size: 30px; color: #E6C4B4; font-weight: 600; flex-shrink: 0;">01</div>
         <div>
-          <div style="font-size: 17px; font-weight: 600; color: #2E2420;">Hiểu đúng nguyên nhân thật sự</div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #5A4B44; margin-top: 4px;">Biết chính xác sức khỏe đường ruột, nội tiết tố và tốc độ chuyển hóa đang ảnh hưởng thế nào đến năng lượng, giấc ngủ và vóc dáng của bạn.</div>
+          <div style="font-size: 17px; font-weight: 600; color: #2E2420;">Hiểu rõ hơn điều có thể đang rút cạn bạn</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #5A4B44; margin-top: 4px;">Kiến thức phổ thông, dễ hiểu về cách ăn uống, giấc ngủ, vận động và tiêu hóa liên quan đến năng lượng, giấc ngủ và vóc dáng.</div>
         </div>
       </div>
 
       <div style="display: flex; gap: 16px; background: #FFFFFF; border-radius: 16px; padding: 22px;">
         <div style="font-family: 'Fraunces', serif; font-size: 30px; color: #E6C4B4; font-weight: 600; flex-shrink: 0;">02</div>
-        <div>
-          <div style="font-size: 17px; font-weight: 600; color: #2E2420;">Lớp 1 — Phục hồi nền tảng cơ thể</div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #5A4B44; margin-top: 4px;">Cách ăn, vận động và nghỉ ngơi phù hợp để phục hồi đường ruột, nội tiết tố và giấc ngủ, áp dụng được ngay cho bữa cơm và lịch sinh hoạt gia đình sẵn có.</div>
+        <div style="flex: 1;">
+          <div style="font-size: 17px; font-weight: 600; color: #2E2420;">Lớp 1 — Chăm sóc nền tảng cơ thể</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #5A4B44; margin-top: 4px;">Gợi ý ăn, vận động và nghỉ ngơi có thể áp dụng ngay vào bữa cơm và lịch sinh hoạt gia đình sẵn có.</div>
+          <img src="assets/bua-an-lanh-manh.webp" alt="Bữa ăn lành mạnh" loading="lazy" style="display: block; width: 100%; max-width: 320px; height: auto; border-radius: 12px; margin-top: 12px;">
         </div>
       </div>
 
@@ -157,16 +222,16 @@
         <div style="font-family: 'Fraunces', serif; font-size: 30px; color: #E6C4B4; font-weight: 600; flex-shrink: 0;">03</div>
         <div>
           <div style="font-size: 17px; font-weight: 600; color: #2E2420;">Lớp 2 — Tháo gỡ niềm tin đang giữ chân bạn</div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #5A4B44; margin-top: 4px;">Hiểu vì sao cảm giác có lỗi khi chăm sóc bản thân xuất hiện, và cách bắt đầu tháo gỡ nó mà không ảnh hưởng đến hạnh phúc gia đình.</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #5A4B44; margin-top: 4px;">Hiểu vì sao cảm giác có lỗi khi chăm sóc bản thân xuất hiện, và cách bắt đầu tháo gỡ nó theo hướng hài hòa với gia đình.</div>
         </div>
       </div>
 
       <div style="display: flex; gap: 16px; background: #FFF5EE; border: 1.5px solid #E6C4B4; border-radius: 16px; padding: 22px;">
         <div style="font-family: 'Fraunces', serif; font-size: 30px; color: #C0654A; font-weight: 600; flex-shrink: 0;">04</div>
         <div>
-          <div style="font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #C0654A; font-weight: 700;">Dành riêng cho Vé VIP — Buổi 3</div>
+          <div style="font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #C0654A; font-weight: 700;">VIP — Dành riêng cho Buổi 3</div>
           <div style="font-size: 17px; font-weight: 600; color: #2E2420; margin-top: 2px;">Lớp 3 — Bản Kế Hoạch Cá Nhân Hóa 21 Ngày</div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #5A4B44; margin-top: 4px;">Kèm hướng dẫn tái thiết không gian sống và ranh giới gia đình để duy trì thay đổi lâu dài.</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #5A4B44; margin-top: 4px;">Ra về với kế hoạch dựa trên bảng tự đánh giá của chính bạn, kèm hướng dẫn tái thiết không gian sống và ranh giới gia đình để duy trì thay đổi lâu dài.</div>
         </div>
       </div>
 
@@ -183,13 +248,13 @@
         <div style="background: #FAF3EC; padding: 18px 22px;">
           <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #7C8A6E; text-transform: uppercase;">Miễn phí · Buổi 1</div>
           <div style="font-size: 19px; font-weight: 600; color: #2E2420; margin-top: 2px;">Vì sao cơ thể mệt mỏi không chỉ do tuổi tác</div>
-          <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;" id="date-buoi1">20h00 · Thứ Ba · 90 phút qua Zoom</div>
+          <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;" id="date-buoi1">20h Thứ Ba, 27/10 · 90 phút qua Zoom</div>
         </div>
         <div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 10px;">
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Sức khỏe đường ruột, nội tiết tố và tốc độ chuyển hóa đang ảnh hưởng đến bạn thế nào, giải thích dễ hiểu, không thuật ngữ y khoa</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Thói quen ăn uống, giấc ngủ, tiêu hóa có thể ảnh hưởng đến năng lượng thế nào — kiến thức phổ thông, dễ hiểu, không chẩn đoán</div>
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— 3 sai lầm phổ biến khi cố chăm sóc bản thân theo cách cũ</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Lớp 1 của Phương Pháp 3 Lớp Chuyển Hóa: công thức phục hồi năng lượng qua ăn uống, vận động, nghỉ ngơi</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Thực hành ngay: 1 điều chỉnh nhỏ áp dụng được ngay tối nay</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Lớp 1 của Phương Pháp 3 Lớp Chuyển Hóa: nguyên tắc chăm sóc năng lượng qua ăn uống, vận động, nghỉ ngơi</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Thực hành ngay: 1 điều chỉnh nhỏ áp dụng được ngay tối nay — và chia sẻ vào nhóm Zalo của lớp</div>
         </div>
       </div>
 
@@ -197,12 +262,12 @@
         <div style="background: #FAF3EC; padding: 18px 22px;">
           <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #7C8A6E; text-transform: uppercase;">Miễn phí · Buổi 2</div>
           <div style="font-size: 19px; font-weight: 600; color: #2E2420; margin-top: 2px;">Niềm tin âm thầm khiến bạn luôn đặt mình sau cùng</div>
-          <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;" id="date-buoi2">20h00 · Thứ Tư · 90 phút qua Zoom</div>
+          <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;" id="date-buoi2">20h Thứ Tư, 28/10 · 90 phút qua Zoom</div>
         </div>
         <div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 10px;">
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Vì sao càng cố gắng vì gia đình, bạn càng kiệt sức</div>
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Nhận diện cảm giác có lỗi khi chăm sóc bản thân đến từ đâu</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Lớp 2: cách bắt đầu ưu tiên bản thân mà không đánh đổi hạnh phúc gia đình</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Lớp 2 của Phương Pháp 3 Lớp Chuyển Hóa: cách bắt đầu ưu tiên bản thân theo hướng hài hòa với gia đình</div>
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Thực hành: viết ra 1 điều bạn đang trì hoãn vì cảm giác có lỗi</div>
         </div>
       </div>
@@ -211,12 +276,12 @@
         <div style="background: #C0654A; padding: 18px 22px;">
           <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #FFF0E9; text-transform: uppercase;">Vé VIP · Buổi 3</div>
           <div style="font-size: 19px; font-weight: 600; color: #FFFFFF; margin-top: 2px;">Tái thiết không gian sống và hoàn thiện Kế Hoạch 21 Ngày</div>
-          <div style="font-size: 13.5px; color: #FCE4DA; margin-top: 2px;" id="date-vip">20h00 · Thứ Năm · 90 phút qua Zoom</div>
+          <div style="font-size: 13.5px; color: #FCE4DA; margin-top: 2px;" id="date-vip">20h Thứ Năm, 29/10 · 90 phút qua Zoom</div>
         </div>
         <div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; background: #FFF5EE;">
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Lớp 3: vì sao môi trường sống và ranh giới gia đình quyết định bạn có duy trì được thay đổi hay không</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Cách thiết lập ranh giới yêu thương với chồng con mà không gây xung đột</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Hoàn thiện Bản Kế Hoạch Cá Nhân Hóa 21 Ngày dựa trên đúng tình trạng của bạn</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Lớp 3 của Phương Pháp 3 Lớp Chuyển Hóa: vì sao môi trường sống và ranh giới gia đình ảnh hưởng đến việc duy trì thay đổi</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Cách thiết lập ranh giới yêu thương với chồng con, hạn chế xung đột</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.55;">— Hoàn thiện Bản Kế Hoạch Cá Nhân Hóa 21 Ngày dựa trên bảng tự đánh giá của bạn</div>
         </div>
       </div>
 
@@ -224,116 +289,170 @@
     </div>
   </div>
 
-  <!-- ============ SECTION: DÀNH CHO BẠN NẾU ============ -->
+  <!-- ============ SECTION 6: DÀNH CHO BẠN NẾU / KHÔNG DÀNH CHO BẠN NẾU ============ -->
   <div style="width: 100%; background: #F1D9CE; padding: 64px 6px;">
     <div style="max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
       <h2 style="font-size: 26px; text-align: center; color: #2E2420;">Buổi Học Này Là Dành Cho Bạn Nếu</h2>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <div style="display: flex; gap: 12px; align-items: flex-start; background: #FFFFFF; border-radius: 14px; padding: 16px 18px;">
-          <div style="width: 22px; height: 22px; border-radius: 50%; background: #C0654A; flex-shrink: 0; margin-top: 2px;"></div>
+          <div style="width: 22px; height: 22px; border-radius: 50%; background: #C0654A; flex-shrink: 0; margin-top: 2px; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center;">✓</div>
           <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Bạn thường xuyên mệt mỏi, khó ngủ hoặc tụt năng lượng vào giữa ngày, dù đã thử đủ cách</div>
         </div>
         <div style="display: flex; gap: 12px; align-items: flex-start; background: #FFFFFF; border-radius: 14px; padding: 16px 18px;">
-          <div style="width: 22px; height: 22px; border-radius: 50%; background: #C0654A; flex-shrink: 0; margin-top: 2px;"></div>
+          <div style="width: 22px; height: 22px; border-radius: 50%; background: #C0654A; flex-shrink: 0; margin-top: 2px; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center;">✓</div>
           <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Vóc dáng, làn da thay đổi rõ rệt nhưng bạn không hiểu vì sao, và các phương pháp ăn kiêng/chăm da thông thường không còn hiệu quả như trước</div>
         </div>
         <div style="display: flex; gap: 12px; align-items: flex-start; background: #FFFFFF; border-radius: 14px; padding: 16px 18px;">
-          <div style="width: 22px; height: 22px; border-radius: 50%; background: #C0654A; flex-shrink: 0; margin-top: 2px;"></div>
+          <div style="width: 22px; height: 22px; border-radius: 50%; background: #C0654A; flex-shrink: 0; margin-top: 2px; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center;">✓</div>
           <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Bạn đã quen đặt nhu cầu bản thân xuống cuối cùng, và thấy áy náy mỗi khi dành thời gian hay tiền bạc chăm sóc riêng cho mình</div>
         </div>
         <div style="display: flex; gap: 12px; align-items: flex-start; background: #FFFFFF; border-radius: 14px; padding: 16px 18px;">
-          <div style="width: 22px; height: 22px; border-radius: 50%; background: #C0654A; flex-shrink: 0; margin-top: 2px;"></div>
-          <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Bạn muốn lấy lại sự tươi trẻ và năng lượng, nhưng không muốn đánh đổi bằng việc hy sinh thời gian cho gia đình hay nhịn ăn khắc nghiệt</div>
+          <div style="width: 22px; height: 22px; border-radius: 50%; background: #C0654A; flex-shrink: 0; margin-top: 2px; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center;">✓</div>
+          <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Bạn muốn chăm sóc lại sự tươi tắn và năng lượng, nhưng không muốn đánh đổi bằng việc hy sinh thời gian cho gia đình hay nhịn ăn khắc nghiệt</div>
         </div>
         <div style="display: flex; gap: 12px; align-items: flex-start; background: #FFFFFF; border-radius: 14px; padding: 16px 18px;">
-          <div style="width: 22px; height: 22px; border-radius: 50%; background: #C0654A; flex-shrink: 0; margin-top: 2px;"></div>
-          <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Bạn sẵn sàng dành 3 buổi tối để hiểu đúng nguyên nhân và có một lộ trình cụ thể để bắt đầu — thay vì thử thêm một phương pháp mơ hồ khác</div>
+          <div style="width: 22px; height: 22px; border-radius: 50%; background: #C0654A; flex-shrink: 0; margin-top: 2px; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center;">✓</div>
+          <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Bạn sẵn sàng dành 3 buổi tối để hiểu rõ hơn về bản thân và có một lộ trình cụ thể để bắt đầu — thay vì thử thêm một phương pháp mơ hồ khác</div>
         </div>
       </div>
+
+      <h2 style="font-size: 22px; text-align: center; color: #2E2420; margin-top: 12px;">Buổi Học Này Không Dành Cho Bạn Nếu</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start; background: #FFFFFF; border-radius: 14px; padding: 16px 18px;">
+          <div style="width: 22px; height: 22px; border-radius: 50%; background: #8A756A; flex-shrink: 0; margin-top: 2px; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center;">✕</div>
+          <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Bạn tìm cách giảm vài ký thật nhanh trong một tuần</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start; background: #FFFFFF; border-radius: 14px; padding: 16px 18px;">
+          <div style="width: 22px; height: 22px; border-radius: 50%; background: #8A756A; flex-shrink: 0; margin-top: 2px; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center;">✕</div>
+          <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Bạn đang tìm thuốc, thực phẩm chức năng hay một "liệu trình thần kỳ"</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start; background: #FFFFFF; border-radius: 14px; padding: 16px 18px;">
+          <div style="width: 22px; height: 22px; border-radius: 50%; background: #8A756A; flex-shrink: 0; margin-top: 2px; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center;">✕</div>
+          <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Bạn cần chẩn đoán hoặc điều trị một bệnh lý, hoặc đang có dấu hiệu bất thường kéo dài (mệt nhiều tuần không đỡ, rụng tóc thành mảng, tăng hoặc sụt cân nhanh) — hãy gặp bác sĩ trước</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start; background: #FFFFFF; border-radius: 14px; padding: 16px 18px;">
+          <div style="width: 22px; height: 22px; border-radius: 50%; background: #8A756A; flex-shrink: 0; margin-top: 2px; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center;">✕</div>
+          <div style="font-size: 15px; line-height: 1.6; color: #3A2E2A;">Bạn đang mang thai, cho con bú, có bệnh mạn tính hoặc đang dùng thuốc — hãy hỏi bác sĩ trước khi thay đổi chế độ ăn hay vận động</div>
+        </div>
+      </div>
+
       <a href="#form" class="btn" style="align-self: center; background: #2E2420; color: #FFFFFF; font-weight: 600; font-size: 15.5px; padding: 15px 32px; border-radius: 100px; margin-top: 4px;">Đăng Ký Giữ Chỗ Ngay</a>
     </div>
   </div>
 
-  <!-- ============ SECTION 6: NGƯỜI HƯỚNG DẪN ============ -->
+  <!-- ============ SECTION 7: NGƯỜI HƯỚNG DẪN ============ -->
   <div style="width: 100%; background: #2E2420; padding: 72px 6px;">
     <div style="max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;">
       <h2 style="font-size: 28px; text-align: center; color: #FFFFFF;">Người Hướng Dẫn Của Bạn</h2>
 
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 14px;">
-        <img src="assets/founder-new.jpg" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; object-position: center 30%; border: 3px solid #C0654A;">
-        <div style="text-align: center;">
-          <div style="font-size: 21px; font-weight: 600; color: #FFFFFF;">Nguyễn Thắm</div>
-          <div style="font-size: 14px; color: #E6C4B4; margin-top: 2px;">Kiến Trúc Sư &amp; Coach Chuyển Hóa Sức Khỏe</div>
+      <img src="assets/tham-chan-dung.webp" alt="Chân dung Nguyễn Thắm" loading="lazy" style="display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto; border-radius: 16px;">
+
+      <div style="text-align: center;">
+        <div style="font-size: 21px; font-weight: 600; color: #FFFFFF;">Nguyễn Thắm</div>
+        <div style="font-size: 14px; color: #E6C4B4; margin-top: 2px;">Kiến Trúc Sư &amp; Coach Chuyển Hóa Sức Khỏe</div>
+      </div>
+
+      <div class="flex-row-wrap" style="display: flex; gap: 12px;">
+        <div style="flex: 1; text-align: center;">
+          <img src="assets/tham-tot-nghiep.webp" alt="Thắm tốt nghiệp Kiến trúc" loading="lazy" style="width: 100%; height: 120px; object-fit: cover; border-radius: 12px;">
+          <div style="font-size: 12.5px; color: #E6C4B4; margin-top: 6px;">Tốt nghiệp Kiến trúc</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <img src="assets/tham-chung-chi-dinh-duong.webp" alt="Thắm nhận chứng chỉ Huấn luyện viên Dinh dưỡng" loading="lazy" style="width: 100%; height: 120px; object-fit: cover; border-radius: 12px;">
+          <div style="font-size: 12.5px; color: #E6C4B4; margin-top: 6px;">Khóa Huấn luyện viên Dinh dưỡng</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <img src="assets/tham-hoi-hoa.webp" alt="Thắm vẽ tranh" loading="lazy" style="width: 100%; height: 120px; object-fit: cover; border-radius: 12px;">
+          <div style="font-size: 12.5px; color: #E6C4B4; margin-top: 6px;">Hội họa — không gian riêng của Thắm</div>
         </div>
       </div>
 
       <div style="display: flex; gap: 16px; align-items: center; background: #3A2E2A; border-radius: 16px; padding: 18px;">
-        <img src="assets/certificate.jpg" style="width: 96px; height: 128px; object-fit: cover; border-radius: 10px; flex-shrink: 0;">
         <div style="font-size: 14px; line-height: 1.6; color: #F3E9E1;">Chứng chỉ Huấn Luyện Viên Dinh Dưỡng và Wellness Coach. Tốt nghiệp Kiến trúc và từng làm việc trong ngành — niềm yêu thích không gian sống có từ thời sinh viên, khi từng khởi nghiệp nhỏ với vườn kiểng chỉ 500 nghìn vốn ban đầu, và giờ trở thành tư duy cốt lõi trong Lớp 3 (Không Gian) của Phương Pháp 3 Lớp Chuyển Hóa.</div>
       </div>
 
-      <div style="font-size: 14.5px; line-height: 1.6; color: #E6C4B4; font-style: italic; text-align: center;">Phương Pháp 3 Lớp Chuyển Hóa được đúc kết từ chính hành trình phục hồi sức khỏe của bản thân Thắm.</div>
+      <div style="font-size: 14.5px; line-height: 1.6; color: #E6C4B4; font-style: italic; text-align: center;">Phương Pháp 3 Lớp Chuyển Hóa được đúc kết từ chính hành trình phục hồi sức khỏe của bản thân (chi tiết đầy đủ bên dưới).</div>
 
       <div style="display: flex; flex-direction: column; gap: 14px;">
         <p style="font-size: 15px; line-height: 1.75; color: #F3E9E1;">Trong nhiều năm, Thắm cũng từng sống đúng như những gì chị vừa đọc ở trên: luôn đặt công việc và trách nhiệm gia đình lên trước, còn sức khỏe của mình thì "để sau". Cơ thể dần lên tiếng qua những vấn đề tiêu hóa kéo dài, làn da xuống sắc, năng lượng cạn kiệt — nhưng Thắm vẫn nghĩ đó là điều bình thường của việc "ai cũng bận rộn thôi".</p>
-        <p style="font-size: 15px; line-height: 1.75; color: #F3E9E1;">Phải đến khi mọi thứ trở nên nghiêm trọng hơn, Thắm mới bắt đầu tìm hiểu sâu về mối liên hệ giữa sức khỏe đường ruột, nội tiết tố và năng lượng tổng thể — và nhận ra vấn đề không nằm ở tuổi tác hay ý chí, mà ở cách cơ thể đang được (hoặc không được) chăm sóc đúng cách. Từng bước, Thắm phục hồi được hệ tiêu hóa, làn da và cân nặng ổn định trở lại — không quá kiêng khem cực đoan, mà qua việc hiểu đúng cơ chế của cơ thể mình.</p>
+        <p style="font-size: 15px; line-height: 1.75; color: #F3E9E1;">Phải đến khi mọi thứ trở nên nghiêm trọng hơn, Thắm mới bắt đầu tìm hiểu sâu về mối liên hệ giữa sức khỏe đường ruột, nội tiết tố và năng lượng tổng thể — và nhận ra với mình, vấn đề không chỉ là tuổi tác hay ý chí, mà là cách mình đã chăm sóc (hoặc bỏ quên) cơ thể. Từng bước, tiêu hóa, làn da và cân nặng của Thắm dần ổn định trở lại — không qua kiêng khem cực đoan, mà qua việc hiểu cơ thể mình hơn.</p>
       </div>
 
       <div style="font-style: italic; font-size: 15px; line-height: 1.8; color: #E6C4B4; border-left: 3px solid #C0654A; padding-left: 18px;">"Mình từng ở đúng vị trí của bạn bây giờ — biết mình cần thay đổi nhưng không biết bắt đầu từ đâu, và cũng không có ai chỉ cho mình một cách rõ ràng, thực tế. Workshop này là những gì mình ước có ai đó đã đưa cho mình từ nhiều năm trước."</div>
+
+      <div style="font-size: 13px; line-height: 1.6; color: #B5A89C; font-style: italic; text-align: center;">Thắm không phải bác sĩ. Workshop chia sẻ kiến thức dinh dưỡng, lối sống và trải nghiệm cá nhân, không thay thế tư vấn hay điều trị y khoa.</div>
 
       <a href="#form" class="btn" style="align-self: center; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15.5px; padding: 15px 32px; border-radius: 100px;">Đăng Ký Giữ Chỗ Ngay</a>
     </div>
   </div>
 
-  <!-- ============ SECTION 7: CHỨNG THỰC ============ -->
+  <!-- ============ SECTION 8: CHỨNG THỰC ============ -->
   <div style="width: 100%; background: #FAF3EC; padding: 72px 6px;">
     <div style="max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px;">
-      <h2 style="font-size: 28px; text-align: center;">Hành Trình Trước – Sau Của Nguyễn Thắm</h2>
+      <h2 style="font-size: 28px; text-align: center;">Hành trình trước – sau của Nguyễn Thắm</h2>
+      <p style="font-size: 14px; color: #8A756A; font-style: italic; text-align: center; margin-top: -16px;">Những thay đổi của Thắm từ khi áp dụng phương pháp của chính mình (bắt đầu năm 2025).</p>
 
-      <!-- Pair 1: vóc dáng -->
+      <!-- Pair 1: vòng bụng -->
       <div>
-        <div style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #C0654A; font-weight: 700; margin-bottom: 10px; text-align: center;">Vóc dáng &amp; vòng eo</div>
+        <div style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #C0654A; font-weight: 700; margin-bottom: 10px; text-align: center;">Vòng bụng</div>
         <div style="display: flex; gap: 12px;">
           <div style="width: 50%; position: relative;">
-            <img src="assets/waist-tape.jpg" style="width: 100%; height: 340px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
-            <div style="position: absolute; top: 10px; left: 10px; background: rgba(46,36,32,0.75); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Trước</div>
+            <img src="assets/truoc-vong-bung.webp" alt="Vòng bụng trước khi áp dụng phương pháp" loading="lazy" style="width: 100%; height: 300px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
+            <div style="position: absolute; top: 10px; left: 10px; background: rgba(46,36,32,0.75); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Trước · 83cm</div>
           </div>
           <div style="width: 50%; position: relative;">
-            <img src="assets/body-result.jpg" style="width: 100%; height: 340px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
-            <div style="position: absolute; top: 10px; left: 10px; background: rgba(192,101,74,0.9); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Bây giờ</div>
+            <img src="assets/sau-vong-bung.webp" alt="Vòng bụng sau 2 tuần điều chỉnh" loading="lazy" style="width: 100%; height: 300px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
+            <div style="position: absolute; top: 10px; left: 10px; background: rgba(192,101,74,0.9); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Sau 2 tuần điều chỉnh · 73cm</div>
           </div>
         </div>
       </div>
 
-      <!-- Pair 2: da / năng lượng -->
+      <!-- Pair 2: da tay -->
       <div>
-        <div style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #C0654A; font-weight: 700; margin-bottom: 10px; text-align: center;">Làn da &amp; năng lượng</div>
+        <div style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #C0654A; font-weight: 700; margin-bottom: 10px; text-align: center;">Da tay</div>
         <div style="display: flex; gap: 12px;">
           <div style="width: 50%; position: relative;">
-            <img src="assets/ba-skin-before.jpg" style="width: 100%; height: 340px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
+            <img src="assets/truoc-da-tay.webp" alt="Da tay trước, bị nám" loading="lazy" style="width: 100%; height: 300px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
+            <div style="position: absolute; top: 10px; left: 10px; background: rgba(46,36,32,0.75); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Trước · da tay bị nám</div>
+          </div>
+          <div style="width: 50%; position: relative;">
+            <img src="assets/sau-da-tay.webp" alt="Da tay sau, nám mờ dần" loading="lazy" style="width: 100%; height: 300px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
+            <div style="position: absolute; top: 10px; left: 10px; background: rgba(192,101,74,0.9); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Sau · nám mờ dần</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pair 3: gương mặt -->
+      <div>
+        <div style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #C0654A; font-weight: 700; margin-bottom: 10px; text-align: center;">Gương mặt</div>
+        <div style="display: flex; gap: 12px;">
+          <div style="width: 50%; position: relative;">
+            <img src="assets/truoc-guong-mat.webp" alt="Gương mặt năm 2022" loading="lazy" style="width: 100%; height: 300px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
             <div style="position: absolute; top: 10px; left: 10px; background: rgba(46,36,32,0.75); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Trước · 2022</div>
           </div>
           <div style="width: 50%; position: relative;">
-            <img src="assets/ba-skin-after.jpg" style="width: 100%; height: 340px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
-            <div style="position: absolute; top: 10px; left: 10px; background: rgba(192,101,74,0.9); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Hiện tại</div>
+            <img src="assets/sau-guong-mat.webp" alt="Gương mặt hiện tại, tháng 9/2026" loading="lazy" style="width: 100%; height: 300px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
+            <div style="position: absolute; top: 10px; left: 10px; background: rgba(192,101,74,0.9); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Hiện tại · 9/2026</div>
           </div>
         </div>
       </div>
 
-      <!-- Pair 3: tóc -->
+      <!-- Pair 4: tóc -->
       <div>
-        <div style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #C0654A; font-weight: 700; margin-bottom: 10px; text-align: center;">Mái tóc</div>
+        <div style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #C0654A; font-weight: 700; margin-bottom: 10px; text-align: center;">Tóc</div>
         <div style="display: flex; gap: 12px;">
           <div style="width: 50%; position: relative;">
-            <img src="assets/hair-loss.jpg" style="width: 100%; height: 340px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
+            <img src="assets/truoc-toc.webp" alt="Tóc trước khi áp dụng phương pháp" loading="lazy" style="width: 100%; height: 300px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
             <div style="position: absolute; top: 10px; left: 10px; background: rgba(46,36,32,0.75); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Trước</div>
           </div>
           <div style="width: 50%; position: relative;">
-            <img src="assets/ba-hair-after.jpg" style="width: 100%; height: 340px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
-            <div style="position: absolute; top: 10px; left: 10px; background: rgba(192,101,74,0.9); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Bây giờ</div>
+            <img src="assets/sau-toc.webp" alt="Tóc sau khi áp dụng phương pháp" loading="lazy" style="width: 100%; height: 300px; object-fit: contain; background: #EFE2D6; border-radius: 14px;">
+            <div style="position: absolute; top: 10px; left: 10px; background: rgba(192,101,74,0.9); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Sau</div>
           </div>
         </div>
       </div>
+
+      <p style="font-size: 13.5px; color: #8A756A; font-style: italic; text-align: center;">Đây là trải nghiệm cá nhân của Thắm, không phải cam kết kết quả. Mỗi người có cơ địa và hoàn cảnh khác nhau.</p>
 
       <div class="flex-row-wrap" style="display: flex; gap: 16px; flex-wrap: wrap;">
         <div style="flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 10px; background: #FFFFFF; border-radius: 16px; padding: 22px;">
@@ -344,15 +463,15 @@
         </div>
         <div style="flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 10px; background: #FFFFFF; border-radius: 16px; padding: 22px; border: 1.5px solid #C0654A;">
           <div style="font-size: 13px; font-weight: 700; color: #7C8A6E; text-transform: uppercase; letter-spacing: 1px;">Bây giờ</div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;">✓ Hệ tiêu hóa và năng lượng ổn định trở lại</div>
-          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;">✓ Làn da khỏe, cân nặng duy trì bền vững</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;">✓ Tiêu hóa và năng lượng ổn định hơn</div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;">✓ Làn da khỏe hơn, cân nặng giữ ổn định</div>
           <div style="font-size: 14.5px; line-height: 1.6; color: #3A2E2A;">✓ Tìm ra phương pháp để chia sẻ lại cho những phụ nữ khác đang ở đúng vị trí mình từng trải qua</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ============ SECTION 8: HẠNG VÉ ============ -->
+  <!-- ============ SECTION 9: HẠNG VÉ ============ -->
   <div style="width: 100%; background: #FFFFFF; padding: 72px 6px;">
     <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
       <h2 style="font-size: 28px; text-align: center;">Chọn Hạng Vé Của Bạn</h2>
@@ -361,46 +480,81 @@
         <div style="flex: 1; min-width: 260px; border: 1.5px solid #EFE2D6; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 14px;">
           <div>
             <div style="font-size: 19px; font-weight: 700; color: #2E2420;">VÉ TIÊU CHUẨN</div>
-            <div style="font-size: 22px; font-weight: 700; color: #7C8A6E; margin-top: 2px;">Miễn phí</div>
+            <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;">Hiểu điều đang rút cạn năng lượng của bạn</div>
+            <div style="font-size: 22px; font-weight: 700; color: #7C8A6E; margin-top: 8px;">0đ</div>
+            <div style="font-size: 13px; color: #8A756A; font-style: italic;">Miễn phí, chỉ cần giữ chỗ</div>
           </div>
           <div style="height: 1px; background: #EFE2D6;"></div>
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Tham gia Buổi 1 và Buổi 2</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Học trực tiếp Lớp 1 (phục hồi năng lượng) và Lớp 2 (tháo gỡ niềm tin giới hạn) của Phương Pháp 3 Lớp Chuyển Hóa</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Học trực tiếp Lớp 1 (chăm sóc năng lượng) và Lớp 2 (tháo gỡ niềm tin giới hạn)</div>
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Hỏi đáp trực tiếp trong 2 buổi học</div>
-          <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Mở khóa Buổi 3 — Lớp 3 (Không Gian), nội dung chuyên sâu</div>
-          <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</div>
-          <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Bảng Tự Đánh Giá Toàn Diện</div>
+          <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Buổi 3: Lớp 3 (Không Gian), nội dung chuyên sâu</div>
+          <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Bản Kế Hoạch Cá Nhân Hóa 21 Ngày</div>
+          <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Bảng Tự Đánh Giá Thói Quen</div>
           <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Video xem lại cả 3 buổi học</div>
-          <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Tham gia nhóm kín Zalo VIP để được hỗ trợ sau workshop</div>
+          <div style="font-size: 14.5px; color: #B5A89C; line-height: 1.6; text-decoration: line-through;">— Nhóm Zalo VIP — Thắm hỗ trợ trực tiếp 21 ngày sau workshop</div>
           <div style="flex-grow: 1;"></div>
-          <a href="#form" onclick="preselectTicket('free')" class="btn" style="margin-top: 8px; background: #2E2420; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Đăng Ký Vé Miễn Phí (Buổi 1-2)</a>
+          <a href="#form" onclick="preselectTicket('free')" class="btn" style="margin-top: 8px; background: #2E2420; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Đăng Ký Vé Miễn Phí (Buổi 1–2)</a>
         </div>
 
         <div style="flex: 1; min-width: 260px; border: 2px solid #C0654A; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 14px; background: #FFF5EE; position: relative;">
-          <div style="position: absolute; top: -12px; right: 24px; background: #C0654A; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 5px 14px; border-radius: 100px;">GIÁ RA MẮT</div>
-          <div>
+          <div style="position: absolute; top: -12px; right: 24px; background: #C0654A; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.3px; padding: 5px 14px; border-radius: 100px; text-align: center;">GIÁ ƯU ĐÃI CHO NGƯỜI THAM DỰ · ĐẾN 23H59 TỐI BUỔI 2</div>
+          <div style="margin-top: 10px;">
             <div style="font-size: 19px; font-weight: 700; color: #2E2420;">VÉ VIP</div>
-            <div style="font-size: 22px; font-weight: 700; color: #C0654A; margin-top: 2px;">99.000đ</div>
+            <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;">Ra về với kế hoạch 21 ngày của riêng bạn</div>
+            <div style="margin-top: 8px;"><span style="font-size: 16px; color: #B5A89C; text-decoration: line-through;">189.000đ</span> <span style="font-size: 22px; font-weight: 700; color: #C0654A;">99.000đ</span></div>
+            <div style="font-size: 12.5px; color: #8A756A; font-style: italic;">Sau 23h59 tối Buổi 2, vé VIP về giá 189.000đ.</div>
           </div>
           <div style="height: 1px; background: #E6C4B4;"></div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Tham gia Buổi 1 và Buổi 2</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Học trực tiếp Lớp 1 (phục hồi năng lượng) và Lớp 2 (tháo gỡ niềm tin giới hạn) của Phương Pháp 3 Lớp Chuyển Hóa</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Hỏi đáp trực tiếp trong 2 buổi học</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Mở khóa Buổi 3 — Lớp 3 (Không Gian), nội dung chuyên sâu, chỉ dành riêng cho vé VIP</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Tất cả quyền lợi vé tiêu chuẩn</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Mở khóa Buổi 3 — Lớp 3 (Không Gian), chỉ dành riêng cho vé VIP</div>
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Bảng Tự Đánh Giá Toàn Diện</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Bảng Tự Đánh Giá Thói Quen — xác định bạn nên ưu tiên điều gì trước</div>
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Video xem lại cả 3 buổi học</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Tham gia nhóm kín Zalo VIP để được hỗ trợ sau workshop</div>
+          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Nhóm Zalo VIP — Thắm hỗ trợ trực tiếp 21 ngày sau workshop</div>
           <div style="flex-grow: 1;"></div>
           <a href="#form" onclick="preselectTicket('vip')" class="btn" style="margin-top: 8px; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Mở Khóa Buổi 3 — Đăng Ký Vé VIP (99K)</a>
+          <div style="background: #EAF2E7; border: 1.5px dashed #7C8A6E; border-radius: 10px; padding: 12px 14px; font-size: 13px; line-height: 1.55; color: #44513C;">🎥 Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày trong nhóm VIP.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ============ SECTION 9: FORM ============ -->
+  <!-- ============ SECTION 10: FAQ ============ -->
+  <div style="width: 100%; background: #FAF3EC; padding: 72px 6px;">
+    <div style="max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+      <h2 style="font-size: 28px; text-align: center;">Câu Hỏi Thường Gặp</h2>
+
+      <div>
+        <details class="faq" open>
+          <summary>Mình không xem trực tiếp được thì sao?</summary>
+          <div class="faq-answer">Vé miễn phí học trực tiếp qua Zoom. Vé VIP có video xem lại cả 3 buổi.</div>
+        </details>
+        <details class="faq">
+          <summary>Buổi 1–2 có bán hàng không?</summary>
+          <div class="faq-answer">Hai buổi miễn phí là nội dung trọn vẹn, áp dụng được ngay. Cuối Buổi 2, Thắm giới thiệu vé VIP Buổi 3 cho ai muốn đi tiếp — hoàn toàn tự nguyện.</div>
+        </details>
+        <details class="faq">
+          <summary>Thắm có phải bác sĩ không?</summary>
+          <div class="faq-answer">Không. Thắm là Huấn luyện viên Dinh dưỡng &amp; Wellness Coach. Workshop không thay thế tư vấn hay điều trị y khoa.</div>
+        </details>
+        <details class="faq">
+          <summary>Vé VIP có hoàn tiền không?</summary>
+          <div class="faq-answer">Vé VIP không hoàn tiền. Bù lại, bạn được học trọn 2 buổi miễn phí trước khi quyết định. Nếu không dự trực tiếp được Buổi 3, bạn vẫn có video xem lại và được hỗ trợ đủ 21 ngày.</div>
+        </details>
+        <details class="faq">
+          <summary>Cần chuẩn bị gì?</summary>
+          <div class="faq-answer">Điện thoại hoặc máy tính có Zoom, giấy bút, và 90 phút yên tĩnh cho chính bạn.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 11: LỜI KẾT VÀ FORM ============ -->
   <div id="form" style="width: 100%; background: #2E2420; padding: 72px 6px 88px;">
     <div style="max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+      <img src="assets/tu-do.webp" alt="Nguyễn Thắm tận hưởng khoảnh khắc tự do" loading="lazy" style="display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; border-radius: 16px;">
+
       <div style="text-align: center; display: flex; flex-direction: column; gap: 10px;">
         <h2 style="font-size: 24px; color: #FFFFFF; line-height: 1.4;">3 buổi tối cho một hành trình khỏe mạnh và trọn vẹn hơn</h2>
         <p style="font-size: 14.5px; color: #E6C4B4; line-height: 1.6;">Bạn đã chăm sóc cả nhà nhiều năm rồi. 3 buổi tối này là dành cho bạn. Hẹn gặp bạn trong workshop.</p>
@@ -413,7 +567,7 @@
         </div>
         <div style="display: flex; flex-direction: column; gap: 6px;">
           <label for="phone" style="font-size: 13px; font-weight: 600; color: #5A4B44;">Số điện thoại (có Zalo)</label>
-          <input id="phone" name="phone" required type="tel" pattern="[0-9]{10,11}" placeholder="Nhập số điện thoại để nhận link phòng học..." style="border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 14.5px; font-family: 'Work Sans', sans-serif;">
+          <input id="phone" name="phone" required type="tel" pattern="0[0-9]{9}" placeholder="Nhập số điện thoại để nhận link phòng học..." style="border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 14.5px; font-family: 'Work Sans', sans-serif;">
         </div>
         <div style="display: flex; flex-direction: column; gap: 6px;">
           <label for="email" style="font-size: 13px; font-weight: 600; color: #5A4B44;">Địa chỉ Email</label>
@@ -423,23 +577,44 @@
           <div style="font-size: 13px; font-weight: 600; color: #5A4B44;">Chọn hạng vé</div>
           <label id="label-free" style="display: flex; align-items: center; gap: 10px; border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 14px; color: #3A2E2A;">
             <input type="radio" name="goal" value="Vé Tiêu Chuẩn (Miễn phí)" required>
-            Vé Tiêu Chuẩn — Buổi 1-2 (Miễn phí)
+            Vé Tiêu Chuẩn — Buổi 1–2 (Miễn phí)
           </label>
           <label id="label-vip" style="display: flex; align-items: center; gap: 10px; border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 14px; color: #3A2E2A;">
             <input type="radio" name="goal" value="Vé VIP (99K)" required>
-            Vé VIP — Mở khóa Buổi 3 (99K)
+            Vé VIP — Mở khóa Buổi 3 (99K — giá ưu đãi đến 23h59 tối Buổi 2, giá thường 189K)
           </label>
         </div>
-        <button type="submit" id="submitBtn" style="margin-top: 4px; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 16px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer;">XÁC NHẬN ĐĂNG KÝ GIỮ CHỖ</button>
+        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.5; color: #3A2E2A;">
+          <input id="commitCheck" type="checkbox" required style="margin-top: 3px;">
+          Tôi dành ra 3 buổi tối này cho bản thân mình.
+        </label>
+        <button type="submit" id="submitBtn" disabled style="margin-top: 4px; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 16px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer; opacity: 0.5; transition: opacity 0.15s;">XÁC NHẬN ĐĂNG KÝ GIỮ CHỖ</button>
+        <p style="font-size: 12.5px; color: #8A756A; text-align: center; font-style: italic; margin: 0;">Link phòng học và lịch nhắc được gửi qua email và nhóm Zalo của lớp.</p>
+        <p style="font-size: 11.5px; color: #B0A094; text-align: center; margin: 0;">Bằng việc đăng ký, bạn đồng ý để Thắm liên hệ qua Zalo/email về workshop. Thông tin của bạn được bảo mật, không chia sẻ cho bên thứ ba, và bạn có thể yêu cầu xóa bất cứ lúc nào.</p>
         <p id="error" style="color: #B5482F; font-size: 13px; margin: 0; display: none;"></p>
       </form>
+
+      <div id="thankyou" style="display: none; background: #FFFFFF; border-radius: 18px; padding: 32px 28px; text-align: center; flex-direction: column; gap: 14px; align-items: center;">
+        <div style="width: 56px; height: 56px; background: #C0654A; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">✓</div>
+        <h3 style="font-size: 21px; color: #2E2420;">Bạn đã giữ chỗ thành công!</h3>
+        <p style="font-size: 14.5px; color: #5A4B44; line-height: 1.6;">Bước tiếp theo: vào nhóm Zalo của lớp để nhận link phòng học, lịch nhắc và tài liệu trước Buổi 1.</p>
+        <a id="thankyouZaloBtn" href="#" target="_blank" rel="noopener" class="btn" style="background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 100px;">Vào Nhóm Zalo Ngôi Nhà 3 Lớp</a>
+        <p style="font-size: 12.5px; color: #8A756A; font-style: italic; margin: 0;">Hướng dẫn tham gia cũng đã được gửi vào email của bạn.</p>
+      </div>
 
     </div>
   </div>
 
 </div>
 
+<!-- Thanh CTA dính trên điện thoại -->
+<div id="stickyCta">
+  <a href="#form" onclick="preselectTicket('free')" class="btn" style="flex: 1; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 13px; border-radius: 100px;">Đăng Ký Giữ Chỗ Miễn Phí</a>
+</div>
+
 <script>
+  var CONFIG = window.APP_CONFIG;
+
   function preselectTicket(type) {
     var free = document.querySelector('#label-free input');
     var vip = document.querySelector('#label-vip input');
@@ -447,25 +622,78 @@
     if (type === 'vip') { vip.checked = true; document.getElementById('label-vip').style.borderColor = '#C0654A'; }
   }
 
+  // Ngày học — lấy từ CONFIG, chỉ cần sửa 1 chỗ ở đầu file cho đợt sau
+  document.getElementById('hero-info-line').textContent =
+    '3 buổi tối · 20h · Zoom · Buổi 1–2 miễn phí · Bắt đầu ' + CONFIG.NGAY_BUOI_1;
+  document.getElementById('date-buoi1').textContent = '20h ' + CONFIG.NGAY_BUOI_1 + ' · 90 phút qua Zoom';
+  document.getElementById('date-buoi2').textContent = '20h ' + CONFIG.NGAY_BUOI_2 + ' · 90 phút qua Zoom';
+  document.getElementById('date-vip').textContent = '20h ' + CONFIG.NGAY_BUOI_3 + ' · 90 phút qua Zoom';
+  document.getElementById('thankyouZaloBtn').href = CONFIG.LINK_NHOM_LOP;
+
+  // ============ Section 2: dấu hiệu bấm chọn được ============
+  (function () {
+    var selected = new Set();
+    var counterEl = document.getElementById('signCounter');
+    var conclusionEl = document.getElementById('section2-conclusion');
+    document.querySelectorAll('.sign-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var id = card.getAttribute('data-sign');
+        if (selected.has(id)) { selected.delete(id); card.classList.remove('selected'); }
+        else { selected.add(id); card.classList.add('selected'); }
+        counterEl.textContent = 'Bạn đã chọn ' + selected.size + '/5 dấu hiệu';
+        conclusionEl.classList.toggle('highlighted', selected.size >= 3);
+      });
+    });
+  })();
+
+  // ============ Thanh CTA dính trên điện thoại — ẩn khi thấy form ============
+  (function () {
+    var stickyBar = document.getElementById('stickyCta');
+    var formSection = document.getElementById('form');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          stickyBar.classList.toggle('show', !entry.isIntersecting);
+        });
+      }, { threshold: 0.1 });
+      observer.observe(formSection);
+    }
+  })();
+
+  // ============ Form đăng ký ============
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
   const submitBtn = document.getElementById('submitBtn');
   const errEl = document.getElementById('error');
+  const commitCheck = document.getElementById('commitCheck');
   const SUBMIT_BTN_DEFAULT_TEXT = submitBtn.textContent;
 
+  function updateSubmitGate() {
+    submitBtn.disabled = !commitCheck.checked;
+    submitBtn.style.opacity = commitCheck.checked ? '1' : '0.5';
+  }
+  commitCheck.addEventListener('change', updateSubmitGate);
+
   function resetSubmitBtn() {
-    submitBtn.disabled = false;
     submitBtn.textContent = SUBMIT_BTN_DEFAULT_TEXT;
+    updateSubmitGate();
     errEl.style.display = 'none';
   }
 
-  // Nếu khách bấm nút Back của trình duyệt để quay lại sửa thông tin sau khi đã submit,
-  // trang có thể được phục hồi từ bfcache đúng lúc nút đang khóa ở trạng thái "ĐANG XỬ LÝ..." — reset lại cho khách sửa được.
+  // Nếu khách bấm nút Back của trình duyệt sau khi đã submit, trang có thể được
+  // phục hồi từ bfcache đúng lúc nút đang khóa ở trạng thái "ĐANG XỬ LÝ..." — reset lại.
   window.addEventListener('pageshow', function (event) {
     if (event.persisted) resetSubmitBtn();
   });
 
+  function fireLead(contentName) {
+    if (window.fbq) {
+      fbq('track', 'Lead', { content_name: contentName });
+    }
+  }
+
   document.getElementById('orderForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (!commitCheck.checked) { commitCheck.focus(); return; }
     const btn = submitBtn;
     errEl.style.display = 'none';
     btn.disabled = true;
@@ -500,13 +728,22 @@
         goal: data.goal
       }));
 
-      window.location.href = json.free ? '/giu-cho-thanh-cong' : '/checkout';
+      if (json.free) {
+        fireLead('ve-mien-phi');
+        document.getElementById('orderForm').style.display = 'none';
+        document.getElementById('thankyou').style.display = 'flex';
+      } else {
+        fireLead('ve-vip');
+        window.location.href = '/checkout';
+      }
     } catch (err) {
       resetSubmitBtn();
       errEl.textContent = 'Lỗi: ' + err.message + '. Vui lòng thử lại.';
       errEl.style.display = 'block';
     }
   });
+
+  updateSubmitGate();
 </script>
 </body>
 </html>
