@@ -755,14 +755,13 @@
         document.getElementById('orderForm').style.display = 'none';
         var thankyouEl = document.getElementById('thankyou');
         thankyouEl.style.display = 'flex';
-        thankyouEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         fireLead('ve-vip');
         window.location.href = '/checkout';
       }
     } catch (err) {
       resetSubmitBtn();
-      errEl.textContent = 'Chưa gửi được đăng ký do hệ thống đang bận. Bạn vui lòng thử lại sau ít phút, hoặc nhắn Fanpage để được hỗ trợ.';
+      errEl.textContent = 'Lỗi: ' + err.message + '. Vui lòng thử lại.';
       errEl.style.display = 'block';
     }
   });
