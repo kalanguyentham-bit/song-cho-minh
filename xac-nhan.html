@@ -92,7 +92,14 @@
     <a href="https://zalo.me/g/afweoiaxvoywcsm4nsxh" target="_blank" rel="noopener" class="zalo-btn">Vào Nhóm Ngôi Nhà 3 Lớp →</a>
     <p class="zalo-desc" style="margin: 18px 0 8px; text-align: left;"><strong>2.</strong> Vào nhóm Zalo VIP (Buổi 3 và 21 ngày hỗ trợ):</p>
     <a href="https://zalo.me/g/hh6v7z42bcuiz7jio8au" target="_blank" rel="noopener" class="zalo-btn">Vào Nhóm VIP 21 Ngày →</a>
-    <p class="zalo-desc" style="margin: 12px 0 0; text-align: left; font-style: italic; font-size: 13px;">Nhóm VIP cần được duyệt. Thắm sẽ duyệt khi đối chiếu tên Zalo với đơn hàng, nên bạn dùng tên giống tên đăng ký nhé.</p>
+    <div id="replyBox" style="display: none; margin-top: 14px; text-align: left;">
+      <p class="zalo-desc" style="margin: 0 0 8px; font-size: 13px;">Khi xin vào nhóm VIP, Thắm sẽ hỏi 3 thông tin. Bạn trả lời đúng theo mẫu này:</p>
+      <div style="display: flex; gap: 8px; align-items: stretch;">
+        <div id="replySample" style="flex: 1; background: var(--surface-2); border: 1px dashed var(--accent); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 14px; font-weight: 600; word-break: break-word;"></div>
+        <button type="button" id="copyReplyBtn" style="flex-shrink: 0; background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 0 16px; font-weight: 700; font-size: 14px; cursor: pointer;">Sao chép</button>
+      </div>
+      <p class="zalo-desc" style="margin: 8px 0 0; font-size: 12.5px; font-style: italic;">Mẫu gồm: nội dung chuyển khoản – số điện thoại – tên đăng ký. Thắm đối chiếu với đơn hàng rồi duyệt bạn vào nhóm.</p>
+    </div>
   </div>
 
   <div class="steps">
@@ -108,7 +115,7 @@
       <div class="step-num">2</div>
       <div class="step-text">
         <div class="step-title">Vào hai nhóm Zalo</div>
-        <div class="step-desc">Nhóm lớp để học Buổi 1–2, và nhóm VIP cho Buổi 3 cùng 21 ngày hỗ trợ. Nhóm VIP cần được duyệt, nên bạn dùng tên Zalo giống tên đăng ký nhé.</div>
+        <div class="step-desc">Nhóm lớp để học Buổi 1–2, và nhóm VIP cho Buổi 3 cùng 21 ngày hỗ trợ. Khi xin vào nhóm VIP, bạn trả lời theo mẫu: nội dung chuyển khoản – số điện thoại – tên đăng ký.</div>
       </div>
     </div>
     <div class="step">
@@ -145,7 +152,7 @@
   function formatVnd(n) { return Number(n).toLocaleString('en-US').replace(/,/g, '.'); }
 
   if (order.orderId) {
-    document.getElementById('orderId').textContent = order.orderId;
+    document.getElementById('orderId').textContent = order.ckContent || order.orderId;
     document.getElementById('orderName').textContent = order.name || '—';
     document.getElementById('orderEmail').textContent = order.email || '—';
     document.getElementById('orderAmount').textContent = formatVnd(order.totalAmount || 0) + 'đ';
@@ -164,6 +171,33 @@
         }
       })
       .catch(err => console.error('getStatus failed', err));
+
+    // Dòng mẫu trả lời khi xin vào nhóm VIP: {ckContent} – {phone} – {name}
+    if (order.ckContent && order.phone && order.name) {
+      const sample = order.ckContent + ' – ' + order.phone + ' – ' + order.name;
+      document.getElementById('replySample').textContent = sample;
+      document.getElementById('replyBox').style.display = 'block';
+
+      document.getElementById('copyReplyBtn').addEventListener('click', function () {
+        const btn = this;
+        function done() {
+          const old = btn.textContent;
+          btn.textContent = 'Đã chép ✓';
+          setTimeout(function () { btn.textContent = old; }, 1500);
+        }
+        function fallback() {
+          const ta = document.createElement('textarea');
+          ta.value = sample; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(ta);
+          done();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(sample).then(done).catch(fallback);
+        } else { fallback(); }
+      });
+    }
   }
 </script>
 </body>
