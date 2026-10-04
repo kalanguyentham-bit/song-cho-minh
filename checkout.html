@@ -75,7 +75,13 @@
         <button type="button" class="copy-btn" data-copy-target="ckContent">Copy</button>
       </span>
     </div>
-    <div class="info-row"><span>Số tiền</span><strong id="amount">—</strong></div>
+    <div class="info-row">
+      <span>Số tiền</span>
+      <span class="info-value">
+        <strong id="amount">—</strong>
+        <button type="button" class="copy-btn" data-copy-target="amount" data-copy-digits="1">Copy</button>
+      </span>
+    </div>
   </div>
 
   <div class="status pending" id="statusBox">
@@ -101,8 +107,9 @@
   document.querySelectorAll('.copy-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       const targetEl = document.getElementById(btn.getAttribute('data-copy-target'));
-      const text = targetEl ? targetEl.textContent.trim() : '';
+      let text = targetEl ? targetEl.textContent.trim() : '';
       if (!text || text === '—') return;
+      if (btn.hasAttribute('data-copy-digits')) text = text.replace(/\D/g, '');
 
       function showCopied() {
         const original = btn.textContent;
