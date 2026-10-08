@@ -154,7 +154,7 @@
     document.getElementById('total').textContent = formatVnd(amount) + 'đ';
   }
 
-  updateQR(BASE_PRICE);
+  updateQR(Number(order.totalAmount) || BASE_PRICE); // giá lấy từ máy chủ (đơn đã tạo), không tự gõ cứng
 
   let shortageShown = false;
 

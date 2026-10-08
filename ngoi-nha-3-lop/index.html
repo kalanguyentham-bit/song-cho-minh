@@ -19,6 +19,7 @@
 <script>
   (function (cfg) {
     if (!cfg.PIXEL_ID) return;
+    if (/[?&]test=1(&|$)/.test(location.search)) return; // link có ?test=1 → không bắn Pixel (đơn thử)
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
