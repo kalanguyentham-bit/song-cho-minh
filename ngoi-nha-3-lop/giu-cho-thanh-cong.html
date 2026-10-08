@@ -126,7 +126,7 @@
     // dùng lại đúng đơn cũ, không tạo đơn mới để mã CK không bao giờ đổi.
     const current = JSON.parse(sessionStorage.getItem('order') || '{}');
     if (current.goal === 'Vé VIP (99K)' && current.orderId) {
-      window.location.href = '/checkout';
+      window.location.href = '/ngoi-nha-3-lop/checkout';
       return;
     }
 
@@ -162,7 +162,7 @@
         goal: 'Vé VIP (99K)'
       }));
 
-      window.location.href = '/checkout';
+      window.location.href = '/ngoi-nha-3-lop/checkout';
     } catch (err) {
       btn.disabled = false;
       btn.textContent = upgradeBtnDefaultText;

@@ -92,7 +92,7 @@
     Gặp khó khăn khi thanh toán? Nhắn tin cho <a href="https://www.facebook.com/profile.php?id=61577145553348" target="_blank" rel="noopener" style="color: var(--accent-deep); font-weight: 600;">Fanpage</a> để được hỗ trợ ngay.
   </p>
 
-  <a href="/" style="display: block; text-align: center; margin-top: 20px; padding: 14px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text); font-weight: 600; text-decoration: none; font-size: 14px;">Quay Lại Trang Chương Trình</a>
+  <a href="/ngoi-nha-3-lop" style="display: block; text-align: center; margin-top: 20px; padding: 14px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text); font-weight: 600; text-decoration: none; font-size: 14px;">Quay Lại Trang Chương Trình</a>
 </div>
 
 <script>
@@ -100,7 +100,7 @@
   const BASE_PRICE = 99000;
 
   const order = JSON.parse(sessionStorage.getItem('order') || '{}');
-  if (!order.orderId) { window.location.href = '/'; }
+  if (!order.orderId) { window.location.href = '/ngoi-nha-3-lop'; }
 
   document.getElementById('ckContent').textContent = order.ckContent;
 
@@ -166,7 +166,7 @@
         const box = document.getElementById('statusBox');
         box.className = 'status paid';
         document.getElementById('statusText').textContent = '✓ Đã nhận giao dịch · Đang chuyển trang...';
-        setTimeout(() => { window.location.href = '/xac-nhan'; }, 1500);
+        setTimeout(() => { window.location.href = '/ngoi-nha-3-lop/xac-nhan'; }, 1500);
         return;
       }
 

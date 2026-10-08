@@ -1,5 +1,13 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [{ "source": "/", "destination": "/index.html" }]
+  "redirects": [
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.thantamcanh.com" }], "destination": "https://thantamcanh.com/$1", "permanent": true },
+    { "source": "/", "destination": "/ngoi-nha-3-lop", "permanent": false },
+    { "source": "/checkout", "destination": "/ngoi-nha-3-lop/checkout", "permanent": true },
+    { "source": "/xac-nhan", "destination": "/ngoi-nha-3-lop/xac-nhan", "permanent": true },
+    { "source": "/giu-cho-thanh-cong", "destination": "/ngoi-nha-3-lop/giu-cho-thanh-cong", "permanent": true },
+    { "source": "/config.js", "destination": "/ngoi-nha-3-lop/config.js", "permanent": true },
+    { "source": "/assets/:path*", "destination": "/ngoi-nha-3-lop/assets/:path*", "permanent": true }
+  ]
 }
