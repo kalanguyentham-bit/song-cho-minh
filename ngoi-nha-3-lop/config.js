@@ -2,6 +2,10 @@
 // CẤU HÌNH TRANG — Thắm chỉ cần sửa ở file này
 // ============================================================
 window.APP_CONFIG = {
+  // Tên miền chính và đường dẫn workshop: đổi ở đây (và ở các thẻ canonical, og:url, og:image trong index.html)
+  SITE_URL: 'https://thantamcanh.com',
+  DUONG_DAN_WORKSHOP: '/ngoi-nha-3-lop',
+
   LINK_NHOM_LOP: 'https://zalo.me/g/afweoiaxvoywcsm4nsxh',
   PIXEL_ID: '3416020051935979',
   GIO_HOC: '20h',

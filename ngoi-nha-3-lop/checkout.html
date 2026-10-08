@@ -95,12 +95,13 @@
   <a href="/ngoi-nha-3-lop" style="display: block; text-align: center; margin-top: 20px; padding: 14px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text); font-weight: 600; text-decoration: none; font-size: 14px;">Quay Lại Trang Chương Trình</a>
 </div>
 
+<script src="/ngoi-nha-3-lop/config.js"></script>
 <script>
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
   const BASE_PRICE = 99000;
 
   const order = JSON.parse(sessionStorage.getItem('order') || '{}');
-  if (!order.orderId) { window.location.href = '/ngoi-nha-3-lop'; }
+  if (!order.orderId) { window.location.href = window.APP_CONFIG.DUONG_DAN_WORKSHOP; }
 
   document.getElementById('ckContent').textContent = order.ckContent;
 
@@ -166,7 +167,7 @@
         const box = document.getElementById('statusBox');
         box.className = 'status paid';
         document.getElementById('statusText').textContent = '✓ Đã nhận giao dịch · Đang chuyển trang...';
-        setTimeout(() => { window.location.href = '/ngoi-nha-3-lop/xac-nhan'; }, 1500);
+        setTimeout(() => { window.location.href = window.APP_CONFIG.DUONG_DAN_WORKSHOP + '/xac-nhan'; }, 1500);
         return;
       }
 
