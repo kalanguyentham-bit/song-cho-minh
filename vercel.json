@@ -3,6 +3,7 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/(.*)", "has": [{ "type": "host", "value": "www.thantamcanh.com" }], "destination": "https://thantamcanh.com/$1", "permanent": true },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "song-cho-minh.vercel.app" }], "destination": "https://thantamcanh.com/ngoi-nha-3-lop", "permanent": true },
     { "source": "/", "destination": "/ngoi-nha-3-lop", "permanent": false },
     { "source": "/checkout", "destination": "/ngoi-nha-3-lop/checkout", "permanent": true },
     { "source": "/xac-nhan", "destination": "/ngoi-nha-3-lop/xac-nhan", "permanent": true },
