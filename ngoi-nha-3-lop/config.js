@@ -7,7 +7,7 @@ window.APP_CONFIG = {
   DUONG_DAN_WORKSHOP: '/ngoi-nha-3-lop',
 
   LINK_NHOM_LOP: 'https://zalo.me/g/afweoiaxvoywcsm4nsxh',
-  PIXEL_ID: '3416020051935979',
+  PIXEL_ID: '26885894507775293',
   GIO_HOC: '20h',
 
   // Ngày đặc biệt (ban đầu để trống). Sao chép 1 trong 2 dòng mẫu bên dưới khi cần:
