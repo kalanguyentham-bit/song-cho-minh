@@ -22,7 +22,7 @@ window.APP_CONFIG = {
 // ============================================================
 // LỊCH HỌC TỰ ĐỘNG
 // Buổi 1 = Thứ Ba thứ 4 của tháng (luôn rơi vào ngày 22–28), Buổi 2 = hôm sau, Buổi 3 = 2 ngày sau.
-// Mốc chuyển đợt: 19h00 Thứ Năm (Buổi 3) của đợt tháng hiện tại → từ đó trang hiển thị đợt tháng kế tiếp.
+// Mốc chuyển đợt: 20h00 Thứ Năm (Buổi 3, giờ bắt đầu học) của đợt tháng hiện tại → từ đó trang hiển thị đợt tháng kế tiếp.
 // Mọi phép tính theo giờ Việt Nam (UTC+7), không phụ thuộc múi giờ máy của khách.
 // ============================================================
 window.tinhDotKeTiep = function (now) {
@@ -61,7 +61,7 @@ window.tinhDotKeTiep = function (now) {
     var mm = (m + i) % 12;
     var b1 = buoi1Cua(yy, mm);
     if (!b1) continue;
-    var cutoff = b1.getTime() + 2 * DAY + 19 * 3600 * 1000; // 19h00 Thứ Năm
+    var cutoff = b1.getTime() + 2 * DAY + 20 * 3600 * 1000; // 20h00 Thứ Năm (giờ bắt đầu Buổi 3)
     if (vn.getTime() < cutoff) {
       var b2 = new Date(b1.getTime() + DAY);
       var b3 = new Date(b1.getTime() + 2 * DAY);
