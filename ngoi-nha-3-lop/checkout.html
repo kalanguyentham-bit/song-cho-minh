@@ -47,10 +47,10 @@
 <body>
 <div class="container">
   <h1>Hoàn tất thanh toán</h1>
-  <p class="lead">Chuyển khoản theo thông tin dưới đây — đơn được xác nhận tự động trong 30 giây.</p>
+  <p class="lead">Chuyển khoản theo thông tin dưới đây. Đơn được xác nhận tự động trong 30 giây.</p>
 
   <div class="summary">
-    <div class="summary-row"><span>Vé VIP — Buổi 3 (Lớp 3 - Không Gian)</span><span id="base">99.000đ</span></div>
+    <div class="summary-row"><span>Vé VIP: Buổi 3 (Lớp 3 - Không Gian)</span><span id="base">99.000đ</span></div>
     <div class="summary-row summary-total"><span>Tổng</span><span id="total">99.000đ</span></div>
   </div>
 
@@ -59,7 +59,7 @@
   </div>
 
   <div class="info-box">
-    <div class="info-row"><span>Ngân hàng</span><strong>BIDV — Ngân hàng TMCP Đầu tư &amp; Phát triển Việt Nam</strong></div>
+    <div class="info-row"><span>Ngân hàng</span><strong>BIDV: Ngân hàng TMCP Đầu tư &amp; Phát triển Việt Nam</strong></div>
     <div class="info-row">
       <span>Số TK</span>
       <span class="info-value">
@@ -96,6 +96,25 @@
 </div>
 
 <script src="/ngoi-nha-3-lop/config.js"></script>
+<script>
+  // Meta Pixel: chỉ để bắn sự kiện Purchase khi đơn đã thanh toán (trang này không bắn PageView).
+  // Không tải Pixel nếu link có ?test=1 hoặc nếu trang chủ đã được mở bằng ?test=1 trong phiên này.
+  (function (cfg) {
+    if (!cfg.PIXEL_ID) return;
+    var laTest = /[?&]test=1(&|$)/.test(location.search);
+    try { if (sessionStorage.getItem('fb_test') === '1') laTest = true; } catch (e) {}
+    if (laTest) return;
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', cfg.PIXEL_ID);
+  })(window.APP_CONFIG);
+</script>
 <script>
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
   const BASE_PRICE = 99000;
@@ -156,6 +175,15 @@
 
   updateQR(Number(order.totalAmount) || BASE_PRICE); // giá lấy từ máy chủ (đơn đã tạo), không tự gõ cứng
 
+  // Purchase: bắn 1 lần cho mỗi đơn (theo orderId) khi đơn đã thanh toán
+  function firePurchaseOnce() {
+    if (!window.fbq || !order.orderId) return;
+    var key = 'fb_Purchase_' + order.orderId;
+    try { if (localStorage.getItem(key)) return; } catch (e) {}
+    fbq('track', 'Purchase', { value: 99000, currency: 'VND' });
+    try { localStorage.setItem(key, '1'); } catch (e) {}
+  }
+
   let shortageShown = false;
 
   async function pollStatus() {
@@ -164,6 +192,7 @@
       const json = await res.json();
 
       if (json.status === 'PAID') {
+        firePurchaseOnce();
         const box = document.getElementById('statusBox');
         box.className = 'status paid';
         document.getElementById('statusText').textContent = '✓ Đã nhận giao dịch · Đang chuyển trang...';
@@ -179,7 +208,7 @@
         const box = document.getElementById('statusBox');
         box.className = 'status pending';
         document.getElementById('statusText').textContent =
-          'Đã nhận ' + formatVnd(received) + 'đ — còn thiếu ' + formatVnd(missing) + 'đ. Chuyển thêm đúng số tiền này, giữ nguyên nội dung CK.';
+          'Đã nhận ' + formatVnd(received) + 'đ, còn thiếu ' + formatVnd(missing) + 'đ. Chuyển thêm đúng số tiền này, giữ nguyên nội dung CK.';
 
         if (!shortageShown) {
           shortageShown = true;
