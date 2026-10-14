@@ -724,7 +724,7 @@
     if (!window.fbq || !orderId) return;
     var key = 'fb_' + eventName + '_' + orderId;
     try { if (localStorage.getItem(key)) return; } catch (e) {}
-    fbq('track', eventName, { value: 99000, currency: 'VND' });
+    fbq('track', eventName, { value: 99000, currency: 'VND' }, { eventID: 'ic_' + orderId });
     try { localStorage.setItem(key, '1'); } catch (e) {}
   }
   // Chờ một chút để sự kiện kịp gửi đi trước khi chuyển sang trang thanh toán
@@ -732,10 +732,24 @@
     setTimeout(function () { window.location.href = window.APP_CONFIG.DUONG_DAN_WORKSHOP + '/checkout'; }, 250);
   }
 
-  function fireLead(contentName) {
+  function fireLead(contentName, orderId) {
     if (window.fbq) {
-      fbq('track', 'Lead', { content_name: contentName });
+      fbq('track', 'Lead', { content_name: contentName }, { eventID: 'lead_' + orderId });
     }
+  }
+
+  // Thông tin gửi kèm đơn để máy chủ (Conversions API) khớp đúng người với sự kiện Pixel.
+  // Đơn từ link ?test=1 được đánh dấu để máy chủ KHÔNG gửi sự kiện nào.
+  function layCookie(ten) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + ten + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  function thongTinTheoDoi(capi) {
+    var laTest = /[?&]test=1(&|$)/.test(location.search);
+    try { if (sessionStorage.getItem('fb_test') === '1') laTest = true; } catch (e) {}
+    var fbc = layCookie('_fbc');
+    if (!fbc) { var m = location.search.match(/[?&]fbclid=([^&]+)/); if (m) fbc = 'fb.1.' + Date.now() + '.' + m[1]; }
+    return { fbp: layCookie('_fbp'), fbc: fbc, ua: navigator.userAgent, src: location.origin + location.pathname, test: laTest ? 1 : 0, capi: capi };
   }
 
   document.getElementById('orderForm').addEventListener('submit', async (e) => {
@@ -760,6 +774,8 @@
       bump2: false,
       totalAmount: 99000
     };
+    var laVipForm = !/Miễn phí/i.test(String(data.goal || ''));
+    Object.assign(data, thongTinTheoDoi(laVipForm ? ['Lead', 'InitiateCheckout'] : ['Lead']));
 
     try {
       const res = await fetch(GAS_URL, {
@@ -780,12 +796,12 @@
       }));
 
       if (json.free) {
-        fireLead('ve-mien-phi');
+        fireLead('ve-mien-phi', json.orderId);
         document.getElementById('orderForm').style.display = 'none';
         var thankyouEl = document.getElementById('thankyou');
         thankyouEl.style.display = 'flex';
       } else {
-        fireLead('ve-vip');
+        fireLead('ve-vip', json.orderId);
         fireOncePerOrder('InitiateCheckout', json.orderId);
         goCheckout();
       }
@@ -834,7 +850,13 @@
             ngay_buoi_3: document.getElementById('f-ngay3').value,
             bump1: false,
             bump2: false,
-            totalAmount: 99000
+            totalAmount: 99000,
+            fbp: thongTinTheoDoi(['InitiateCheckout']).fbp,
+            fbc: thongTinTheoDoi(['InitiateCheckout']).fbc,
+            ua: navigator.userAgent,
+            src: location.origin + location.pathname,
+            test: thongTinTheoDoi(['InitiateCheckout']).test,
+            capi: ['InitiateCheckout']
           }
         })
       });

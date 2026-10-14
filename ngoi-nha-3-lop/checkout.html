@@ -180,7 +180,7 @@
     if (!window.fbq || !order.orderId) return;
     var key = 'fb_Purchase_' + order.orderId;
     try { if (localStorage.getItem(key)) return; } catch (e) {}
-    fbq('track', 'Purchase', { value: 99000, currency: 'VND' });
+    fbq('track', 'Purchase', { value: 99000, currency: 'VND' }, { eventID: 'pur_' + order.orderId });
     try { localStorage.setItem(key, '1'); } catch (e) {}
   }
 
