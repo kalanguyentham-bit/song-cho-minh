@@ -14,7 +14,11 @@
 <meta property="og:image" content="https://thantamcanh.com/ngoi-nha-3-lop/assets/chia-se-ngoi-nha-3-lop-2.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="/ngoi-nha-3-lop/assets/hero-tham-1080.webp" imagesrcset="/ngoi-nha-3-lop/assets/hero-tham-720.webp 720w, /ngoi-nha-3-lop/assets/hero-tham-1080.webp 1080w" imagesizes="(max-width: 700px) 100vw, 672px" fetchpriority="high">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap"></noscript>
 
 <!-- Cấu hình + hàm tính lịch học: sửa trong config.js -->
 <script src="/ngoi-nha-3-lop/config.js"></script>
@@ -104,7 +108,7 @@
 
   <!-- ============ HERO IMAGE ============ -->
   <div style="width: 100%; background: #FAF3EC; padding: 24px 6px;">
-    <img src="/ngoi-nha-3-lop/assets/hero-tham-0162.jpg" alt="Nguyễn Thắm — người hướng dẫn workshop Ngôi Nhà 3 Lớp" loading="eager" style="display: block; width: 100%; max-width: 672px; height: auto; margin: 0 auto; border-radius: 16px;">
+    <img src="/ngoi-nha-3-lop/assets/hero-tham-1080.webp" srcset="/ngoi-nha-3-lop/assets/hero-tham-720.webp 720w, /ngoi-nha-3-lop/assets/hero-tham-1080.webp 1080w" sizes="(max-width: 700px) 100vw, 672px" width="720" height="900" fetchpriority="high" decoding="async" alt="Nguyễn Thắm — người hướng dẫn workshop Ngôi Nhà 3 Lớp" loading="eager" style="display: block; width: 100%; max-width: 672px; height: auto; margin: 0 auto; border-radius: 16px;">
     <p style="font-size: 16px; line-height: 1.75; color: #5A4B44; max-width: 600px; margin: 24px auto 0; text-align: center;"><b>Buổi 1 và 2 miễn phí:</b> hiểu điều đang rút cạn năng lượng của bạn, qua cách ăn, ngủ, vận động và những điều bạn đang âm thầm gánh.<br><b>Buổi 3 (vé VIP):</b> làm xong Kế Hoạch 21 Ngày theo tình trạng của riêng bạn. Không nhịn ăn khắc nghiệt, không bớt thời gian cho gia đình.</p>
   </div>
 
@@ -166,7 +170,7 @@
         <p style="font-size: 14.5px; line-height: 1.65; color: #5A4B44; font-style: italic; margin-top: 4px;">Giống như xây một ngôi nhà: làm móng trước, dựng khung sau, rồi mới hoàn thiện ngôi nhà bao bọc bạn. Đó cũng là thứ tự của 3 buổi học.</p>
       </div>
 
-      <img src="/ngoi-nha-3-lop/assets/phuong-phap-3-lop.webp" alt="Phương pháp 3 Lớp Chuyển Hóa: Lớp 1 Cơ Thể, Lớp 2 Niềm Tin, Lớp 3 Không Gian" loading="lazy" style="display: block; width: 100%; height: auto; border-radius: 16px;">
+      <img src="/ngoi-nha-3-lop/assets/phuong-phap-3-lop-1000.webp" alt="Phương pháp 3 Lớp Chuyển Hóa: Lớp 1 Cơ Thể, Lớp 2 Niềm Tin, Lớp 3 Không Gian" loading="lazy" style="display: block; width: 100%; height: auto; border-radius: 16px;">
 
       <div style="display: flex; flex-direction: column; gap: 16px;">
         <div style="background: #FAF3EC; border-radius: 16px; padding: 24px;">
@@ -573,12 +577,7 @@
             Vé VIP: Mở khóa Buổi 3 (99K, giá ưu đãi đến 23h59 tối Buổi 2, giá thường 189K)
           </label>
         </div>
-        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.5; color: #3A2E2A;">
-          <input id="commitCheck" type="checkbox" required style="margin-top: 3px;">
-          Tôi dành ra 3 buổi tối này cho bản thân mình.
-        </label>
-        <p style="font-size: 12px; color: #8A756A; margin: -6px 0 0;">Tích vào ô trên để mở nút đăng ký.</p>
-        <button type="submit" id="submitBtn" disabled style="margin-top: 4px; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 16px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer; opacity: 0.5; transition: opacity 0.15s;">XÁC NHẬN ĐĂNG KÝ GIỮ CHỖ</button>
+        <button type="submit" id="submitBtn" style="margin-top: 4px; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 16px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer; transition: opacity 0.15s;">XÁC NHẬN ĐĂNG KÝ GIỮ CHỖ</button>
         <p style="font-size: 12.5px; color: #8A756A; text-align: center; font-style: italic; margin: 0;">Link phòng học và lịch nhắc được gửi qua email và nhóm Zalo của lớp.</p>
         <p style="font-size: 11.5px; color: #B0A094; text-align: center; margin: 0;">Bằng việc đăng ký, bạn đồng ý để Thắm liên hệ qua Zalo/email về workshop. Thông tin của bạn được bảo mật, không chia sẻ cho bên thứ ba, và bạn có thể yêu cầu xóa bất cứ lúc nào.</p>
         <p id="error" style="color: #B5482F; font-size: 13px; margin: 0; display: none;"></p>
@@ -698,14 +697,13 @@
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
   const submitBtn = document.getElementById('submitBtn');
   const errEl = document.getElementById('error');
-  const commitCheck = document.getElementById('commitCheck');
   const SUBMIT_BTN_DEFAULT_TEXT = submitBtn.textContent;
 
+  // Nút đăng ký luôn bấm được (đã bỏ ô tích cam kết). Các ô Họ tên, SĐT, Email, loại vé vẫn bắt buộc (required).
   function updateSubmitGate() {
-    submitBtn.disabled = !commitCheck.checked;
-    submitBtn.style.opacity = commitCheck.checked ? '1' : '0.5';
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = '1';
   }
-  commitCheck.addEventListener('change', updateSubmitGate);
 
   function resetSubmitBtn() {
     submitBtn.textContent = SUBMIT_BTN_DEFAULT_TEXT;
@@ -754,7 +752,6 @@
 
   document.getElementById('orderForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!commitCheck.checked) { commitCheck.focus(); return; }
     const btn = submitBtn;
     errEl.style.display = 'none';
     btn.disabled = true;

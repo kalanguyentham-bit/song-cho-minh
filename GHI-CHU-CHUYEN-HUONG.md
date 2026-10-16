@@ -15,3 +15,8 @@ File này nằm trong .vercelignore nên không bị đưa lên web.
 | `/assets/...` | `/ngoi-nha-3-lop/assets/...` | 301 | Đường dẫn cũ của ảnh. |
 
 Quy tắc lâu dài: mỗi sản phẩm một đường dẫn phẳng đặt theo tên sản phẩm (không đặt theo vai trò, ngày hay giá). Không bao giờ xóa đường dẫn cũ; đổi tên thì thêm chuyển hướng 301.
+
+## Bộ nhớ đệm (headers trong vercel.json)
+| Đường dẫn | Quy tắc | Giải thích |
+|---|---|---|
+| `/ngoi-nha-3-lop/assets/...` | `Cache-Control: public, max-age=86400, stale-while-revalidate=604800` | Ảnh được trình duyệt giữ 1 ngày để khách vào lần hai tải nhanh hơn. Muốn đổi ảnh ngay, đặt tên file mới (không ghi đè tên cũ). |

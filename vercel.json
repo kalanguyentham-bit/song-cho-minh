@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "headers": [
+    { "source": "/ngoi-nha-3-lop/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }] }
+  ],
   "redirects": [
     { "source": "/(.*)", "has": [{ "type": "host", "value": "www.thantamcanh.com" }], "destination": "https://thantamcanh.com/$1", "permanent": true },
     { "source": "/(.*)", "has": [{ "type": "host", "value": "song-cho-minh.vercel.app" }], "destination": "https://thantamcanh.com/ngoi-nha-3-lop", "permanent": true },
