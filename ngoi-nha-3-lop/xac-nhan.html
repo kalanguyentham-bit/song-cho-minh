@@ -86,11 +86,17 @@
     Bạn đã chuyển dư <strong id="overageAmount">—</strong> so với giá Vé VIP. Vé của bạn vẫn được xác nhận đầy đủ. Nhắn tin <a href="https://www.facebook.com/profile.php?id=61577145553348" target="_blank" rel="noopener" style="color: var(--accent-deep); font-weight: 600;">Fanpage</a> kèm mã đơn hàng để được hoàn lại phần chênh lệch.
   </div>
 
-  <div class="zalo-card">
-    <div class="zalo-title">2 Bước Tiếp Theo</div>
-    <p class="zalo-desc" style="margin-bottom: 8px; text-align: left;"><strong>1.</strong> Vào nhóm Zalo của lớp (học Buổi 1 và 2):</p>
-    <a href="https://zalo.me/g/afweoiaxvoywcsm4nsxh" target="_blank" rel="noopener" class="zalo-btn">Vào Nhóm Ngôi Nhà 3 Lớp →</a>
-    <p class="zalo-desc" style="margin: 18px 0 8px; text-align: left;"><strong>2.</strong> Vào nhóm Zalo VIP (Buổi 3 và 21 ngày hỗ trợ):</p>
+  <!-- Chỉ hiện khi máy chủ xác nhận đơn đã thanh toán (PAID). Trước đó hiện ô "đang kiểm tra". -->
+  <div class="zalo-card" id="dangKiemTra">
+    <p class="zalo-desc" style="margin: 0;">Đang kiểm tra thanh toán của bạn...</p>
+  </div>
+  <div class="zalo-card" id="chuaThanhToan" style="display: none;">
+    <p class="zalo-desc" style="margin: 0 0 12px;">Hệ thống chưa thấy thanh toán cho đơn này. Nếu bạn vừa chuyển khoản, đợi khoảng 1 phút rồi tải lại trang. Link nhóm VIP cũng được gửi trong email sau khi thanh toán được xác nhận.</p>
+    <a href="/ngoi-nha-3-lop/checkout" class="zalo-btn">Quay Lại Trang Thanh Toán →</a>
+  </div>
+  <div class="zalo-card" id="zaloCard" style="display: none;">
+    <div class="zalo-title">Bước Tiếp Theo</div>
+    <p class="zalo-desc" style="margin-bottom: 8px; text-align: left;">Vào nhóm Zalo VIP. Bạn chỉ cần vào 1 nhóm này: lịch nhắc cả 3 buổi, tài liệu, video xem lại và 21 ngày Thắm hỗ trợ. Link Zoom cả 3 buổi đã gửi trong email của bạn.</p>
     <a href="https://zalo.me/g/hh6v7z42bcuiz7jio8au" target="_blank" rel="noopener" class="zalo-btn">Vào Nhóm VIP 21 Ngày →</a>
     <div id="replyBox" style="display: none; margin-top: 14px; text-align: left;">
       <p class="zalo-desc" style="margin: 0 0 8px; font-size: 13px;">Khi xin vào nhóm VIP, Thắm sẽ hỏi 3 thông tin. Bạn trả lời đúng theo mẫu này:</p>
@@ -114,8 +120,8 @@
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-text">
-        <div class="step-title">Vào hai nhóm Zalo</div>
-        <div class="step-desc">Nhóm lớp để học Buổi 1 và 2, và nhóm VIP cho Buổi 3 cùng 21 ngày hỗ trợ. Khi xin vào nhóm VIP, bạn trả lời theo mẫu: nội dung chuyển khoản, số điện thoại, tên đăng ký.</div>
+        <div class="step-title">Vào nhóm Zalo VIP</div>
+        <div class="step-desc">Chỉ 1 nhóm cho cả 3 buổi và 21 ngày hỗ trợ. Khi xin vào nhóm, bạn trả lời theo mẫu: nội dung chuyển khoản, số điện thoại, tên đăng ký.</div>
       </div>
     </div>
     <div class="step">
@@ -151,6 +157,12 @@
 
   function formatVnd(n) { return Number(n).toLocaleString('en-US').replace(/,/g, '.'); }
 
+  // Mở trang không qua trang thanh toán (không có đơn trong phiên này) → không hiện link nhóm VIP
+  if (!order.orderId) {
+    document.getElementById('dangKiemTra').innerHTML =
+      '<p class="zalo-desc" style="margin: 0;">Link nhóm Zalo VIP và link Zoom đã được gửi trong email xác nhận thanh toán của bạn. Không thấy email? Nhắn Fanpage để được hỗ trợ.</p>';
+  }
+
   if (order.orderId) {
     document.getElementById('orderId').textContent = order.ckContent || order.orderId;
     document.getElementById('orderName').textContent = order.name || '—';
@@ -161,7 +173,12 @@
     fetch(GAS_URL + '?action=getStatus&orderId=' + encodeURIComponent(order.orderId))
       .then(res => res.json())
       .then(json => {
-        if (!json.success) return;
+        document.getElementById('dangKiemTra').style.display = 'none';
+        if (!json.success || json.status !== 'PAID') {
+          document.getElementById('chuaThanhToan').style.display = 'block';
+          return;
+        }
+        document.getElementById('zaloCard').style.display = 'block';
         const received = Number(json.amountReceived) || 0;
         const expected = Number(json.amountExpected) || 0;
         document.getElementById('orderAmount').textContent = formatVnd(received) + 'đ';
@@ -170,7 +187,11 @@
           document.getElementById('overageNote').style.display = 'block';
         }
       })
-      .catch(err => console.error('getStatus failed', err));
+      .catch(err => {
+        console.error('getStatus failed', err);
+        document.getElementById('dangKiemTra').style.display = 'none';
+        document.getElementById('chuaThanhToan').style.display = 'block';
+      });
 
     // Dòng mẫu trả lời khi xin vào nhóm VIP: {ckContent} – {phone} – {name}
     if (order.ckContent && order.phone && order.name) {
