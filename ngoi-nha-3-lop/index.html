@@ -78,6 +78,16 @@
   details.faq[open] summary::after { content: '–'; }
   details.faq .faq-answer { font-size: 14.5px; line-height: 1.65; color: #5A4B44; margin-top: 12px; }
 
+  /* Khung lịch học (đầu trang và trên form đăng ký) — ngày do script tự điền theo đợt */
+  .lich-hoc { width: 100%; max-width: 400px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.28); border-radius: 16px; padding: 14px 18px; text-align: left; color: #FFFFFF; }
+  .lich-tieu-de { font-size: 13px; font-weight: 700; letter-spacing: 0.3px; color: #F1D9CE; text-align: center; margin-bottom: 8px; }
+  .lich-dong { display: flex; align-items: baseline; gap: 10px; padding: 7px 0; border-top: 1px solid rgba(255,255,255,0.16); font-size: 15px; }
+  .lich-dong span { flex-shrink: 0; width: 56px; color: #F1D9CE; font-size: 13.5px; }
+  .lich-dong b { flex: 1; font-size: 16.5px; font-weight: 700; }
+  .lich-dong em { flex-shrink: 0; font-style: normal; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 100px; background: rgba(255,255,255,0.18); }
+  .lich-dong em.vip { background: #E8B87A; color: #3A2A22; }
+  .lich-chu-thich { font-size: 12.5px; color: #F1D9CE; text-align: center; margin-top: 6px; }
+
   /* Thanh CTA dính trên điện thoại */
   #stickyCta { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: #FFFFFF; padding: 10px 16px; box-shadow: 0 -4px 16px rgba(46,36,32,0.12); }
   @media (max-width: 680px) {
@@ -96,7 +106,13 @@
       <div style="font-size: 12.5px; letter-spacing: 2px; text-transform: uppercase; color: #F1D9CE; font-weight: 700; background: rgba(255,255,255,0.1); padding: 6px 16px; border-radius: 100px;">Workshop Ngôi Nhà 3 Lớp</div>
       <div style="font-size: 13px; letter-spacing: 0.5px; color: #F1D9CE; font-weight: 600;">Dành cho phụ nữ 35+ muốn chăm sóc lại sự tươi tắn và năng lượng từ trong ra ngoài</div>
       <h1 style="font-size: 38px; line-height: 1.25; color: #FFFFFF; font-weight: 600;">3 buổi tối giúp phụ nữ 35+ hiểu vì sao mình mệt dù ngủ đủ, và bắt đầu lấy lại năng lượng mà không cần nhịn ăn</h1>
-      <div id="hero-info-line" style="font-size: 13.5px; letter-spacing: 0.3px; color: #F1D9CE; font-weight: 700;">3 buổi tối · 20h · Zoom · Buổi 1 và 2 miễn phí · Bắt đầu Thứ Ba, 27/10</div>
+      <div class="lich-hoc" aria-label="Lịch học">
+        <div class="lich-tieu-de">Lịch học · 20h tối · Online qua Zoom</div>
+        <div class="lich-dong"><span>Buổi 1</span><b class="lich-b1">Thứ Ba, 27/10</b><em>Miễn phí</em></div>
+        <div class="lich-dong"><span>Buổi 2</span><b class="lich-b2">Thứ Tư, 28/10</b><em>Miễn phí</em></div>
+        <div class="lich-dong"><span>Buổi 3</span><b class="lich-b3">Thứ Năm, 29/10</b><em class="vip">Vé VIP</em></div>
+        <div class="lich-chu-thich">Mỗi buổi 90 phút</div>
+      </div>
       <a href="#form" class="btn" style="margin-top: 8px; background: #FFFFFF; color: #B5482F; font-weight: 600; font-size: 16px; padding: 16px 36px; border-radius: 100px;">Đăng Ký Giữ Chỗ Miễn Phí</a>
       <div style="font-size: 12.5px; color: #E6C4B4; font-style: italic;">Link phòng học gửi qua email và nhóm Zalo của lớp ngay sau khi đăng ký.</div>
 
@@ -549,6 +565,14 @@
         <p style="font-size: 14.5px; color: #E6C4B4; line-height: 1.6;">Bạn đã chăm sóc cả nhà nhiều năm rồi. 3 buổi tối này là dành cho bạn. Hẹn gặp bạn trong workshop.</p>
       </div>
 
+      <div class="lich-hoc" aria-label="Lịch học" style="margin: 0 auto;">
+        <div class="lich-tieu-de">Lịch học · 20h tối · Online qua Zoom</div>
+        <div class="lich-dong"><span>Buổi 1</span><b class="lich-b1">Thứ Ba, 27/10</b><em>Miễn phí</em></div>
+        <div class="lich-dong"><span>Buổi 2</span><b class="lich-b2">Thứ Tư, 28/10</b><em>Miễn phí</em></div>
+        <div class="lich-dong"><span>Buổi 3</span><b class="lich-b3">Thứ Năm, 29/10</b><em class="vip">Vé VIP</em></div>
+        <div class="lich-chu-thich">Mỗi buổi 90 phút</div>
+      </div>
+
       <form id="orderForm" style="background: #FFFFFF; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 16px;">
         <input type="hidden" name="dot" id="f-dot">
         <input type="hidden" name="ngay_buoi_1" id="f-ngay1">
@@ -650,8 +674,13 @@
   var DOT = window.tinhDotKeTiep(new Date());
   var GIO = CONFIG.GIO_HOC || '20h';
   if (DOT) {
-    document.getElementById('hero-info-line').textContent =
-      '3 buổi tối · ' + GIO + ' · Zoom · Buổi 1 và 2 miễn phí · Bắt đầu ' + DOT.label[0];
+    // Khung lịch học ở đầu trang và trên form đăng ký
+    [1, 2, 3].forEach(function (n) {
+      document.querySelectorAll('.lich-b' + n).forEach(function (el) { el.textContent = DOT.label[n - 1]; });
+    });
+    document.querySelectorAll('.lich-tieu-de').forEach(function (el) {
+      el.textContent = 'Lịch học · ' + GIO + ' tối · Online qua Zoom';
+    });
     document.getElementById('date-buoi1').textContent = GIO + ' ' + DOT.label[0] + ' · 90 phút qua Zoom';
     document.getElementById('date-buoi2').textContent = GIO + ' ' + DOT.label[1] + ' · 90 phút qua Zoom';
     document.getElementById('date-vip').textContent = GIO + ' ' + DOT.label[2] + ' · 90 phút qua Zoom';
