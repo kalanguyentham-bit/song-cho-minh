@@ -95,6 +95,13 @@
   .vip-noi-bat > span { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: #C0654A; color: #FFFFFF; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
   .vip-noi-bat b { display: block; font-size: 15px; color: #2E2420; }
   #upgradeBox .vip-noi-bat { margin-bottom: 10px; }
+  .qua-vip { background: #FFFFFF; border: 1.5px solid #E8B87A; border-radius: 10px; padding: 10px 12px; text-align: left; font-size: 13.5px; line-height: 1.5; color: #5A4B44; }
+  .qua-vip[hidden] { display: none; }
+  .qua-nhan { display: inline-block; background: #E8B87A; color: #3A2A22; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; margin-bottom: 6px; }
+  .qua-vip b { display: block; font-size: 15px; color: #2E2420; }
+  .qua-ghi-chu { font-size: 12px; color: #8A756A; font-style: italic; margin-top: 4px; }
+  .qua-dem { margin-top: 8px; font-weight: 700; color: #B5482F; font-size: 15px; }
+  .qua-dem.het { color: #8A756A; font-weight: 600; font-size: 13px; }
   .vip-them-chon { align-self: flex-start; background: #FFFFFF; color: #B5482F; border: 1.5px solid #C0654A; border-radius: 100px; padding: 8px 16px; font-size: 13.5px; font-weight: 700; font-family: 'Work Sans', sans-serif; cursor: pointer; }
 
   /* Thanh CTA dính trên điện thoại */
@@ -613,6 +620,12 @@
             <div class="vip-them-tieu-de">Vé VIP có thêm 2 điều vé miễn phí không có</div>
             <div class="vip-noi-bat"><span>1</span><div><b>Buổi 3 · Thực hành chuyển hóa</b>Cùng Thắm đi qua Lớp 3 và hoàn thiện Kế Hoạch 21 Ngày của riêng bạn.</div></div>
             <div class="vip-noi-bat"><span>2</span><div><b>21 ngày Thắm đồng hành sau workshop</b>Thắm hỗ trợ trực tiếp trong nhóm Zalo VIP khi bạn bắt đầu áp dụng.</div></div>
+            <div class="qua-vip" data-qua hidden>
+              <div class="qua-nhan">Quà khi mua VIP trong <span class="qua-so-phut">60</span> phút</div>
+              <b class="qua-ten"></b>
+              <div class="qua-mo-ta"></div>
+              <div class="qua-ghi-chu"><span class="qua-so-phut">60</span> phút tính từ lúc bạn đăng ký. Quà gửi vào email ngay sau khi thanh toán.</div>
+            </div>
             <button type="button" class="vip-them-chon" id="chonVipBtn">Chọn vé VIP (99K)</button>
           </div>
         </div>
@@ -638,6 +651,12 @@
           <div style="height: 1px; background: #E6C4B4; margin-bottom: 12px;"></div>
           <div class="vip-noi-bat"><span>1</span><div><b>Buổi 3 · Thực hành chuyển hóa</b>Cùng Thắm đi qua Lớp 3 và hoàn thiện Kế Hoạch 21 Ngày của riêng bạn. Chỉ dành cho vé VIP.</div></div>
           <div class="vip-noi-bat" style="margin-bottom: 12px;"><span>2</span><div><b>21 ngày Thắm đồng hành sau workshop</b>Thắm hỗ trợ trực tiếp trong nhóm Zalo VIP khi bạn bắt đầu áp dụng.</div></div>
+          <div class="qua-vip" data-qua hidden style="margin-bottom: 12px;">
+            <div class="qua-nhan">Quà khi mua VIP trong <span class="qua-so-phut">60</span> phút</div>
+            <b class="qua-ten"></b>
+            <div class="qua-mo-ta"></div>
+            <div class="qua-dem" id="quaDemNangCap"></div>
+          </div>
           <div style="font-size: 13px; font-weight: 700; color: #5A4B44; margin-bottom: 4px;">Kèm theo:</div>
           <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6;">✓ Tất cả quyền lợi vé tiêu chuẩn</div>
           <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6;">✓ Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</div>
@@ -708,6 +727,9 @@
     document.getElementById('f-ngay3').value = DOT.ngay[2];
   }
   document.getElementById('thankyouZaloBtn').href = CONFIG.LINK_NHOM_LOP;
+
+  // Quà VIP 60 phút: chỉ hiện khi bật trong config.js (QUA_VIP.BAT)
+  var QUA_BAT = window.hienKhoiQua();
 
   // ============ Section 2: dấu hiệu bấm chọn được ============
   (function () {
@@ -856,6 +878,7 @@
       if (!json.success) throw new Error(json.error || 'Order creation failed');
       dungCho();
 
+      const quaHan = window.quaVipHan(); // hạn nhận quà VIP: 60 phút từ lúc đăng ký này
       sessionStorage.setItem('order', JSON.stringify({
         orderId: json.orderId,
         ckContent: json.ckContent,
@@ -863,8 +886,14 @@
         name: data.name,
         email: data.email,
         phone: data.phone,
-        goal: data.goal
+        goal: data.goal,
+        quaHan: quaHan
       }));
+      if (QUA_BAT && json.free) {
+        window.demNguocQua(document.getElementById('quaDemNangCap'), quaHan,
+          function (mmss) { return 'Còn ' + mmss + ' để nhận quà'; },
+          'Đã hết thời gian nhận quà. Giá 99K vẫn giữ đến 23h59 tối Buổi 2.');
+      }
 
       if (json.free) {
         fireLead('ve-mien-phi', json.orderId);
@@ -943,7 +972,8 @@
         name: current.name || '',
         email: current.email || '',
         phone: current.phone || '',
-        goal: 'Vé VIP (99K)'
+        goal: 'Vé VIP (99K)',
+        quaHan: current.quaHan || window.quaVipHan() // giữ nguyên hạn quà tính từ lúc đăng ký vé miễn phí
       }));
       fireOncePerOrder('InitiateCheckout', json.orderId);
       goCheckout();

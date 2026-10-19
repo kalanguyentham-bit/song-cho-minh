@@ -50,6 +50,12 @@
   .save-qr-btn:active { transform: scale(0.97); }
   .qr-hint { margin-top: 10px; font-size: 13px; color: var(--text-muted); line-height: 1.55; text-align: left; background: var(--surface-2); border-radius: 8px; padding: 10px 12px; }
   .qr-hint ol { padding-left: 18px; }
+  .qua-vip { background: #FFF6EC; border: 1.5px solid #E8B87A; border-radius: 10px; padding: 12px 14px; font-size: 13.5px; line-height: 1.5; color: var(--text-muted); margin-bottom: 8px; }
+  .qua-vip[hidden] { display: none; }
+  .qua-nhan { display: inline-block; background: #E8B87A; color: #3A2A22; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; margin-bottom: 6px; }
+  .qua-vip b { display: block; font-size: 15px; color: var(--text); }
+  .qua-dem { margin-top: 8px; font-weight: 700; color: #B5482F; font-size: 16px; }
+  .qua-dem.het { color: var(--text-muted); font-weight: 600; font-size: 13px; }
   @media (max-width: 480px) {
     body { padding: 12px 10px; }
     .container { padding: 22px 16px; }
@@ -69,6 +75,14 @@
   <div class="summary">
     <div class="summary-row"><span>Vé VIP: Buổi 3 (Lớp 3 - Không Gian)</span><span id="base">99.000đ</span></div>
     <div class="summary-row summary-total"><span>Tổng</span><span id="total">99.000đ</span></div>
+  </div>
+
+  <!-- Quà VIP 60 phút: chỉ hiện khi bật trong config.js (QUA_VIP.BAT) -->
+  <div class="qua-vip" data-qua hidden>
+    <div class="qua-nhan">Quà khi thanh toán trong <span class="qua-so-phut">60</span> phút</div>
+    <b class="qua-ten"></b>
+    <div class="qua-mo-ta"></div>
+    <div class="qua-dem" id="quaDemThanhToan"></div>
   </div>
 
   <div class="qr-section">
@@ -149,6 +163,15 @@
   if (!order.orderId) { window.location.href = window.APP_CONFIG.DUONG_DAN_WORKSHOP; }
 
   document.getElementById('ckContent').textContent = order.ckContent;
+
+  // Quà VIP: đồng hồ chạy tới hạn đã lưu lúc khách đăng ký (không quay lại 60 phút khi tải lại trang)
+  if (window.hienKhoiQua() && order.quaHan) {
+    window.demNguocQua(document.getElementById('quaDemThanhToan'), Number(order.quaHan),
+      function (mmss) { return 'Chuyển khoản trong ' + mmss + ' để nhận quà'; },
+      'Đã hết thời gian nhận quà. Giá vé của bạn không đổi.');
+  } else {
+    document.querySelectorAll('[data-qua]').forEach(function (el) { el.hidden = true; });
+  }
 
   document.querySelectorAll('.copy-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {

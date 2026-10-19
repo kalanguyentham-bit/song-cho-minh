@@ -11,6 +11,16 @@ window.APP_CONFIG = {
   PIXEL_ID: '26885894507775293',
   GIO_HOC: '20h',
 
+  // Quà cho khách mua VIP trong 60 phút (tính từ lúc đăng ký đầu tiên). Giá 99K vẫn giữ đến 23h59 tối Buổi 2.
+  // CHỈ đổi BAT thành true khi file quà đã có sẵn VÀ email tự gửi quà đã chạy (Apps Script).
+  // Trang hứa tặng quà mà khách không nhận được là vi phạm chính sách Meta.
+  QUA_VIP: {
+    BAT: false,
+    SO_PHUT: 60,
+    TEN: 'Bộ Thực Đơn 7 Ngày Bữa Cơm Gia Đình',
+    MO_TA: 'Kèm danh sách đi chợ. Cả nhà ăn chung một mâm, bạn không phải nấu riêng.'
+  },
+
   // Ngày đặc biệt (ban đầu để trống). Sao chép 1 trong 2 dòng mẫu bên dưới khi cần:
   //   { thang: "2027-01", nghi: true }            → tháng đó không có đợt, trang tính sang tháng sau.
   //   { thang: "2027-04", buoi1: "2027-04-20" }   → tháng đó học Thứ Ba 20/4, Thứ Tư 21/4, Thứ Năm 22/4 thay cho ngày tự tính.
@@ -74,4 +84,40 @@ window.tinhDotKeTiep = function (now) {
     }
   }
   return null;
+};
+
+// ============================================================
+// QUÀ VIP 60 PHÚT — hiện quà và đồng hồ đếm ngược (chỉ khi QUA_VIP.BAT = true)
+// han = thời điểm hết hạn nhận quà (mili giây), tính từ lúc khách đăng ký lần đầu, lưu cùng đơn trong phiên.
+// Đồng hồ chạy theo giờ thật nên tải lại trang không quay về 60 phút. Máy chủ mới là nơi quyết định có gửi quà hay không.
+// ============================================================
+window.quaVipHan = function () {
+  var q = window.APP_CONFIG.QUA_VIP || {};
+  return Date.now() + (q.SO_PHUT || 60) * 60000;
+};
+
+/** Điền tên + mô tả quà vào mọi khối [data-qua] trong trang và cho hiện. Trả về false nếu quà đang tắt. */
+window.hienKhoiQua = function () {
+  var q = window.APP_CONFIG.QUA_VIP || {};
+  if (!q.BAT) return false;
+  document.querySelectorAll('[data-qua]').forEach(function (el) {
+    el.querySelectorAll('.qua-ten').forEach(function (x) { x.textContent = q.TEN; });
+    el.querySelectorAll('.qua-mo-ta').forEach(function (x) { x.textContent = q.MO_TA; });
+    el.querySelectorAll('.qua-so-phut').forEach(function (x) { x.textContent = q.SO_PHUT || 60; });
+    el.hidden = false;
+  });
+  return true;
+};
+
+/** Đồng hồ đếm ngược trong el tới thời điểm han. chuCon(mm:ss) và chuHet là chữ hiển thị. */
+window.demNguocQua = function (el, han, chuCon, chuHet) {
+  if (!el || !han) return;
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function ve() {
+    var con = Math.floor((han - Date.now()) / 1000);
+    if (con <= 0) { el.textContent = chuHet; el.classList.add('het'); clearInterval(t); return; }
+    el.textContent = chuCon(pad(Math.floor(con / 60)) + ':' + pad(con % 60));
+  }
+  var t = setInterval(ve, 1000);
+  ve();
 };
