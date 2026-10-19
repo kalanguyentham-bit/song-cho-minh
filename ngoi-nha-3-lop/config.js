@@ -6,7 +6,8 @@ window.APP_CONFIG = {
   SITE_URL: 'https://thantamcanh.com',
   DUONG_DAN_WORKSHOP: '/ngoi-nha-3-lop',
 
-  LINK_NHOM_LOP: 'https://zalo.me/g/afweoiaxvoywcsm4nsxh',
+  LINK_NHOM_LOP: 'https://zalo.me/g/afweoiaxvoywcsm4nsxh',   // nhóm lớp (vé miễn phí)
+  LINK_NHOM_VIP: 'https://zalo.me/g/hh6v7z42bcuiz7jio8au',   // nhóm VIP 21 ngày (vé VIP đã thanh toán)
   PIXEL_ID: '26885894507775293',
   GIO_HOC: '20h',
 

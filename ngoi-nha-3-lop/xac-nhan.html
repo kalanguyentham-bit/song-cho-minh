@@ -97,7 +97,7 @@
   <div class="zalo-card" id="zaloCard" style="display: none;">
     <div class="zalo-title">Bước Tiếp Theo</div>
     <p class="zalo-desc" style="margin-bottom: 8px; text-align: left;">Vào nhóm Zalo VIP. Bạn chỉ cần vào 1 nhóm này: lịch nhắc cả 3 buổi, tài liệu, video xem lại và 21 ngày Thắm hỗ trợ. Link Zoom cả 3 buổi đã gửi trong email của bạn.</p>
-    <a href="https://zalo.me/g/hh6v7z42bcuiz7jio8au" target="_blank" rel="noopener" class="zalo-btn">Vào Nhóm VIP 21 Ngày →</a>
+    <a href="https://zalo.me/g/hh6v7z42bcuiz7jio8au" id="zaloVipBtn" target="_blank" rel="noopener" class="zalo-btn">Vào Nhóm VIP 21 Ngày →</a>
     <div id="replyBox" style="display: none; margin-top: 14px; text-align: left;">
       <p class="zalo-desc" style="margin: 0 0 8px; font-size: 13px;">Khi xin vào nhóm VIP, Thắm sẽ hỏi 3 thông tin. Bạn trả lời đúng theo mẫu này:</p>
       <div style="display: flex; gap: 8px; align-items: stretch;">
@@ -179,6 +179,8 @@
           return;
         }
         document.getElementById('zaloCard').style.display = 'block';
+        // Nút vào nhóm VIP đi qua trang vao-nhom để ghi lại lúc khách bấm (Thắm vẫn tự duyệt và tích)
+        document.getElementById('zaloVipBtn').href = '/ngoi-nha-3-lop/vao-nhom?n=vip&d=' + encodeURIComponent(order.orderId);
         const received = Number(json.amountReceived) || 0;
         const expected = Number(json.amountExpected) || 0;
         document.getElementById('orderAmount').textContent = formatVnd(received) + 'đ';

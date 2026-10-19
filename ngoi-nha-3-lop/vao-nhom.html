@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Ngôi Nhà 3 Lớp: Vào nhóm Zalo</title>
+<style>
+  :root { --bg: #FDE5D0; --surface: #FFFFFF; --text: #3D2A1A; --text-muted: #6B5340; --accent: #C77539; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); padding: 40px 16px; text-align: center; line-height: 1.6; }
+  .box { max-width: 420px; margin: 0 auto; background: var(--surface); border-radius: 14px; padding: 28px 22px; }
+  a.btn { display: inline-block; margin-top: 16px; background: var(--accent); color: #fff; font-weight: 700; padding: 12px 24px; border-radius: 100px; text-decoration: none; }
+  p { color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="box">
+  <h1 style="font-size: 20px; margin-bottom: 8px;">Đang mở nhóm Zalo...</h1>
+  <p>Nếu Zalo không tự mở sau vài giây, bạn bấm nút dưới đây.</p>
+  <a class="btn" id="linkNhom" href="#">Mở Nhóm Zalo</a>
+</div>
+
+<script src="/ngoi-nha-3-lop/config.js"></script>
+<script>
+  // Trang trung gian cho nút "Vào nhóm Zalo" (trang cảm ơn, trang xác nhận, email).
+  // ?n=lop (nhóm lớp, vé miễn phí) hoặc ?n=vip (nhóm VIP); ?d=mã đơn.
+  // Gửi lượt bấm về Apps Script (ghi cột daBamLinkNhom; vé miễn phí tự tích daVaoNhomZaloFree) rồi mở Zalo ngay.
+  // Chỉ mở 2 link nhóm có sẵn trong config.js, không mở link nào khác.
+  (function () {
+    var GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
+    var cfg = window.APP_CONFIG || {};
+    var q = new URLSearchParams(location.search);
+    var nhom = q.get('n') === 'vip' ? 'vip' : 'lop';
+    var orderId = (q.get('d') || '').slice(0, 40);
+    var zalo = nhom === 'vip' ? cfg.LINK_NHOM_VIP : cfg.LINK_NHOM_LOP;
+    document.getElementById('linkNhom').href = zalo;
+
+    if (orderId) {
+      var body = JSON.stringify({ action: 'daBamNhom', orderId: orderId, nhom: nhom });
+      var daGui = false;
+      try { daGui = navigator.sendBeacon && navigator.sendBeacon(GAS_URL, new Blob([body], { type: 'text/plain' })); } catch (e) {}
+      if (!daGui) { try { fetch(GAS_URL, { method: 'POST', body: body, mode: 'no-cors', keepalive: true }); } catch (e) {} }
+    }
+    setTimeout(function () { location.replace(zalo); }, 150);
+  })();
+</script>
+</body>
+</html>

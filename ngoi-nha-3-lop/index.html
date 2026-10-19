@@ -822,6 +822,8 @@
 
       if (json.free) {
         fireLead('ve-mien-phi', json.orderId);
+        // Nút vào nhóm đi qua trang vao-nhom để tự tích "đã vào nhóm" cho đơn này trong Sheet
+        document.getElementById('thankyouZaloBtn').href = CONFIG.DUONG_DAN_WORKSHOP + '/vao-nhom?n=lop&d=' + encodeURIComponent(json.orderId);
         document.getElementById('orderForm').style.display = 'none';
         var thankyouEl = document.getElementById('thankyou');
         thankyouEl.style.display = 'flex';
