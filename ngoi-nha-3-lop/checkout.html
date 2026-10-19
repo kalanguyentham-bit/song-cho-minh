@@ -42,6 +42,23 @@
   .status.paid { background: #E3EFE9; color: #2F7A56; }
   .pulse { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: currentColor; margin-right: 8px; vertical-align: middle; animation: pulse 1.5s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .qr-section img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; margin: 0 auto; }
+  .save-qr-btn {
+    display: inline-block; margin-top: 12px; padding: 12px 22px; border: none; border-radius: 100px;
+    background: var(--accent); color: #fff; font-family: var(--font-b); font-weight: 700; font-size: 15px; cursor: pointer;
+  }
+  .save-qr-btn:active { transform: scale(0.97); }
+  .qr-hint { margin-top: 10px; font-size: 13px; color: var(--text-muted); line-height: 1.55; text-align: left; background: var(--surface-2); border-radius: 8px; padding: 10px 12px; }
+  .qr-hint ol { padding-left: 18px; }
+  @media (max-width: 480px) {
+    body { padding: 12px 10px; }
+    .container { padding: 22px 16px; }
+    .lead { margin-bottom: 16px; }
+    .summary { padding: 14px 16px; margin-bottom: 8px; }
+    .summary-total { font-size: 20px; padding-top: 8px; }
+    .qr-section { padding: 12px 0; }
+    .qr-section img { max-width: 240px; }
+  }
 </style>
 </head>
 <body>
@@ -55,11 +72,20 @@
   </div>
 
   <div class="qr-section">
-    <img id="qrImg" alt="QR thanh toán">
+    <img id="qrImg" alt="QR thanh toán" width="280" height="280">
+    <button type="button" class="save-qr-btn" id="saveQrBtn">Lưu mã QR về máy</button>
+    <div class="qr-hint">
+      <strong>Đang xem trên điện thoại?</strong>
+      <ol>
+        <li>Bấm <strong>Lưu mã QR về máy</strong> (hoặc nhấn giữ vào mã QR, chọn Lưu ảnh).</li>
+        <li>Mở ứng dụng ngân hàng, chọn <strong>Quét mã QR</strong>, rồi chọn ảnh vừa lưu.</li>
+        <li>Số tiền và nội dung đã điền sẵn, bạn chỉ cần xác nhận chuyển.</li>
+      </ol>
+    </div>
   </div>
 
   <div class="info-box">
-    <div class="info-row"><span>Ngân hàng</span><strong>BIDV: Ngân hàng TMCP Đầu tư &amp; Phát triển Việt Nam</strong></div>
+    <div class="info-row"><span>Ngân hàng</span><strong>BIDV</strong></div>
     <div class="info-row">
       <span>Số TK</span>
       <span class="info-value">
@@ -166,12 +192,46 @@
 
   function formatVnd(n) { return Number(n).toLocaleString('en-US').replace(/,/g, '.'); }
 
+  // Ảnh QR lấy từ SePay (cho phép lưu về máy). Nếu SePay lỗi thì dùng vietqr.app (nội dung mã giống hệt).
+  let qrUrl = '';
+  let qrBlob = null;
   function updateQR(amount) {
-    const url = 'https://vietqr.app/img?acc=96247SCMTHAM01&bank=BIDV&amount=' + amount + '&des=' + encodeURIComponent(order.ckContent);
-    document.getElementById('qrImg').src = url;
+    const q = '?acc=96247SCMTHAM01&bank=BIDV&amount=' + amount + '&des=' + encodeURIComponent(order.ckContent);
+    const img = document.getElementById('qrImg');
+    qrUrl = 'https://qr.sepay.vn/img' + q;
+    img.onerror = function () { img.onerror = null; img.src = 'https://vietqr.app/img' + q; };
+    img.src = qrUrl;
+    // Tải sẵn ảnh để lúc bấm "Lưu" mở được bảng chia sẻ ngay (iPhone chặn nếu phải chờ tải)
+    qrBlob = null;
+    fetch(qrUrl).then(function (r) { return r.blob(); }).then(function (b) { qrBlob = b; }).catch(function () {});
     document.getElementById('amount').textContent = formatVnd(amount) + 'đ';
     document.getElementById('total').textContent = formatVnd(amount) + 'đ';
   }
+
+  // Nút "Lưu mã QR về máy": điện thoại → mở bảng chia sẻ (có mục Lưu ảnh); máy tính → tải file ảnh.
+  // Nếu cả hai không được (vd trình duyệt trong Facebook) → mở ảnh ở tab mới để khách nhấn giữ và lưu.
+  document.getElementById('saveQrBtn').addEventListener('click', async function () {
+    const btn = this;
+    const tenFile = 'QR-thanh-toan-' + (order.ckContent || 'ngoi-nha-3-lop') + '.png';
+    try {
+      const blob = qrBlob || await (await fetch(qrUrl)).blob();
+      const file = new File([blob], tenFile, { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] }) && /Android|iPhone|iPad/i.test(navigator.userAgent)) {
+        await navigator.share({ files: [file] });
+      } else {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = tenFile;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+      btn.textContent = 'Đã lưu ✓ Mở app ngân hàng để quét';
+    } catch (err) {
+      if (err && err.name === 'AbortError') return; // khách tự đóng bảng chia sẻ
+      window.open(qrUrl, '_blank');
+    }
+  });
 
   updateQR(Number(order.totalAmount) || BASE_PRICE); // giá lấy từ máy chủ (đơn đã tạo), không tự gõ cứng
 

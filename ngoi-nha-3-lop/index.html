@@ -556,15 +556,15 @@
         <input type="hidden" name="ngay_buoi_3" id="f-ngay3">
         <div style="display: flex; flex-direction: column; gap: 6px;">
           <label for="fullname" style="font-size: 13px; font-weight: 600; color: #5A4B44;">Họ và tên của bạn</label>
-          <input id="fullname" name="name" required type="text" placeholder="Nhập họ và tên..." style="border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 14.5px; font-family: 'Work Sans', sans-serif;">
+          <input id="fullname" name="name" required type="text" autocomplete="name" enterkeyhint="next" placeholder="Nhập họ và tên..." style="border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 16px; font-family: 'Work Sans', sans-serif;">
         </div>
         <div style="display: flex; flex-direction: column; gap: 6px;">
           <label for="phone" style="font-size: 13px; font-weight: 600; color: #5A4B44;">Số điện thoại (có Zalo)</label>
-          <input id="phone" name="phone" required type="tel" pattern="0[0-9]{9}" placeholder="Nhập số điện thoại để nhận link phòng học..." style="border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 14.5px; font-family: 'Work Sans', sans-serif;">
+          <input id="phone" name="phone" required type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="next" placeholder="Ví dụ: 0912 345 678" style="border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 16px; font-family: 'Work Sans', sans-serif;">
         </div>
         <div style="display: flex; flex-direction: column; gap: 6px;">
           <label for="email" style="font-size: 13px; font-weight: 600; color: #5A4B44;">Địa chỉ Email</label>
-          <input id="email" name="email" required type="email" placeholder="Nhập địa chỉ Email của bạn..." style="border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 14.5px; font-family: 'Work Sans', sans-serif;">
+          <input id="email" name="email" required type="email" inputmode="email" autocomplete="email" autocapitalize="off" enterkeyhint="done" placeholder="Ví dụ: ten@gmail.com" style="border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 16px; font-family: 'Work Sans', sans-serif;">
         </div>
         <div style="display: flex; flex-direction: column; gap: 8px;">
           <div style="font-size: 13px; font-weight: 600; color: #5A4B44;">Chọn hạng vé</div>
@@ -705,7 +705,25 @@
     submitBtn.style.opacity = '1';
   }
 
+  // Chữ trên nút đổi dần trong lúc chờ máy chủ (thường mất vài giây) để khách không tưởng trang bị treo
+  var choTimers = [];
+  function batDauCho(btn, cacDong) {
+    btn.textContent = cacDong[0][1];
+    choTimers = cacDong.slice(1).map(function (d) { return setTimeout(function () { btn.textContent = d[1]; }, d[0]); });
+  }
+  function dungCho() { choTimers.forEach(clearTimeout); choTimers = []; }
+
+  // Chuẩn hóa SĐT: bỏ dấu cách, dấu chấm, gạch; +84 / 84 → 0. Trả về '' nếu không đúng 10 số bắt đầu bằng 0.
+  function chuanHoaSdt(v) {
+    var s = String(v || '').replace(/[^\d+]/g, '');
+    if (/^\+?84\d{9}$/.test(s)) s = '0' + s.replace(/^\+?84/, '');
+    return /^0\d{9}$/.test(s) ? s : '';
+  }
+
+  document.getElementById('phone').addEventListener('input', function () { this.setCustomValidity(''); });
+
   function resetSubmitBtn() {
+    dungCho();
     submitBtn.textContent = SUBMIT_BTN_DEFAULT_TEXT;
     updateSubmitGate();
     errEl.style.display = 'none';
@@ -754,13 +772,22 @@
     e.preventDefault();
     const btn = submitBtn;
     errEl.style.display = 'none';
+
+    const phoneEl = document.getElementById('phone');
+    const sdt = chuanHoaSdt(phoneEl.value);
+    if (!sdt) {
+      phoneEl.setCustomValidity('Số điện thoại cần đủ 10 số và bắt đầu bằng số 0, ví dụ 0912 345 678.');
+      phoneEl.reportValidity();
+      return;
+    }
+
     btn.disabled = true;
-    btn.textContent = 'ĐANG XỬ LÝ...';
+    batDauCho(btn, [[0, 'ĐANG GIỮ CHỖ CHO BẠN...'], [3500, 'SẮP XONG, BẠN ĐỢI VÀI GIÂY...'], [9000, 'VẪN ĐANG XỬ LÝ, ĐỪNG ĐÓNG TRANG NHÉ...']]);
 
     const form = new FormData(e.target);
     const data = {
       name: form.get('name'),
-      phone: form.get('phone'),
+      phone: sdt,
       email: form.get('email'),
       goal: form.get('goal'),
       dot: form.get('dot'),
@@ -781,6 +808,7 @@
       });
       const json = await res.json();
       if (!json.success) throw new Error(json.error || 'Order creation failed');
+      dungCho();
 
       sessionStorage.setItem('order', JSON.stringify({
         orderId: json.orderId,
