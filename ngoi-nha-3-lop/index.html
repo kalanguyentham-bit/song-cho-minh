@@ -87,6 +87,7 @@
   .lich-dong em { flex-shrink: 0; font-style: normal; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 100px; background: rgba(255,255,255,0.18); }
   .lich-dong em.vip { background: #E8B87A; color: #3A2A22; }
   .lich-chu-thich { font-size: 12.5px; color: #F1D9CE; text-align: center; margin-top: 6px; }
+  .lich-cho { font-size: 13px; font-weight: 700; color: #FFE1A8; text-align: center; margin-top: 8px; line-height: 1.5; }
 
   /* Quyền lợi nổi bật của vé VIP (khu chọn vé và ô nâng cấp sau khi giữ chỗ miễn phí) */
   .vip-them { background: #FFF5EE; border: 1.5px dashed #C0654A; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
@@ -681,6 +682,7 @@
 
 <script>
   var CONFIG = window.APP_CONFIG;
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
 
   // ============ Chọn hạng vé: viền theo lựa chọn + nút CTA cuộn mượt xuống form ============
   function syncTicketBorders() {
@@ -709,18 +711,23 @@
   });
 
   // ============ Lịch học: tự tính đợt kế tiếp (giờ Việt Nam), xem config.js ============
-  // Trang hiện lịch theo vé miễn phí (từ 19h ngày Buổi 1 chuyển sang đợt tháng sau).
+  // Trang hiện lịch theo vé miễn phí (từ 19h ngày Buổi 1 chuyển sang đợt sau; nhịp đợt xem APP_CONFIG.LICH).
   // Vé VIP vẫn thuộc đợt đang học đến 19h Thứ Năm (ngày Buổi 3) → nếu 2 đợt khác nhau, hiện ghi chú ở lựa chọn vé VIP.
   var DOT = window.tinhDotKeTiep(new Date(), 'free');
   var DOT_VIP = window.tinhDotKeTiep(new Date(), 'vip');
+  var DOT_DAY = null; // đợt đã đủ vé miễn phí (khi đó DOT là đợt sau)
   var GIO = CONFIG.GIO_HOC || '20h';
-  if (DOT && DOT_VIP && DOT_VIP.dot !== DOT.dot) {
+  function hienDot() {
     var ghiChuVip = document.getElementById('vipDotNote');
-    ghiChuVip.textContent = 'Lúc này vé VIP thuộc đợt đang diễn ra (Buổi 3: ' + GIO + ' ' + DOT_VIP.label[2] +
-      '). Vé miễn phí đăng ký lúc này thuộc đợt sau, bắt đầu ' + DOT.label[0] + '.';
-    ghiChuVip.hidden = false;
-  }
-  if (DOT) {
+    ghiChuVip.hidden = true;
+    if (DOT && DOT_VIP && DOT_VIP.dot !== DOT.dot) {
+      ghiChuVip.textContent = DOT_DAY && DOT_DAY.dot === DOT_VIP.dot
+        ? 'Vé VIP vẫn thuộc đợt Buổi 1 ' + DOT_VIP.label[0] + ' (Buổi 3: ' + GIO + ' ' + DOT_VIP.label[2] + '). Vé miễn phí đợt này đã đủ chỗ nên thuộc đợt sau, bắt đầu ' + DOT.label[0] + '.'
+        : 'Lúc này vé VIP thuộc đợt đang diễn ra (Buổi 3: ' + GIO + ' ' + DOT_VIP.label[2] +
+          '). Vé miễn phí đăng ký lúc này thuộc đợt sau, bắt đầu ' + DOT.label[0] + '.';
+      ghiChuVip.hidden = false;
+    }
+    if (!DOT) return;
     // Khung lịch học ở đầu trang và trên form đăng ký
     [1, 2, 3].forEach(function (n) {
       document.querySelectorAll('.lich-b' + n).forEach(function (el) { el.textContent = DOT.label[n - 1]; });
@@ -736,6 +743,35 @@
     document.getElementById('f-ngay1').value = DOT.ngay[0];
     document.getElementById('f-ngay2').value = DOT.ngay[1];
     document.getElementById('f-ngay3').value = DOT.ngay[2];
+  }
+  hienDot();
+
+  // ============ Giới hạn vé miễn phí mỗi đợt (số thật đếm trong Sheet, máy chủ quyết định) ============
+  // Đã đủ: trang chuyển sang hiện đợt sau. Còn ít chỗ: hiện "Đợt này còn X chỗ" dưới khung lịch học.
+  function ghiChoTrongLich(chu) {
+    document.querySelectorAll('.lich-hoc').forEach(function (box) {
+      var el = box.querySelector('.lich-cho');
+      if (!el) { el = document.createElement('div'); el.className = 'lich-cho'; box.appendChild(el); }
+      el.textContent = chu;
+    });
+  }
+  if (DOT) {
+    fetch(GAS_URL + '?action=soCho&dot=' + encodeURIComponent(DOT.dot))
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.success || typeof j.conLai !== 'number') return;
+        if (j.conLai <= 0) {
+          var sau = window.tinhDotSau(DOT);
+          if (!sau) return;
+          DOT_DAY = DOT;
+          DOT = sau;
+          hienDot();
+          ghiChoTrongLich('Đợt ' + DOT_DAY.label[0] + ' đã đủ chỗ miễn phí. Đăng ký bây giờ, bạn được giữ chỗ đợt ' + DOT.label[0] + '.');
+        } else if (j.conLai <= j.hienKhiConDuoi) {
+          ghiChoTrongLich('Đợt này còn ' + j.conLai + ' chỗ miễn phí');
+        }
+      })
+      .catch(function () {});
   }
   document.getElementById('thankyouZaloBtn').href = CONFIG.LINK_NHOM_LOP;
 
@@ -773,7 +809,6 @@
   })();
 
   // ============ Form đăng ký ============
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
   const submitBtn = document.getElementById('submitBtn');
   const errEl = document.getElementById('error');
   const SUBMIT_BTN_DEFAULT_TEXT = submitBtn.textContent;
@@ -867,6 +902,9 @@
     var laVipForm = !/Miễn phí/i.test(String(form.get('goal') || ''));
     // Tính lại đợt ngay lúc bấm (trang có thể mở từ trước 19h): vé miễn phí đổi đợt lúc 19h ngày Buổi 1, vé VIP lúc 19h ngày Buổi 3
     var dotDon = window.tinhDotKeTiep(new Date(), laVipForm ? 'vip' : 'free');
+    if (!laVipForm && dotDon && DOT_DAY && dotDon.dot === DOT_DAY.dot) dotDon = DOT; // đợt này đã đủ vé miễn phí
+    // Đợt dự phòng: máy chủ xếp vé miễn phí vào đây nếu lúc bấm đợt kia vừa đủ chỗ
+    var dotSau = laVipForm ? null : window.tinhDotSau(dotDon);
     if (dotDon) {
       document.getElementById('f-dot').value = dotDon.dot;
       document.getElementById('f-ngay1').value = dotDon.ngay[0];
@@ -882,6 +920,10 @@
       ngay_buoi_1: document.getElementById('f-ngay1').value,
       ngay_buoi_2: document.getElementById('f-ngay2').value,
       ngay_buoi_3: document.getElementById('f-ngay3').value,
+      dot_sau: dotSau ? dotSau.dot : '',
+      ngay_sau_1: dotSau ? dotSau.ngay[0] : '',
+      ngay_sau_2: dotSau ? dotSau.ngay[1] : '',
+      ngay_sau_3: dotSau ? dotSau.ngay[2] : '',
       bump1: false,
       bump2: false,
       totalAmount: 99000
@@ -918,8 +960,17 @@
         fireLead('ve-mien-phi', json.orderId);
         // Nút vào nhóm đi qua trang vao-nhom để tự tích "đã vào nhóm" cho đơn này trong Sheet
         document.getElementById('thankyouZaloBtn').href = CONFIG.DUONG_DAN_WORKSHOP + '/vao-nhom?n=lop&d=' + encodeURIComponent(json.orderId);
+        // Máy chủ đã xếp sang đợt sau vì đợt này vừa đủ chỗ → dùng đợt sau cho lịch và cho nút nâng cấp VIP
+        var daChuyen = json.daChuyenDot && dotSau && json.dot === dotSau.dot;
+        if (daChuyen) {
+          dotDon = dotSau;
+          document.getElementById('f-dot').value = dotSau.dot;
+          document.getElementById('f-ngay1').value = dotSau.ngay[0];
+          document.getElementById('f-ngay2').value = dotSau.ngay[1];
+          document.getElementById('f-ngay3').value = dotSau.ngay[2];
+        }
         if (dotDon) {
-          document.getElementById('thankyouLich').textContent =
+          document.getElementById('thankyouLich').textContent = (daChuyen ? 'Đợt bạn chọn vừa đủ chỗ, Thắm đã giữ chỗ cho bạn ở đợt sau. ' : '') +
             'Lịch học của bạn: Buổi 1 lúc ' + GIO + ' ' + dotDon.label[0] + ', Buổi 2 lúc ' + GIO + ' ' + dotDon.label[1] + '.';
         }
         document.getElementById('orderForm').style.display = 'none';

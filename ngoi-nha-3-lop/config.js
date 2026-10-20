@@ -21,20 +21,28 @@ window.APP_CONFIG = {
     MO_TA: 'Kèm danh sách đi chợ. Cả nhà ăn chung một mâm, bạn không phải nấu riêng.'
   },
 
-  // Ngày đặc biệt (ban đầu để trống). Sao chép 1 trong 2 dòng mẫu bên dưới khi cần:
-  //   { thang: "2027-01", nghi: true }            → tháng đó không có đợt, trang tính sang tháng sau.
-  //   { thang: "2027-04", buoi1: "2027-04-20" }   → tháng đó học Thứ Ba 20/4, Thứ Tư 21/4, Thứ Năm 22/4 thay cho ngày tự tính.
+  // Nhịp đợt: 2 tháng 1 đợt (tháng 1, 3, 5, 7, 9, 11), Buổi 1 = Thứ Ba thứ 2 của tháng (luôn rơi vào ngày 8–14:
+  // lương đã về, tránh cuối tháng). Muốn mỗi tháng 1 đợt thì đổi CACH_THANG thành 1.
+  LICH: {
+    THANG_DAU: '2027-01',   // tháng của đợt đầu tiên theo nhịp mới
+    CACH_THANG: 2,          // 2 = cứ 2 tháng 1 đợt
+    THU_BA_THU: 2           // Buổi 1 là Thứ Ba thứ mấy trong tháng
+  },
+
+  // Ngày đặc biệt, ưu tiên hơn nhịp ở trên. Mẫu:
+  //   { thang: "2027-03", nghi: true }            → tháng đó không có đợt, trang tính sang đợt kế tiếp.
+  //   { thang: "2027-04", buoi1: "2027-04-20" }   → tháng đó học Thứ Ba 20/4, Thứ Tư 21/4, Thứ Năm 22/4 (kể cả tháng không nằm trong nhịp).
   LICH_NGOAI_LE: [
-    // { thang: "2027-01", nghi: true },
-    // { thang: "2027-04", buoi1: "2027-04-20" },
+    { thang: "2026-10", buoi1: "2026-10-27" },   // đợt đang bán, giữ nguyên như đã báo khách
+    { thang: "2027-09", buoi1: "2027-09-07" }    // Thứ Ba thứ 2 là 14/9, nhưng 15/9 là Tết Trung thu → dời lên 7/9
   ]
 };
 
 // ============================================================
 // LỊCH HỌC TỰ ĐỘNG
-// Buổi 1 = Thứ Ba thứ 4 của tháng (luôn rơi vào ngày 22–28), Buổi 2 = hôm sau, Buổi 3 = 2 ngày sau.
-// Mốc chuyển sang đợt tháng kế tiếp (tham số loaiVe):
-//   - 'free' (vé miễn phí): 19h00 Thứ Ba, ngày Buổi 1 → đăng ký từ giờ đó được xếp vào đợt tháng sau.
+// Buổi 1 theo APP_CONFIG.LICH (Thứ Ba thứ 2 của tháng lẻ) hoặc LICH_NGOAI_LE, Buổi 2 = hôm sau, Buổi 3 = 2 ngày sau.
+// Mốc chuyển sang đợt kế tiếp (tham số loaiVe):
+//   - 'free' (vé miễn phí): 19h00 Thứ Ba, ngày Buổi 1 → đăng ký từ giờ đó được xếp vào đợt sau.
 //   - mặc định / 'vip': 19h00 Thứ Năm, ngày Buổi 3 → vẫn bán vé VIP đợt này trong lúc học Buổi 1 và 2.
 // Mọi phép tính theo giờ Việt Nam (UTC+7), không phụ thuộc múi giờ máy của khách.
 // ============================================================
@@ -64,9 +72,14 @@ window.tinhDotKeTiep = function (now, loaiVe) {
         }
       }
     }
+    var lich = window.APP_CONFIG.LICH || {};
+    var dau = String(lich.THANG_DAU || '2027-01').split('-');
+    var cach = lich.CACH_THANG || 1;
+    var lech = (year - +dau[0]) * 12 + (month - (+dau[1] - 1));
+    if (lech < 0 || lech % cach !== 0) return null;
     var first = new Date(Date.UTC(year, month, 1));
     var toFirstTuesday = (2 - first.getUTCDay() + 7) % 7;
-    return new Date(Date.UTC(year, month, 1 + toFirstTuesday + 21));
+    return new Date(Date.UTC(year, month, 1 + toFirstTuesday + 7 * ((lich.THU_BA_THU || 2) - 1)));
   }
 
   for (var i = 0; i < 36; i++) {
@@ -88,6 +101,12 @@ window.tinhDotKeTiep = function (now, loaiVe) {
     }
   }
   return null;
+};
+
+/** Đợt liền sau đợt d (dùng khi đợt d đã đủ vé miễn phí). 12:00 UTC = 19h giờ Việt Nam ngày Buổi 1. */
+window.tinhDotSau = function (d) {
+  if (!d) return null;
+  return window.tinhDotKeTiep(new Date(Date.parse(d.ngay[0] + 'T12:00:00Z') + 60000), 'free');
 };
 
 // ============================================================
