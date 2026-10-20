@@ -616,6 +616,7 @@
             <input type="radio" name="goal" value="Vé VIP (99K)" required>
             Vé VIP: Mở khóa Buổi 3 (99K, giá ưu đãi đến 23h59 tối Buổi 2, giá thường 189K)
           </label>
+          <p id="vipDotNote" hidden style="margin: 0; font-size: 12.5px; color: #8A756A; font-style: italic;"></p>
           <div class="vip-them">
             <div class="vip-them-tieu-de">Vé VIP có thêm 2 điều vé miễn phí không có</div>
             <div class="vip-noi-bat"><span>1</span><div><b>Buổi 3 · Thực hành chuyển hóa</b>Cùng Thắm đi qua Lớp 3 và hoàn thiện Kế Hoạch 21 Ngày của riêng bạn.</div></div>
@@ -638,6 +639,7 @@
       <div id="thankyou" style="display: none; background: #FFFFFF; border-radius: 18px; padding: 32px 28px; text-align: center; flex-direction: column; gap: 14px; align-items: center;">
         <div style="width: 56px; height: 56px; background: #C0654A; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">✓</div>
         <h3 style="font-size: 21px; color: #2E2420;">Bạn đã giữ chỗ thành công!</h3>
+        <p id="thankyouLich" style="font-size: 15px; color: #2E2420; font-weight: 600; line-height: 1.6; margin: 0;"></p>
         <p style="font-size: 14.5px; color: #5A4B44; line-height: 1.6;">Bước tiếp theo: vào nhóm Zalo của lớp để nhận link phòng học, lịch nhắc và tài liệu trước Buổi 1.</p>
         <a id="thankyouZaloBtn" href="#" target="_blank" rel="noopener" class="btn" style="background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 100px;">Vào Nhóm Zalo Ngôi Nhà 3 Lớp</a>
         <p style="font-size: 12.5px; color: #8A756A; font-style: italic; margin: 0;">Hướng dẫn tham gia cũng đã được gửi vào email của bạn.</p>
@@ -707,8 +709,17 @@
   });
 
   // ============ Lịch học: tự tính đợt kế tiếp (giờ Việt Nam), xem config.js ============
-  var DOT = window.tinhDotKeTiep(new Date());
+  // Trang hiện lịch theo vé miễn phí (từ 19h ngày Buổi 1 chuyển sang đợt tháng sau).
+  // Vé VIP vẫn thuộc đợt đang học đến 19h Thứ Năm (ngày Buổi 3) → nếu 2 đợt khác nhau, hiện ghi chú ở lựa chọn vé VIP.
+  var DOT = window.tinhDotKeTiep(new Date(), 'free');
+  var DOT_VIP = window.tinhDotKeTiep(new Date(), 'vip');
   var GIO = CONFIG.GIO_HOC || '20h';
+  if (DOT && DOT_VIP && DOT_VIP.dot !== DOT.dot) {
+    var ghiChuVip = document.getElementById('vipDotNote');
+    ghiChuVip.textContent = 'Lúc này vé VIP thuộc đợt đang diễn ra (Buổi 3: ' + GIO + ' ' + DOT_VIP.label[2] +
+      '). Vé miễn phí đăng ký lúc này thuộc đợt sau, bắt đầu ' + DOT.label[0] + '.';
+    ghiChuVip.hidden = false;
+  }
   if (DOT) {
     // Khung lịch học ở đầu trang và trên form đăng ký
     [1, 2, 3].forEach(function (n) {
@@ -853,20 +864,28 @@
     batDauCho(btn, [[0, 'ĐANG GIỮ CHỖ CHO BẠN...'], [3500, 'SẮP XONG, BẠN ĐỢI VÀI GIÂY...'], [9000, 'VẪN ĐANG XỬ LÝ, ĐỪNG ĐÓNG TRANG NHÉ...']]);
 
     const form = new FormData(e.target);
+    var laVipForm = !/Miễn phí/i.test(String(form.get('goal') || ''));
+    // Tính lại đợt ngay lúc bấm (trang có thể mở từ trước 19h): vé miễn phí đổi đợt lúc 19h ngày Buổi 1, vé VIP lúc 19h ngày Buổi 3
+    var dotDon = window.tinhDotKeTiep(new Date(), laVipForm ? 'vip' : 'free');
+    if (dotDon) {
+      document.getElementById('f-dot').value = dotDon.dot;
+      document.getElementById('f-ngay1').value = dotDon.ngay[0];
+      document.getElementById('f-ngay2').value = dotDon.ngay[1];
+      document.getElementById('f-ngay3').value = dotDon.ngay[2];
+    }
     const data = {
       name: form.get('name'),
       phone: sdt,
       email: form.get('email'),
       goal: form.get('goal'),
-      dot: form.get('dot'),
-      ngay_buoi_1: form.get('ngay_buoi_1'),
-      ngay_buoi_2: form.get('ngay_buoi_2'),
-      ngay_buoi_3: form.get('ngay_buoi_3'),
+      dot: document.getElementById('f-dot').value,
+      ngay_buoi_1: document.getElementById('f-ngay1').value,
+      ngay_buoi_2: document.getElementById('f-ngay2').value,
+      ngay_buoi_3: document.getElementById('f-ngay3').value,
       bump1: false,
       bump2: false,
       totalAmount: 99000
     };
-    var laVipForm = !/Miễn phí/i.test(String(data.goal || ''));
     Object.assign(data, thongTinTheoDoi(laVipForm ? ['Lead', 'InitiateCheckout'] : ['Lead']));
 
     try {
@@ -899,6 +918,10 @@
         fireLead('ve-mien-phi', json.orderId);
         // Nút vào nhóm đi qua trang vao-nhom để tự tích "đã vào nhóm" cho đơn này trong Sheet
         document.getElementById('thankyouZaloBtn').href = CONFIG.DUONG_DAN_WORKSHOP + '/vao-nhom?n=lop&d=' + encodeURIComponent(json.orderId);
+        if (dotDon) {
+          document.getElementById('thankyouLich').textContent =
+            'Lịch học của bạn: Buổi 1 lúc ' + GIO + ' ' + dotDon.label[0] + ', Buổi 2 lúc ' + GIO + ' ' + dotDon.label[1] + '.';
+        }
         document.getElementById('orderForm').style.display = 'none';
         var thankyouEl = document.getElementById('thankyou');
         thankyouEl.style.display = 'flex';
