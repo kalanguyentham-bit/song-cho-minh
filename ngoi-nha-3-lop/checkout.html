@@ -228,8 +228,7 @@
     qrBlob = null;
     fetch(qrUrl).then(function (r) { return r.blob(); }).then(function (b) { qrBlob = b; }).catch(function () {});
     document.getElementById('amount').textContent = formatVnd(amount) + 'đ';
-    document.getElementById('total').textContent = formatVnd(amount) + 'đ';
-  }
+    document.getElementById('total').textContent = formatVnd(amount) + 'đ';  }
 
   // Nút "Lưu mã QR về máy": điện thoại → mở bảng chia sẻ (có mục Lưu ảnh); máy tính → tải file ảnh.
   // Nếu cả hai không được (vd trình duyệt trong Facebook) → mở ảnh ở tab mới để khách nhấn giữ và lưu.
@@ -257,13 +256,14 @@
   });
 
   updateQR(Number(order.totalAmount) || BASE_PRICE); // giá lấy từ máy chủ (đơn đã tạo), không tự gõ cứng
+  document.getElementById('base').textContent = formatVnd(Number(order.totalAmount) || BASE_PRICE) + 'đ'; // 99K hoặc 189K sau hạn ưu đãi
 
   // Purchase: bắn 1 lần cho mỗi đơn (theo orderId) khi đơn đã thanh toán
   function firePurchaseOnce() {
     if (!window.fbq || !order.orderId) return;
     var key = 'fb_Purchase_' + order.orderId;
     try { if (localStorage.getItem(key)) return; } catch (e) {}
-    fbq('track', 'Purchase', { value: 99000, currency: 'VND' }, { eventID: 'pur_' + order.orderId });
+    fbq('track', 'Purchase', { value: Number(order.totalAmount) || BASE_PRICE, currency: 'VND' }, { eventID: 'pur_' + order.orderId });
     try { localStorage.setItem(key, '1'); } catch (e) {}
   }
 

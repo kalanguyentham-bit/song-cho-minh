@@ -87,7 +87,11 @@
   .lich-dong em { flex-shrink: 0; font-style: normal; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 100px; background: rgba(255,255,255,0.18); }
   .lich-dong em.vip { background: #E8B87A; color: #3A2A22; }
   .lich-chu-thich { font-size: 12.5px; color: #F1D9CE; text-align: center; margin-top: 6px; }
-  .lich-cho { font-size: 13px; font-weight: 700; color: #FFE1A8; text-align: center; margin-top: 8px; line-height: 1.5; }
+  .dem-uu-dai { margin-top: 10px; background: #2E2420; color: #FFE1A8; border-radius: 10px; padding: 9px 12px; text-align: center; line-height: 1.4; }
+  .dem-uu-dai .dem-nhan { display: block; font-size: 12px; color: #F1D9CE; letter-spacing: 0.2px; }
+  .dem-uu-dai .dem-so { display: block; font-size: 17px; font-variant-numeric: tabular-nums; }
+  .dem-uu-dai .dem-so b { font-size: 20px; color: #FFFFFF; }
+  .lich-cho {font-size: 13px; font-weight: 700; color: #FFE1A8; text-align: center; margin-top: 8px; line-height: 1.5; }
 
   /* Quyền lợi nổi bật của vé VIP (khu chọn vé và ô nâng cấp sau khi giữ chỗ miễn phí) */
   .vip-them { background: #FFF5EE; border: 1.5px dashed #C0654A; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
@@ -520,13 +524,14 @@
           <a href="#form" data-ticket="free" class="btn" style="margin-top: 8px; background: #2E2420; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Đăng Ký Vé Miễn Phí (Buổi 1 và 2)</a>
         </div>
 
-        <div style="flex: 1; min-width: 260px; border: 2px solid #C0654A; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 14px; background: #FFF5EE; position: relative;">
-          <div style="position: absolute; top: -12px; right: 24px; background: #C0654A; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.3px; padding: 5px 14px; border-radius: 100px; text-align: center;">GIÁ ƯU ĐÃI CHO NGƯỜI THAM DỰ · ĐẾN 23H59 TỐI BUỔI 2</div>
+        <div id="theVip" data-gia-vip="vip" style="flex: 1; min-width: 260px; border: 2px solid #C0654A; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 14px; background: #FFF5EE; position: relative;">
+          <div class="gia-nhan-uu-dai" style="position: absolute; top: -12px; right: 24px; background: #C0654A; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.3px; padding: 5px 14px; border-radius: 100px; text-align: center;">GIÁ ƯU ĐÃI CHO NGƯỜI THAM DỰ · ĐẾN 23H59 TỐI BUỔI 2</div>
           <div style="margin-top: 10px;">
             <div style="font-size: 19px; font-weight: 700; color: #2E2420;">VÉ VIP</div>
             <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;">Ra về với kế hoạch 21 ngày của riêng bạn</div>
-            <div style="margin-top: 8px;"><span style="font-size: 16px; color: #B5A89C; text-decoration: line-through;">189.000đ</span> <span style="font-size: 22px; font-weight: 700; color: #C0654A;">99.000đ</span></div>
-            <div style="font-size: 12.5px; color: #8A756A; font-style: italic;">Sau 23h59 tối Buổi 2, vé VIP về giá 189.000đ.</div>
+            <div style="margin-top: 8px;"><span class="gia-goc" style="font-size: 16px; color: #B5A89C; text-decoration: line-through;">189.000đ</span> <span class="gia-ban" style="font-size: 22px; font-weight: 700; color: #C0654A;">99.000đ</span></div>
+            <div class="gia-ghi-chu" style="font-size: 12.5px; color: #8A756A; font-style: italic;">Sau 23h59 tối Buổi 2, vé VIP về giá 189.000đ.</div>
+            <div class="dem-uu-dai" hidden></div>
           </div>
           <div style="height: 1px; background: #E6C4B4;"></div>
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Tất cả quyền lợi vé tiêu chuẩn</div>
@@ -536,7 +541,7 @@
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Video xem lại cả 3 buổi học</div>
           <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Nhóm Zalo VIP: Thắm hỗ trợ trực tiếp 21 ngày sau workshop</div>
           <div style="flex-grow: 1;"></div>
-          <a href="#form" data-ticket="vip" class="btn" style="margin-top: 8px; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Mở Khóa Buổi 3: Đăng Ký Vé VIP (99K)</a>
+          <a href="#form" data-ticket="vip" class="btn" style="margin-top: 8px; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Mở Khóa Buổi 3: Đăng Ký Vé VIP (<span class="gia-k">99K</span>)</a>
           <div style="background: #EAF2E7; border: 1.5px dashed #7C8A6E; border-radius: 10px; padding: 12px 14px; font-size: 13px; line-height: 1.55; color: #44513C;">🎥 Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày trong nhóm VIP.</div>
         </div>
       </div>
@@ -615,7 +620,7 @@
           </label>
           <label id="label-vip" style="display: flex; align-items: center; gap: 10px; border: 1.5px solid #E6D6C9; border-radius: 10px; padding: 12px 14px; font-size: 14px; color: #3A2E2A;">
             <input type="radio" name="goal" value="Vé VIP (99K)" required>
-            Vé VIP: Mở khóa Buổi 3 (99K, giá ưu đãi đến 23h59 tối Buổi 2, giá thường 189K)
+            <span>Vé VIP: Mở khóa Buổi 3 (<span class="gia-k">99K</span><span class="gia-ghi-chu-ngan">, giá ưu đãi đến 23h59 tối Buổi 2, giá thường 189K</span>)</span>
           </label>
           <p id="vipDotNote" hidden style="margin: 0; font-size: 12.5px; color: #8A756A; font-style: italic;"></p>
           <div class="vip-them">
@@ -628,7 +633,8 @@
               <div class="qua-mo-ta"></div>
               <div class="qua-ghi-chu"><span class="qua-so-phut">60</span> phút tính từ lúc bạn đăng ký. Quà gửi vào email ngay sau khi thanh toán.</div>
             </div>
-            <button type="button" class="vip-them-chon" id="chonVipBtn">Chọn vé VIP (99K)</button>
+            <div class="dem-uu-dai" hidden></div>
+            <button type="button" class="vip-them-chon" id="chonVipBtn">Chọn vé VIP (<span class="gia-k">99K</span>)</button>
           </div>
         </div>
         <button type="submit" id="submitBtn" style="margin-top: 4px; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 16px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer; transition: opacity 0.15s;">XÁC NHẬN ĐĂNG KÝ GIỮ CHỖ</button>
@@ -646,11 +652,12 @@
         <p style="font-size: 12.5px; color: #8A756A; font-style: italic; margin: 0;">Hướng dẫn tham gia cũng đã được gửi vào email của bạn.</p>
 
         <div id="upgradeBox" style="width: 100%; margin-top: 8px; background: #FFF5EE; border: 2px solid #C0654A; border-radius: 14px; padding: 20px; text-align: left; box-shadow: 0 4px 16px rgba(192,101,74,0.15);">
-          <div style="display: inline-block; background: #C0654A; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.3px; padding: 5px 12px; border-radius: 100px; margin-bottom: 10px;">GIÁ ƯU ĐÃI CHO NGƯỜI THAM DỰ · ĐẾN 23H59 TỐI BUỔI 2</div>
+          <div class="gia-nhan-uu-dai" style="display: inline-block; background: #C0654A; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.3px; padding: 5px 12px; border-radius: 100px; margin-bottom: 10px;">GIÁ ƯU ĐÃI CHO NGƯỜI THAM DỰ · ĐẾN 23H59 TỐI BUỔI 2</div>
           <div style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; color: #2E2420;">Nâng cấp lên VÉ VIP</div>
           <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;">Ra về với kế hoạch 21 ngày của riêng bạn</div>
-          <div style="margin-top: 8px;"><span style="font-size: 16px; color: #B5A89C; text-decoration: line-through;">189.000đ</span> <span style="font-size: 22px; font-weight: 700; color: #C0654A;">99.000đ</span></div>
-          <div style="font-size: 12.5px; color: #8A756A; font-style: italic; margin-bottom: 12px;">Sau 23h59 tối Buổi 2, vé VIP về giá 189.000đ.</div>
+          <div style="margin-top: 8px;"><span class="gia-goc" style="font-size: 16px; color: #B5A89C; text-decoration: line-through;">189.000đ</span> <span class="gia-ban" style="font-size: 22px; font-weight: 700; color: #C0654A;">99.000đ</span></div>
+          <div class="gia-ghi-chu" style="font-size: 12.5px; color: #8A756A; font-style: italic; margin-bottom: 12px;">Sau 23h59 tối Buổi 2, vé VIP về giá 189.000đ.</div>
+          <div class="dem-uu-dai" hidden style="margin-bottom: 12px;"></div>
           <div style="height: 1px; background: #E6C4B4; margin-bottom: 12px;"></div>
           <div class="vip-noi-bat"><span>1</span><div><b>Buổi 3 · Thực hành chuyển hóa</b>Cùng Thắm đi qua Lớp 3 và hoàn thiện Kế Hoạch 21 Ngày của riêng bạn. Chỉ dành cho vé VIP.</div></div>
           <div class="vip-noi-bat" style="margin-bottom: 12px;"><span>2</span><div><b>21 ngày Thắm đồng hành sau workshop</b>Thắm hỗ trợ trực tiếp trong nhóm Zalo VIP khi bạn bắt đầu áp dụng.</div></div>
@@ -665,7 +672,7 @@
           <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6;">✓ Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</div>
           <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6;">✓ Bảng Tự Đánh Giá Thói Quen: xác định bạn nên ưu tiên điều gì trước</div>
           <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6; margin-bottom: 14px;">✓ Video xem lại cả 3 buổi học</div>
-          <button type="button" id="upgradeBtn" style="display: block; width: 100%; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer;">Mở Khóa Buổi 3: Đăng Ký Vé VIP (99K)</button>
+          <button type="button" id="upgradeBtn" style="display: block; width: 100%; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer;">Mở Khóa Buổi 3: Đăng Ký Vé VIP (<span class="gia-k">99K</span>)</button>
           <div style="margin-top: 12px; background: #EAF2E7; border: 1.5px dashed #7C8A6E; border-radius: 10px; padding: 12px 14px; font-size: 13px; line-height: 1.55; color: #44513C;">🎥 Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày trong nhóm VIP.</div>
         </div>
       </div>
@@ -746,8 +753,40 @@
   }
   hienDot();
 
-  // ============ Giới hạn vé miễn phí mỗi đợt (số thật đếm trong Sheet, máy chủ quyết định) ============
-  // Đã đủ: trang chuyển sang hiện đợt sau. Còn ít chỗ: hiện "Đợt này còn X chỗ" dưới khung lịch học.
+  // ============ Giá vé VIP + đồng hồ đếm ngược tới 23h59 tối Buổi 2 (config.js: GIA_VIP) ============
+  // vung = khối trang (bảng giá, form, ô nâng cấp); d = đợt mà vé VIP ở khối đó thuộc về.
+  // Hết hạn ưu đãi: hiện giá thường, ẩn đồng hồ. Máy chủ tính giá giống hệt nên số tiền chuyển khoản luôn khớp với trang.
+  var dongHoGia = {};
+  function apGiaVip(vung, d, ten) {
+    if (!vung || !d) return;
+    var g = window.giaVipCua(d);
+    vung.querySelectorAll('.gia-k').forEach(function (el) { el.textContent = window.tienK(g.gia); });
+    vung.querySelectorAll('.gia-ban').forEach(function (el) { el.textContent = window.tienDay(g.gia); });
+    vung.querySelectorAll('.gia-goc, .gia-nhan-uu-dai, .gia-ghi-chu-ngan').forEach(function (el) { el.style.display = g.uuDai ? '' : 'none'; });
+    vung.querySelectorAll('.gia-ghi-chu-ngan').forEach(function (el) {
+      el.textContent = ', giá ưu đãi đến 23h59 tối ' + g.nhanHan + ', giá thường ' + window.tienK(g.thuongGia);
+    });
+    vung.querySelectorAll('.gia-ghi-chu').forEach(function (el) {
+      el.textContent = g.uuDai
+        ? 'Sau 23h59 tối ' + g.nhanHan + ' (Buổi 2), vé VIP về giá ' + window.tienDay(g.thuongGia) + '.'
+        : 'Giá ưu đãi ' + window.tienK(g.uuDaiGia) + ' đã kết thúc lúc 23h59 tối ' + g.nhanHan + '.';
+    });
+    clearInterval(dongHoGia[ten]);
+    var hienDongHo = g.uuDai && g.han - Date.now() <= (CONFIG.DEM_NGUOC_TRUOC_SO_NGAY || 14) * 86400000;
+    vung.querySelectorAll('.dem-uu-dai').forEach(function (el) {
+      el.hidden = !hienDongHo;
+      if (hienDongHo) dongHoGia[ten] = window.demNguocUuDai(el, g.han, function () { apGiaVip(vung, d, ten); });
+    });
+  }
+  function apGiaTrang() {
+    apGiaVip(document.getElementById('theVip'), DOT_VIP, 'theVip');
+    apGiaVip(document.getElementById('orderForm'), DOT_VIP, 'form');
+    apGiaVip(document.getElementById('upgradeBox'), DOT, 'nangCap');
+  }
+  apGiaTrang();
+
+  // ============ Số vé miễn phí còn lại của đợt (số thật đếm trong Sheet, máy chủ quyết định) ============
+  // Luôn hiện "Đợt này còn X vé miễn phí" dưới khung lịch học. Hết vé: trang chuyển sang hiện đợt sau.
   function ghiChoTrongLich(chu) {
     document.querySelectorAll('.lich-hoc').forEach(function (box) {
       var el = box.querySelector('.lich-cho');
@@ -766,9 +805,10 @@
           DOT_DAY = DOT;
           DOT = sau;
           hienDot();
-          ghiChoTrongLich('Đợt ' + DOT_DAY.label[0] + ' đã đủ chỗ miễn phí. Đăng ký bây giờ, bạn được giữ chỗ đợt ' + DOT.label[0] + '.');
-        } else if (j.conLai <= j.hienKhiConDuoi) {
-          ghiChoTrongLich('Đợt này còn ' + j.conLai + ' chỗ miễn phí');
+          apGiaTrang();
+          ghiChoTrongLich('Đợt ' + DOT_DAY.label[0] + ' đã hết vé miễn phí. Đăng ký bây giờ, bạn được giữ chỗ đợt ' + DOT.label[0] + '.');
+        } else {
+          ghiChoTrongLich('Đợt này còn ' + j.conLai + ' vé miễn phí');
         }
       })
       .catch(function () {});
@@ -850,11 +890,11 @@
   });
 
   // Sự kiện Pixel chỉ bắn 1 lần cho mỗi đơn (theo orderId). Link có ?test=1 thì Pixel không được tải nên không bắn gì.
-  function fireOncePerOrder(eventName, orderId) {
+  function fireOncePerOrder(eventName, orderId, value) {
     if (!window.fbq || !orderId) return;
     var key = 'fb_' + eventName + '_' + orderId;
     try { if (localStorage.getItem(key)) return; } catch (e) {}
-    fbq('track', eventName, { value: 99000, currency: 'VND' }, { eventID: 'ic_' + orderId });
+    fbq('track', eventName, { value: Number(value) || CONFIG.GIA_VIP.UU_DAI, currency: 'VND' }, { eventID: 'ic_' + orderId });
     try { localStorage.setItem(key, '1'); } catch (e) {}
   }
   // Chờ một chút để sự kiện kịp gửi đi trước khi chuyển sang trang thanh toán
@@ -970,6 +1010,7 @@
           document.getElementById('f-ngay3').value = dotSau.ngay[2];
         }
         if (dotDon) {
+          apGiaVip(document.getElementById('upgradeBox'), dotDon, 'nangCap'); // giá + đồng hồ theo đúng đợt của khách
           document.getElementById('thankyouLich').textContent = (daChuyen ? 'Đợt bạn chọn vừa đủ chỗ, Thắm đã giữ chỗ cho bạn ở đợt sau. ' : '') +
             'Lịch học của bạn: Buổi 1 lúc ' + GIO + ' ' + dotDon.label[0] + ', Buổi 2 lúc ' + GIO + ' ' + dotDon.label[1] + '.';
         }
@@ -978,7 +1019,7 @@
         thankyouEl.style.display = 'flex';
       } else {
         fireLead('ve-vip', json.orderId);
-        fireOncePerOrder('InitiateCheckout', json.orderId);
+        fireOncePerOrder('InitiateCheckout', json.orderId, json.totalAmount);
         goCheckout();
       }
     } catch (err) {
@@ -1049,7 +1090,7 @@
         goal: 'Vé VIP (99K)',
         quaHan: current.quaHan || window.quaVipHan() // giữ nguyên hạn quà tính từ lúc đăng ký vé miễn phí
       }));
-      fireOncePerOrder('InitiateCheckout', json.orderId);
+      fireOncePerOrder('InitiateCheckout', json.orderId, json.totalAmount);
       goCheckout();
     } catch (err) {
       upgradeBtn.disabled = false;

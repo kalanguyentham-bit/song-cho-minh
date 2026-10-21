@@ -11,6 +11,11 @@ window.APP_CONFIG = {
   PIXEL_ID: '26885894507775293',
   GIO_HOC: '20h',
 
+  // Giá vé VIP: giá ưu đãi đến 23h59 tối Buổi 2 của đợt, sau đó là giá thường (máy chủ Apps Script tính giá giống hệt).
+  // Đổi giá thì đổi ở ĐÂY và ở CONFIG trong Apps Script (PRODUCT_PRICE, PRODUCT_PRICE_THUONG).
+  GIA_VIP: { UU_DAI: 99000, THUONG: 189000 },
+  DEM_NGUOC_TRUOC_SO_NGAY: 14,  // chỉ hiện đồng hồ đếm ngược khi còn từ 14 ngày trở xuống (khớp 14 ngày chạy ads; xa hơn thì chỉ ghi ngày hết hạn)
+
   // Quà cho khách mua VIP trong 60 phút (tính từ lúc đăng ký đầu tiên). Giá 99K vẫn giữ đến 23h59 tối Buổi 2.
   // CHỈ đổi BAT thành true khi file quà đã có sẵn VÀ email tự gửi quà đã chạy (Apps Script).
   // Trang hứa tặng quà mà khách không nhận được là vi phạm chính sách Meta.
@@ -106,6 +111,37 @@ window.tinhDotKeTiep = function (now, loaiVe) {
 window.tinhDotSau = function (d) {
   if (!d) return null;
   return window.tinhDotKeTiep(new Date(Date.parse(d.ngay[0] + 'T12:00:00Z') + 60000), 'free');
+};
+
+// ============================================================
+// GIÁ VÉ VIP + ĐỒNG HỒ ĐẾM NGƯỢC ƯU ĐÃI
+// Hạn ưu đãi = 23h59:59 tối Buổi 2 (giờ Việt Nam) của đợt d. Hết hạn → giá thường. Máy chủ quyết định giá thật của đơn.
+// ============================================================
+window.giaVipCua = function (d, now) {
+  var g = window.APP_CONFIG.GIA_VIP || { UU_DAI: 99000, THUONG: 189000 };
+  if (!d) return { gia: g.UU_DAI, uuDai: true, han: 0, nhanHan: '' };
+  var han = Date.parse(d.ngay[1] + 'T23:59:59+07:00');
+  var uuDai = (now || new Date()).getTime() <= han;
+  return { gia: uuDai ? g.UU_DAI : g.THUONG, uuDai: uuDai, han: han, nhanHan: d.label[1], uuDaiGia: g.UU_DAI, thuongGia: g.THUONG };
+};
+window.tienDay = function (n) { return Number(n).toLocaleString('en-US').replace(/,/g, '.') + 'đ'; };
+window.tienK = function (n) { return Math.round(Number(n) / 1000) + 'K'; };
+
+/** Đồng hồ trong el tới thời điểm han: "6 ngày 05:12:33". Hết giờ thì gọi khiHet() một lần. */
+window.demNguocUuDai = function (el, han, khiHet) {
+  if (!el || !han) return;
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  var t;
+  function ve() {
+    var con = Math.floor((han - Date.now()) / 1000);
+    if (con <= 0) { clearInterval(t); if (khiHet) khiHet(); return; }
+    var ngay = Math.floor(con / 86400), gio = Math.floor(con % 86400 / 3600), phut = Math.floor(con % 3600 / 60), giay = con % 60;
+    el.innerHTML = '<span class="dem-nhan">Ưu đãi ' + window.tienK(window.APP_CONFIG.GIA_VIP.UU_DAI) + ' kết thúc sau</span>' +
+      '<span class="dem-so">' + (ngay ? '<b>' + ngay + '</b> ngày ' : '') + '<b>' + pad(gio) + '</b>:<b>' + pad(phut) + '</b>:<b>' + pad(giay) + '</b></span>';
+  }
+  t = setInterval(ve, 1000);
+  ve();
+  return t;
 };
 
 // ============================================================
