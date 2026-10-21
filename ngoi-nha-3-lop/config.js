@@ -33,7 +33,7 @@ window.APP_CONFIG = {
   //   { thang: "2027-03", nghi: true }            → tháng đó không có đợt, trang tính sang đợt kế tiếp.
   //   { thang: "2027-04", buoi1: "2027-04-20" }   → tháng đó học Thứ Ba 20/4, Thứ Tư 21/4, Thứ Năm 22/4 (kể cả tháng không nằm trong nhịp).
   LICH_NGOAI_LE: [
-    { thang: "2026-11", buoi1: "2026-11-10" }    // đợt 27/10 dời sang 10/11 (cận ngày nên giữ tuần thứ 2; tháng 11 không nằm trong nhịp tháng lẻ)
+    { thang: "2026-10", buoi1: "2026-10-27" }    // đợt đang bán, giữ nguyên vì đã cận ngày (tháng 10 không nằm trong nhịp tháng lẻ)
   ]
 };
 
