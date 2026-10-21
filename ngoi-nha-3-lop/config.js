@@ -21,26 +21,25 @@ window.APP_CONFIG = {
     MO_TA: 'Kèm danh sách đi chợ. Cả nhà ăn chung một mâm, bạn không phải nấu riêng.'
   },
 
-  // Nhịp đợt: 2 tháng 1 đợt (tháng 1, 3, 5, 7, 9, 11), Buổi 1 = Thứ Ba thứ 2 của tháng (luôn rơi vào ngày 8–14:
-  // lương đã về, tránh cuối tháng). Muốn mỗi tháng 1 đợt thì đổi CACH_THANG thành 1.
+  // Nhịp đợt: 2 tháng 1 đợt (tháng 1, 3, 5, 7, 9, 11), Buổi 1 = Thứ Ba thứ 3 của tháng (luôn rơi vào ngày 15–21:
+  // đúng giữa tháng, các khoản đầu tháng đã đóng xong, xa áp lực cuối tháng). Muốn mỗi tháng 1 đợt thì đổi CACH_THANG thành 1.
   LICH: {
     THANG_DAU: '2027-01',   // tháng của đợt đầu tiên theo nhịp mới
     CACH_THANG: 2,          // 2 = cứ 2 tháng 1 đợt
-    THU_BA_THU: 2           // Buổi 1 là Thứ Ba thứ mấy trong tháng
+    THU_BA_THU: 3           // Buổi 1 là Thứ Ba thứ mấy trong tháng
   },
 
   // Ngày đặc biệt, ưu tiên hơn nhịp ở trên. Mẫu:
   //   { thang: "2027-03", nghi: true }            → tháng đó không có đợt, trang tính sang đợt kế tiếp.
   //   { thang: "2027-04", buoi1: "2027-04-20" }   → tháng đó học Thứ Ba 20/4, Thứ Tư 21/4, Thứ Năm 22/4 (kể cả tháng không nằm trong nhịp).
   LICH_NGOAI_LE: [
-    { thang: "2026-11", buoi1: "2026-11-10" },   // đợt 27/10 dời về giữa tháng (tháng 11 không nằm trong nhịp tháng lẻ)
-    { thang: "2027-09", buoi1: "2027-09-07" }    // Thứ Ba thứ 2 là 14/9, nhưng 15/9 là Tết Trung thu → dời lên 7/9
+    { thang: "2026-11", buoi1: "2026-11-10" }    // đợt 27/10 dời sang 10/11 (cận ngày nên giữ tuần thứ 2; tháng 11 không nằm trong nhịp tháng lẻ)
   ]
 };
 
 // ============================================================
 // LỊCH HỌC TỰ ĐỘNG
-// Buổi 1 theo APP_CONFIG.LICH (Thứ Ba thứ 2 của tháng lẻ) hoặc LICH_NGOAI_LE, Buổi 2 = hôm sau, Buổi 3 = 2 ngày sau.
+// Buổi 1 theo APP_CONFIG.LICH (Thứ Ba thứ 3 của tháng lẻ) hoặc LICH_NGOAI_LE, Buổi 2 = hôm sau, Buổi 3 = 2 ngày sau.
 // Mốc chuyển sang đợt kế tiếp (tham số loaiVe):
 //   - 'free' (vé miễn phí): 19h00 Thứ Ba, ngày Buổi 1 → đăng ký từ giờ đó được xếp vào đợt sau.
 //   - mặc định / 'vip': 19h00 Thứ Năm, ngày Buổi 3 → vẫn bán vé VIP đợt này trong lúc học Buổi 1 và 2.
