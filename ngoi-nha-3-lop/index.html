@@ -92,6 +92,21 @@
   .dem-uu-dai .dem-so { display: block; font-size: 17px; font-variant-numeric: tabular-nums; }
   .dem-uu-dai .dem-so b { font-size: 20px; color: #FFFFFF; }
   .lich-cho {font-size: 13px; font-weight: 700; color: #FFE1A8; text-align: center; margin-top: 8px; line-height: 1.5; }
+  .lich-nhip { font-size: 12.5px; color: #FFFFFF; text-align: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.16); line-height: 1.5; }
+  .lien-ket-vip { font-size: 14px; color: #FFE1A8; text-decoration: underline; text-underline-offset: 3px; line-height: 1.5; max-width: 360px; }
+  .lien-ket-vip:hover { color: #FFFFFF; }
+
+  /* Ghi chú miễn trừ nhỏ (dưới bảng dấu hiệu, dưới cặp ảnh da tay) */
+  .ghi-chu-mien-tru { font-size: 13px; line-height: 1.6; color: #8A756A; font-style: italic; text-align: center; margin: 0; }
+
+  /* Popup khi khách sắp rời trang */
+  #popupThoat { position: fixed; inset: 0; z-index: 60; background: rgba(46,36,32,0.6); display: flex; align-items: center; justify-content: center; padding: 16px; }
+  #popupThoat[hidden] { display: none; }
+  .popup-hop { position: relative; width: 100%; max-width: 420px; background: #FFFFFF; border-radius: 18px; padding: 30px 24px 22px; text-align: center; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 12px 40px rgba(46,36,32,0.3); }
+  .popup-hop h3 { font-size: 21px; line-height: 1.35; color: #2E2420; }
+  .popup-hop p { margin: 0; font-size: 15px; line-height: 1.6; color: #5A4B44; }
+  .popup-x { position: absolute; top: 8px; right: 10px; width: 36px; height: 36px; border: none; background: none; font-size: 26px; line-height: 1; color: #8A756A; cursor: pointer; }
+  .popup-dong { border: none; background: none; color: #8A756A; font-size: 14px; text-decoration: underline; cursor: pointer; font-family: 'Work Sans', sans-serif; padding: 6px; }
 
   /* Quyền lợi nổi bật của vé VIP (khu chọn vé và ô nâng cấp sau khi giữ chỗ miễn phí) */
   .vip-them { background: #FFF5EE; border: 1.5px dashed #C0654A; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
@@ -134,7 +149,8 @@
         <div class="lich-dong"><span>Buổi 3</span><b class="lich-b3">Thứ Năm, 29/10</b><em class="vip">Vé VIP</em></div>
         <div class="lich-chu-thich">Mỗi buổi 90 phút</div>
       </div>
-      <a href="#form" class="btn" style="margin-top: 8px; background: #FFFFFF; color: #B5482F; font-weight: 600; font-size: 16px; padding: 16px 36px; border-radius: 100px;">Đăng Ký Giữ Chỗ Miễn Phí</a>
+      <a href="#form" id="heroCta" class="btn" style="margin-top: 8px; background: #FFFFFF; color: #B5482F; font-weight: 600; font-size: 16px; padding: 16px 36px; border-radius: 100px;">Đăng Ký Giữ Chỗ Miễn Phí</a>
+      <a href="#form" data-ticket="vip" id="heroVip" class="lien-ket-vip">Hoặc giữ chỗ VIP <span class="gia-k">99K</span>: có Buổi 3 và video xem lại cả 3 buổi</a>
       <div style="font-size: 12.5px; color: #E6C4B4; font-style: italic;">Link phòng học gửi qua email và nhóm Zalo của lớp ngay sau khi đăng ký.</div>
 
       <div style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
@@ -188,6 +204,7 @@
       <div id="signCounter" style="text-align: center; font-size: 14px; font-weight: 600; color: #C0654A;">Bạn đã chọn 0/5 dấu hiệu</div>
 
       <div id="section2-conclusion" style="background: #F1D9CE; border-radius: 16px; padding: 24px 26px; font-size: 15.5px; line-height: 1.7; color: #5A2E20; transition: background 0.2s;">Nếu bạn thấy mình trong từ 3 dấu hiệu trở lên, nguyên nhân rất có thể không nằm ở tuổi tác hay ý chí, mà ở <b>cách cơ thể bạn đang được nuôi dưỡng mỗi ngày</b>: ăn uống, giấc ngủ, nhịp sinh hoạt và cả những điều bạn đang âm thầm gánh. Và điều quan trọng: đó không phải lỗi của bạn.</div>
+      <p class="ghi-chu-mien-tru" style="margin-top: -14px;">Bảng này giúp bạn tự nhìn lại nhịp sống của mình, không phải công cụ chẩn đoán. Nếu cơ thể có dấu hiệu bất thường kéo dài, hãy gặp bác sĩ trước khi thay đổi chế độ ăn hay vận động.</p>
     </div>
   </div>
 
@@ -447,6 +464,7 @@
             <div style="position: absolute; top: 10px; left: 10px; background: rgba(192,101,74,0.9); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px;">Sau · nám mờ dần</div>
           </div>
         </div>
+        <p class="ghi-chu-mien-tru" style="margin-top: 10px;">Đây là trải nghiệm cá nhân của Thắm, không phải cam kết kết quả. Mỗi người có cơ địa và hoàn cảnh khác nhau.</p>
       </div>
 
       <!-- Pair 3: gương mặt -->
@@ -647,10 +665,8 @@
         <div style="width: 56px; height: 56px; background: #C0654A; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">✓</div>
         <h3 style="font-size: 21px; color: #2E2420;">Bạn đã giữ chỗ thành công!</h3>
         <p id="thankyouLich" style="font-size: 15px; color: #2E2420; font-weight: 600; line-height: 1.6; margin: 0;"></p>
-        <p style="font-size: 14.5px; color: #5A4B44; line-height: 1.6;">Bước tiếp theo: vào nhóm Zalo của lớp để nhận link phòng học, lịch nhắc và tài liệu trước Buổi 1.</p>
-        <a id="thankyouZaloBtn" href="#" target="_blank" rel="noopener" class="btn" style="background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 100px;">Vào Nhóm Zalo Ngôi Nhà 3 Lớp</a>
-        <p style="font-size: 12.5px; color: #8A756A; font-style: italic; margin: 0;">Hướng dẫn tham gia cũng đã được gửi vào email của bạn.</p>
 
+        <!-- Ô nâng cấp VIP đặt TRÊN nút Zalo: khách đọc lời mời trước khi rời trang. Nút Zalo mở ở tab mới. -->
         <div id="upgradeBox" style="width: 100%; margin-top: 8px; background: #FFF5EE; border: 2px solid #C0654A; border-radius: 14px; padding: 20px; text-align: left; box-shadow: 0 4px 16px rgba(192,101,74,0.15);">
           <div class="gia-nhan-uu-dai" style="display: inline-block; background: #C0654A; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.3px; padding: 5px 12px; border-radius: 100px; margin-bottom: 10px;">GIÁ ƯU ĐÃI CHO NGƯỜI THAM DỰ · ĐẾN 23H59 TỐI BUỔI 2</div>
           <div style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; color: #2E2420;">Nâng cấp lên VÉ VIP</div>
@@ -675,11 +691,28 @@
           <button type="button" id="upgradeBtn" style="display: block; width: 100%; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer;">Mở Khóa Buổi 3: Đăng Ký Vé VIP (<span class="gia-k">99K</span>)</button>
           <div style="margin-top: 12px; background: #EAF2E7; border: 1.5px dashed #7C8A6E; border-radius: 10px; padding: 12px 14px; font-size: 13px; line-height: 1.55; color: #44513C;">🎥 Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày trong nhóm VIP.</div>
         </div>
+
+        <p style="font-size: 14.5px; color: #5A4B44; line-height: 1.6; margin: 8px 0 0;">Bước tiếp theo: vào nhóm Zalo của lớp để nhận link phòng học, lịch nhắc và tài liệu trước Buổi 1.</p>
+        <!-- href ghi sẵn link nhóm lớp để nút vẫn đúng nếu script chưa chạy; script ghi đè bằng LINK_NHOM_LOP trong config.js (đổi nhóm thì sửa cả 2 chỗ) -->
+        <a id="thankyouZaloBtn" href="https://zalo.me/g/afweoiaxvoywcsm4nsxh" target="_blank" rel="noopener" class="btn" style="background: #2E2420; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 100px;">Vào Nhóm Zalo Ngôi Nhà 3 Lớp</a>
+        <p style="font-size: 12.5px; color: #8A756A; font-style: italic; margin: 0;">Hướng dẫn tham gia cũng đã được gửi vào email của bạn.</p>
       </div>
 
     </div>
   </div>
 
+</div>
+
+<!-- Popup khi khách sắp rời trang: 1 lần mỗi phiên, không hiện cho người đã đăng ký. Chữ có ngày do script điền theo đợt. -->
+<div id="popupThoat" hidden role="dialog" aria-modal="true" aria-labelledby="popupTieuDe">
+  <div class="popup-hop">
+    <button type="button" class="popup-x" aria-label="Đóng">×</button>
+    <h3 id="popupTieuDe">Trước khi bạn đi: đợt sau phải đến <span class="popup-thang-sau">tháng 1/2027</span></h3>
+    <p>Ngôi Nhà 3 Lớp mở <span class="popup-nhip">2 tháng một lần</span>. Đợt này bắt đầu <span class="popup-buoi1">20h Thứ Ba 27/10</span>, Buổi 1 và 2 miễn phí.</p>
+    <a href="#form" data-ticket="free" class="btn" style="margin-top: 6px; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 15.5px; padding: 14px; border-radius: 100px;">Giữ chỗ miễn phí</a>
+    <a href="#form" data-ticket="vip" class="btn" style="background: #FFFFFF; color: #B5482F; border: 1.5px solid #C0654A; font-weight: 600; font-size: 14.5px; padding: 12px; border-radius: 100px;">Giữ chỗ VIP <span class="gia-k">99K</span>: có video xem lại cả 3 buổi</a>
+    <button type="button" class="popup-dong">Đóng</button>
+  </div>
 </div>
 
 <!-- Thanh CTA dính trên điện thoại -->
@@ -750,6 +783,30 @@
     document.getElementById('f-ngay1').value = DOT.ngay[0];
     document.getElementById('f-ngay2').value = DOT.ngay[1];
     document.getElementById('f-ngay3').value = DOT.ngay[2];
+    hienNhipDot();
+  }
+
+  // ============ Nhịp đợt (khan hiếm thật): "mở 2 tháng một lần, đợt sau bắt đầu tháng 1/2027" ============
+  // Tháng của đợt sau tự tính từ APP_CONFIG.LICH, nên đổi lịch trong config.js thì câu chữ tự đổi theo.
+  function chuNhip() {
+    var cach = (CONFIG.LICH && CONFIG.LICH.CACH_THANG) || 1;
+    return cach === 1 ? 'mỗi tháng một lần' : cach + ' tháng một lần';
+  }
+  function thangCua(d) {
+    var p = d.dot.split('-');
+    return 'tháng ' + (+p[1]) + '/' + p[0];
+  }
+  function hienNhipDot() {
+    var sau = window.tinhDotSau(DOT);
+    if (!sau) return;
+    document.querySelectorAll('.lich-hoc').forEach(function (box) {
+      var el = box.querySelector('.lich-nhip');
+      if (!el) { el = document.createElement('div'); el.className = 'lich-nhip'; box.appendChild(el); }
+      el.textContent = 'Ngôi Nhà 3 Lớp mở ' + chuNhip() + '. Đợt sau bắt đầu ' + thangCua(sau) + '.';
+    });
+    document.querySelectorAll('.popup-thang-sau').forEach(function (el) { el.textContent = thangCua(sau); });
+    document.querySelectorAll('.popup-nhip').forEach(function (el) { el.textContent = chuNhip(); });
+    document.querySelectorAll('.popup-buoi1').forEach(function (el) { el.textContent = GIO + ' ' + DOT.label[0].replace(',', ''); });
   }
   hienDot();
 
@@ -766,9 +823,11 @@
     vung.querySelectorAll('.gia-ghi-chu-ngan').forEach(function (el) {
       el.textContent = ', giá ưu đãi đến 23h59 tối ' + g.nhanHan + ', giá thường ' + window.tienK(g.thuongGia);
     });
+    var dotSauVip = window.tinhDotSau(d);
     vung.querySelectorAll('.gia-ghi-chu').forEach(function (el) {
       el.textContent = g.uuDai
-        ? 'Sau 23h59 tối ' + g.nhanHan + ' (Buổi 2), vé VIP về giá ' + window.tienDay(g.thuongGia) + '.'
+        ? 'Giá ' + window.tienK(g.uuDaiGia) + ' dành cho đợt này đến 23h59 tối ' + g.nhanHan + ' (Buổi 2). Sau đó vé VIP là ' + window.tienK(g.thuongGia) +
+          (dotSauVip ? ', và đợt kế tiếp phải chờ đến ' + thangCua(dotSauVip) + '.' : '.')
         : 'Giá ưu đãi ' + window.tienK(g.uuDaiGia) + ' đã kết thúc lúc 23h59 tối ' + g.nhanHan + '.';
     });
     clearInterval(dongHoGia[ten]);
@@ -782,15 +841,22 @@
     apGiaVip(document.getElementById('theVip'), DOT_VIP, 'theVip');
     apGiaVip(document.getElementById('orderForm'), DOT_VIP, 'form');
     apGiaVip(document.getElementById('upgradeBox'), DOT, 'nangCap');
+    apGiaVip(document.getElementById('heroVip'), DOT_VIP, 'heroVip');
+    apGiaVip(document.getElementById('popupThoat'), DOT_VIP, 'popup');
   }
   apGiaTrang();
 
   // ============ Số vé miễn phí còn lại của đợt (số thật đếm trong Sheet, máy chủ quyết định) ============
-  // Luôn hiện "Đợt này còn X vé miễn phí" dưới khung lịch học. Hết vé: trang chuyển sang hiện đợt sau.
+  // Còn nhiều chỗ thì KHÔNG hiện số còn lại (số lớn khiến khách thấy không cần vội):
+  //   - còn từ NGUONG_HIEN_CHO trở xuống → "Đợt này còn X chỗ miễn phí"
+  //   - còn nhiều hơn, và đã có từ NGUONG_DA_DANG_KY người → "Đã có X chị giữ chỗ đợt này"
+  //   - còn lại: không hiện gì. Hết vé: trang chuyển sang hiện đợt sau.
+  var NGUONG_HIEN_CHO = 30;
+  var NGUONG_DA_DANG_KY = 50;
   function ghiChoTrongLich(chu) {
     document.querySelectorAll('.lich-hoc').forEach(function (box) {
       var el = box.querySelector('.lich-cho');
-      if (!el) { el = document.createElement('div'); el.className = 'lich-cho'; box.appendChild(el); }
+      if (!el) { el = document.createElement('div'); el.className = 'lich-cho'; box.insertBefore(el, box.querySelector('.lich-nhip')); }
       el.textContent = chu;
     });
   }
@@ -807,8 +873,10 @@
           hienDot();
           apGiaTrang();
           ghiChoTrongLich('Đợt ' + DOT_DAY.label[0] + ' đã hết vé miễn phí. Đăng ký bây giờ, bạn được giữ chỗ đợt ' + DOT.label[0] + '.');
-        } else {
-          ghiChoTrongLich('Đợt này còn ' + j.conLai + ' vé miễn phí');
+        } else if (j.conLai <= NGUONG_HIEN_CHO) {
+          ghiChoTrongLich('Đợt này còn ' + j.conLai + ' chỗ miễn phí');
+        } else if (typeof j.daDangKy === 'number' && j.daDangKy >= NGUONG_DA_DANG_KY) {
+          ghiChoTrongLich('Đã có ' + j.daDangKy + ' chị giữ chỗ đợt này');
         }
       })
       .catch(function () {});
@@ -834,18 +902,53 @@
     });
   })();
 
-  // ============ Thanh CTA dính trên điện thoại — ẩn khi thấy form ============
+  // ============ Thanh CTA dính trên điện thoại — chỉ hiện khi nút chính đầu trang đã cuộn khỏi màn hình và chưa tới form ============
   (function () {
     var stickyBar = document.getElementById('stickyCta');
-    var formSection = document.getElementById('form');
+    var dangThay = { heroCta: true, form: false };
     if ('IntersectionObserver' in window) {
       var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          stickyBar.classList.toggle('show', !entry.isIntersecting);
-        });
+        entries.forEach(function (entry) { dangThay[entry.target.id] = entry.isIntersecting; });
+        stickyBar.classList.toggle('show', !dangThay.heroCta && !dangThay.form);
       }, { threshold: 0.1 });
-      observer.observe(formSection);
+      observer.observe(document.getElementById('heroCta'));
+      observer.observe(document.getElementById('form'));
     }
+  })();
+
+  // ============ Popup khi khách sắp rời trang ============
+  // Máy tính: chuột rời mép trên cửa sổ. Điện thoại: đã ở trang từ 40 giây và cuộn ngược nhanh.
+  // Chỉ hiện 1 lần mỗi phiên; không hiện cho người đã đăng ký (có đơn trong phiên) hoặc khi đang ở form.
+  (function () {
+    var popup = document.getElementById('popupThoat');
+    var moLuc = Date.now();
+    function daHien() { try { return sessionStorage.getItem('popupThoat') === '1'; } catch (e) { return false; } }
+    function daDangKy() { try { return !!sessionStorage.getItem('order'); } catch (e) { return false; } }
+    function dangOForm() {
+      var r = document.getElementById('form').getBoundingClientRect();
+      return r.top < window.innerHeight * 0.6 && r.bottom > 0;
+    }
+    function hien() {
+      if (!DOT || daHien() || daDangKy() || dangOForm() || document.getElementById('thankyou').style.display === 'flex') return;
+      try { sessionStorage.setItem('popupThoat', '1'); } catch (e) {}
+      popup.hidden = false;
+    }
+    function dong() { popup.hidden = true; }
+    popup.querySelectorAll('.popup-x, .popup-dong, a[href="#form"]').forEach(function (el) { el.addEventListener('click', dong); });
+    popup.addEventListener('click', function (e) { if (e.target === popup) dong(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') dong(); });
+
+    document.addEventListener('mouseout', function (e) {
+      if (!e.relatedTarget && e.clientY <= 0 && Date.now() - moLuc > 5000) hien();
+    });
+
+    // Cuộn ngược nhanh: lên ít nhất 250px trong vòng 400 mili giây
+    var mocY = window.scrollY, mocT = Date.now();
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY, t = Date.now();
+      if (y > mocY || t - mocT > 400) { mocY = y; mocT = t; return; }
+      if (mocY - y >= 250 && t - moLuc >= 40000 && window.matchMedia('(max-width: 820px)').matches) hien();
+    }, { passive: true });
   })();
 
   // ============ Form đăng ký ============
