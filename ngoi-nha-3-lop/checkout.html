@@ -105,6 +105,17 @@
       <div class="bank-apps-luoi" id="bankAppsLuoi"></div>
       <div class="bank-apps-phu" style="margin: 10px 0 0;">Bấm mà app không mở? Bạn thoát ra màn hình chính, mở app ngân hàng như mọi lần, rồi quét ảnh mã QR vừa lưu. Giữ trang này mở để thấy xác nhận thanh toán.</div>
     </div>
+    <!-- Trang mở bên trong Facebook / Messenger / Instagram / Zalo / TikTok: các app này chặn mở app ngân hàng từ trang web,
+         nên thay lưới logo bằng hướng dẫn chuyển khoản ngay -->
+    <div class="bank-apps" id="huongDanTrongApp" hidden>
+      <div class="bank-apps-tieu-de">Chuyển khoản trong 3 bước</div>
+      <ol style="margin: 6px 0 0; padding-left: 18px; font-size: 13.5px; line-height: 1.6; color: var(--text);">
+        <li>Bấm <strong>Lưu mã QR về máy</strong> ở trên.</li>
+        <li>Thoát ra màn hình chính, mở app ngân hàng của bạn, chọn <strong>Quét mã QR</strong>, rồi chọn ảnh vừa lưu. Số tiền và nội dung đã có sẵn.</li>
+        <li>Chuyển khoản xong, quay lại đây: trang tự báo đã nhận tiền, và email xác nhận gửi vào hộp thư của bạn.</li>
+      </ol>
+      <div class="bank-apps-phu" style="margin: 8px 0 0;">Không quét được ảnh? Chép số tài khoản, số tiền và nội dung chuyển khoản ở khung bên dưới (nút <strong>Copy</strong>), giữ đúng nội dung để đơn được xác nhận tự động.</div>
+    </div>
     <div class="qr-hint">
       <strong>Đang xem trên điện thoại?</strong>
       <ol>
@@ -268,7 +279,7 @@
       // Nút chỉ báo đã lưu (bấm lại thì lưu thêm lần nữa); việc mở app nằm ở khối logo ngân hàng ngay bên dưới
       btn.textContent = 'Đã lưu ảnh ✓ (bấm để lưu lại)';
       btn.classList.add('da-luu');
-      var khoiApp = document.getElementById('bankApps');
+      var khoiApp = document.getElementById('bankApps').hidden ? document.getElementById('huongDanTrongApp') : document.getElementById('bankApps');
       if (!khoiApp.hidden) khoiApp.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } catch (err) {
       if (err && err.name === 'AbortError') return; // khách tự đóng bảng chia sẻ
@@ -298,6 +309,13 @@
     var ua = navigator.userAgent;
     var heDieuHanh = /iPhone|iPad|iPod/i.test(ua) ? 'ios' : /Android/i.test(ua) ? 'android' : '';
     if (!heDieuHanh) return;
+    // Trình duyệt bên trong app mạng xã hội: bấm logo không có tác dụng (đã thử trong Facebook, 22/10/2026) → chỉ hiện hướng dẫn
+    if (/FBAN|FBAV|FB_IAB|FBIOS|FB4A|Messenger|Instagram|Zalo|musical_ly|BytedanceWebview|TikTok|Line\//i.test(ua)) {
+      document.getElementById('huongDanTrongApp').hidden = false;
+      var goiYCu = document.querySelector('.qr-hint'); // khung "Đang xem trên điện thoại?" nói cùng ý → ẩn cho khỏi lặp
+      if (goiYCu) goiYCu.hidden = true;
+      return;
+    }
     var luoi = document.getElementById('bankAppsLuoi');
     APP_NGAN_HANG.forEach(function (a) {
       var el = document.createElement('a');
