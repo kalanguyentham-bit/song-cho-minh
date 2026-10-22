@@ -98,11 +98,12 @@
   <div class="qr-section">
     <img id="qrImg" alt="QR thanh toán" width="280" height="280">
     <button type="button" class="save-qr-btn" id="saveQrBtn">Lưu mã QR về máy</button>
-    <!-- Chỉ hiện trên điện thoại: bấm logo để mở app ngân hàng (link mở app của VietQR, chỉ mở app, không tự điền) -->
+    <!-- Chỉ hiện trên điện thoại: bấm logo để mở app ngân hàng (chỉ mở app, không tự điền; khách quét ảnh QR vừa lưu) -->
     <div class="bank-apps" id="bankApps" hidden>
       <div class="bank-apps-tieu-de">Mở app ngân hàng của bạn</div>
       <div class="bank-apps-phu">Bấm vào ngân hàng bạn dùng. Trong app, chọn <strong>Quét mã QR</strong> rồi chọn ảnh mã QR vừa lưu: số tiền và nội dung đã có sẵn.</div>
       <div class="bank-apps-luoi" id="bankAppsLuoi"></div>
+      <div class="bank-apps-phu" style="margin: 10px 0 0;">Bấm mà app không mở? Bạn thoát ra màn hình chính, mở app ngân hàng như mọi lần, rồi quét ảnh mã QR vừa lưu. Giữ trang này mở để thấy xác nhận thanh toán.</div>
     </div>
     <div class="qr-hint">
       <strong>Đang xem trên điện thoại?</strong>
@@ -275,35 +276,46 @@
     }
   });
 
-  // Khối "Mở app ngân hàng": chỉ trên điện thoại. Danh sách app + logo lấy từ VietQR theo hệ điều hành,
-  // xếp theo số người dùng, lấy 12 app đầu. Lỗi mạng thì ẩn khối, khách vẫn làm theo hướng dẫn bên trên.
+  // Khối "Mở app ngân hàng": chỉ trên điện thoại. Logo bấm thẳng vào link mở app (Android: intent://, iPhone: scheme://),
+  // KHÔNG đi qua trang chuyển tiếp: trình duyệt trong Facebook chặn chuyển tiếp sang app, chỉ cho mở khi khách tự bấm.
+  // Mã mở app lấy từ dl.vietqr.io (22/10/2026). Android: app chưa cài thì mở trang app trên Google Play.
+  var APP_NGAN_HANG = [
+    // [mã logo VietQR, tên, scheme, đường dẫn trong app (Android), gói Android]
+    ['mb', 'MB Bank', 'mbbank', '', 'com.mbmobile'],
+    ['vcb', 'VCB Digibank', 'vietcombankmobile', '', 'com.VCB'],
+    ['vba', 'Agribank Plus', 'agribankmobile', '', 'com.vnpay.Agribank3g'],
+    ['icb', 'VietinBank iPay', 'vietinbankipay', '', 'com.vietinbank.ipay'],
+    ['bidv', 'BIDV SmartBanking', 'bidv.smartbanking.partner', 'payment', 'com.vnpay.bidv'],
+    ['tcb', 'Techcombank', 'tcb', 'applink', 'vn.com.techcombank.bb.app'],
+    ['vpb', 'VPBank NEO', 'vpbankneo', '', 'com.vnpay.vpbankonline'],
+    ['cake', 'CAKE', 'cake.vn', '', 'xyz.be.cake'],
+    ['ocb', 'OCB OMNI', 'newomni-app', '', 'vn.com.ocb.awe'],
+    ['tpb', 'TPBank Mobile', 'hydro', 'onboarding', 'com.tpb.mb.gprsandroid'],
+    ['acb', 'ACB ONE', 'acbone', '', 'mobile.acb.com.vn'],
+    ['lpb', 'LPBank', 'lv24h', '', 'vn.com.lpb.lienviet24h']
+  ];
   (function () {
     var ua = navigator.userAgent;
     var heDieuHanh = /iPhone|iPad|iPod/i.test(ua) ? 'ios' : /Android/i.test(ua) ? 'android' : '';
     if (!heDieuHanh) return;
-    fetch('https://api.vietqr.io/v2/' + heDieuHanh + '-app-deeplinks')
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        var ds = (j && j.apps || []).filter(function (a) { return a.appId && a.deeplink; })
-          .sort(function (a, b) { return (b.monthlyInstall || 0) - (a.monthlyInstall || 0); })
-          .slice(0, 12);
-        if (!ds.length) return;
-        var luoi = document.getElementById('bankAppsLuoi');
-        ds.forEach(function (a) {
-          var el = document.createElement('a');
-          el.className = 'bank-app';
-          el.href = 'https://dl.vietqr.io/pay?app=' + encodeURIComponent(a.appId);
-          el.rel = 'noopener';
-          var img = document.createElement('img');
-          img.src = a.appLogo; img.alt = ''; img.loading = 'lazy';
-          var ten = document.createElement('span');
-          ten.textContent = String(a.appName || a.appId).replace(/\s*-\s*Ngân hàng số.*$/i, '');
-          el.appendChild(img); el.appendChild(ten);
-          luoi.appendChild(el);
-        });
-        document.getElementById('bankApps').hidden = false;
-      })
-      .catch(function () {});
+    var luoi = document.getElementById('bankAppsLuoi');
+    APP_NGAN_HANG.forEach(function (a) {
+      var el = document.createElement('a');
+      el.className = 'bank-app';
+      el.href = heDieuHanh === 'android'
+        ? 'intent://' + a[3] + '#Intent;scheme=' + a[2] + ';package=' + a[4] +
+          ';S.browser_fallback_url=' + encodeURIComponent('https://play.google.com/store/apps/details?id=' + a[4]) + ';end'
+        : a[2] + '://';
+      var img = document.createElement('img');
+      img.src = 'https://cdn.vietqr.io/bank-app-icon/' + a[0] + '-' + heDieuHanh + '.webp';
+      img.alt = ''; img.loading = 'lazy';
+      img.onerror = function () { img.remove(); };
+      var ten = document.createElement('span');
+      ten.textContent = a[1];
+      el.appendChild(img); el.appendChild(ten);
+      luoi.appendChild(el);
+    });
+    document.getElementById('bankApps').hidden = false;
   })();
 
   updateQR(Number(order.totalAmount) || BASE_PRICE); // giá lấy từ máy chủ (đơn đã tạo), không tự gõ cứng
