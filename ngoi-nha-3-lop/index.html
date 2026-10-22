@@ -695,6 +695,7 @@
           <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6;">✓ Bảng Tự Đánh Giá Thói Quen: xác định bạn nên ưu tiên điều gì trước</div>
           <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6; margin-bottom: 14px;">✓ Video xem lại cả 3 buổi học</div>
           <button type="button" id="upgradeBtn" style="display: block; width: 100%; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer;">Mở Khóa Buổi 3: Đăng Ký Vé VIP (<span class="gia-k">99K</span>)</button>
+          <p id="upgradeLoi" style="display: none; color: #B5482F; font-size: 13px; margin: 8px 0 0; line-height: 1.5;"></p>
           <div style="margin-top: 12px; background: #EAF2E7; border: 1.5px dashed #7C8A6E; border-radius: 10px; padding: 12px 14px; font-size: 13px; line-height: 1.55; color: #44513C;">🎥 Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày trong nhóm VIP.</div>
         </div>
 
@@ -1220,10 +1221,18 @@
 
   // ============ Nâng cấp lên Vé VIP ngay trong thông báo giữ chỗ thành công ============
   var upgradeBtn = document.getElementById('upgradeBtn');
-  var UPGRADE_DEFAULT_TEXT = upgradeBtn.textContent;
+  // Chữ của nút lúc khách bấm (có <span class="gia-k"> với giá đúng đợt), để trả lại nguyên vẹn khi phải thử lại
+  var UPGRADE_DEFAULT_HTML = upgradeBtn.innerHTML;
+  var upgradeLoi = document.getElementById('upgradeLoi');
+  var choNangCap = [];
+  function datLaiNutNangCap() {
+    choNangCap.forEach(clearTimeout); choNangCap = [];
+    upgradeBtn.disabled = false;
+    upgradeBtn.innerHTML = UPGRADE_DEFAULT_HTML;
+  }
 
   window.addEventListener('pageshow', function (event) {
-    if (event.persisted) { upgradeBtn.disabled = false; upgradeBtn.textContent = UPGRADE_DEFAULT_TEXT; }
+    if (event.persisted) datLaiNutNangCap();
   });
 
   upgradeBtn.addEventListener('click', async function () {
@@ -1236,36 +1245,29 @@
       return;
     }
 
+    UPGRADE_DEFAULT_HTML = upgradeBtn.innerHTML;
     upgradeBtn.disabled = true;
-    upgradeBtn.textContent = 'Đang xử lý...';
+    upgradeLoi.style.display = 'none';
+    // Chữ trên nút đổi dần trong lúc chờ máy chủ tạo mã chuyển khoản (có lúc mất 20–40 giây)
+    [[0, 'ĐANG TẠO MÃ CHUYỂN KHOẢN CHO BẠN...'], [4000, 'SẮP XONG, BẠN ĐỢI VÀI GIÂY...'], [10000, 'VẪN ĐANG XỬ LÝ, ĐỪNG ĐÓNG TRANG NHÉ...'], [20000, 'MÁY CHỦ ĐANG CHẬM, CHỈ THÊM CHÚT NỮA...']]
+      .forEach(function (d) { choNangCap.push(setTimeout(function () { upgradeBtn.textContent = d[1]; }, d[0])); });
     try {
-      var res = await fetch(GAS_URL, {
-        method: 'POST',
-        body: JSON.stringify({
-          action: 'createOrder',
-          data: {
-            name: current.name || '',
-            phone: current.phone || '',
-            email: current.email || '',
-            goal: 'Vé VIP (99K)',
-            dot: document.getElementById('f-dot').value,
-            ngay_buoi_1: document.getElementById('f-ngay1').value,
-            ngay_buoi_2: document.getElementById('f-ngay2').value,
-            ngay_buoi_3: document.getElementById('f-ngay3').value,
-            bump1: false,
-            bump2: false,
-            totalAmount: 99000,
-            fbp: thongTinTheoDoi(['InitiateCheckout']).fbp,
-            fbc: thongTinTheoDoi(['InitiateCheckout']).fbc,
-            ua: navigator.userAgent,
-            src: location.origin + location.pathname,
-            test: thongTinTheoDoi(['InitiateCheckout']).test,
-            capi: ['InitiateCheckout']
-          }
-        })
-      });
-      var json = await res.json();
-      if (!json.success) throw new Error(json.error || 'Upgrade failed');
+      var donVip = {
+        name: current.name || '',
+        phone: current.phone || '',
+        email: current.email || '',
+        goal: 'Vé VIP (99K)',
+        dot: document.getElementById('f-dot').value,
+        ngay_buoi_1: document.getElementById('f-ngay1').value,
+        ngay_buoi_2: document.getElementById('f-ngay2').value,
+        ngay_buoi_3: document.getElementById('f-ngay3').value,
+        bump1: false,
+        bump2: false,
+        totalAmount: 99000
+      };
+      Object.assign(donVip, thongTinTheoDoi(['InitiateCheckout']));
+      var json = await guiDonLenMayChu(donVip, 75000);
+      choNangCap.forEach(clearTimeout); choNangCap = [];
 
       sessionStorage.setItem('order', JSON.stringify({
         orderId: json.orderId,
@@ -1280,9 +1282,11 @@
       fireOncePerOrder('InitiateCheckout', json.orderId, json.totalAmount);
       goCheckout();
     } catch (err) {
-      upgradeBtn.disabled = false;
-      upgradeBtn.textContent = UPGRADE_DEFAULT_TEXT;
-      alert('Có lỗi xảy ra, vui lòng thử lại: ' + err.message);
+      datLaiNutNangCap();
+      upgradeLoi.textContent = err && err.name === 'AbortError'
+        ? 'Máy chủ đang chậm nên chưa tạo được mã chuyển khoản. Bạn bấm lại nút ở trên để thử lần nữa.'
+        : 'Có lỗi xảy ra (' + err.message + '). Bạn bấm lại nút ở trên để thử lần nữa.';
+      upgradeLoi.style.display = 'block';
     }
   });
 </script>
