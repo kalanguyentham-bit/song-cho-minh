@@ -17,13 +17,13 @@ window.APP_CONFIG = {
   DEM_NGUOC_TRUOC_SO_NGAY: 14,  // chỉ hiện đồng hồ đếm ngược khi còn từ 14 ngày trở xuống (khớp 14 ngày chạy ads; xa hơn thì chỉ ghi ngày hết hạn)
 
   // Quà cho khách mua VIP trong 60 phút (tính từ lúc đăng ký đầu tiên). Giá 99K vẫn giữ đến 23h59 tối Buổi 2.
-  // CHỈ đổi BAT thành true khi file quà đã có sẵn VÀ email tự gửi quà đã chạy (Apps Script).
-  // Trang hứa tặng quà mà khách không nhận được là vi phạm chính sách Meta.
+  // Apps Script (CONFIG.QUA_VIP) tự gửi email đính kèm file quà khi đơn VIP thanh toán trong hạn; hạn do máy chủ tính.
+  // BAT ở đây phải khớp BAT trong Apps Script. Trang hứa tặng quà mà khách không nhận được là vi phạm chính sách Meta.
   QUA_VIP: {
-    BAT: false,
+    BAT: true,
     SO_PHUT: 60,
-    TEN: 'Bộ Thực Đơn 7 Ngày Bữa Cơm Gia Đình',
-    MO_TA: 'Kèm danh sách đi chợ. Cả nhà ăn chung một mâm, bạn không phải nấu riêng.'
+    TEN: 'Ebook Nhật Ký Năng Lượng 3 Ngày',
+    MO_TA: 'Sách thực hành 12 trang: ghi chép 3 tối, mỗi tối 5 phút, để thấy nhịp năng lượng của chính bạn và chọn 1 điều chỉnh nhỏ đầu tiên.'
   },
 
   // Nhịp đợt: 2 tháng 1 đợt (tháng 1, 3, 5, 7, 9, 11), Buổi 1 = Thứ Ba thứ 3 của tháng (luôn rơi vào ngày 15–21:

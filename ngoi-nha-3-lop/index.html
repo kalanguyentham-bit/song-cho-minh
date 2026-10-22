@@ -851,7 +851,7 @@
   //   - còn từ NGUONG_HIEN_CHO trở xuống → "Đợt này còn X chỗ miễn phí"
   //   - còn nhiều hơn, và đã có từ NGUONG_DA_DANG_KY người → "Đã có X chị giữ chỗ đợt này"
   //   - còn lại: không hiện gì. Hết vé: trang chuyển sang hiện đợt sau.
-  var NGUONG_HIEN_CHO = 30;
+  var NGUONG_HIEN_CHO = 100;
   var NGUONG_DA_DANG_KY = 50;
   function ghiChoTrongLich(chu) {
     document.querySelectorAll('.lich-hoc').forEach(function (box) {
@@ -1082,7 +1082,8 @@
       if (!json.success) throw new Error(json.error || 'Order creation failed');
       dungCho();
 
-      const quaHan = window.quaVipHan(); // hạn nhận quà VIP: 60 phút từ lúc đăng ký này
+      // Hạn nhận quà VIP: máy chủ tính từ lần đăng ký đầu tiên của email này trong đợt (dự phòng: 60 phút từ bây giờ)
+      const quaHan = Number(json.quaHan) || window.quaVipHan();
       sessionStorage.setItem('order', JSON.stringify({
         orderId: json.orderId,
         ckContent: json.ckContent,
@@ -1191,7 +1192,7 @@
         email: current.email || '',
         phone: current.phone || '',
         goal: 'Vé VIP (99K)',
-        quaHan: current.quaHan || window.quaVipHan() // giữ nguyên hạn quà tính từ lúc đăng ký vé miễn phí
+        quaHan: Number(json.quaHan) || current.quaHan || window.quaVipHan() // hạn quà tính từ lúc đăng ký vé miễn phí
       }));
       fireOncePerOrder('InitiateCheckout', json.orderId, json.totalAmount);
       goCheckout();
