@@ -122,16 +122,30 @@
   .qua-ghi-chu { font-size: 12px; color: #8A756A; font-style: italic; margin-top: 4px; }
   .qua-dem { margin-top: 8px; font-weight: 700; color: #B5482F; font-size: 15px; }
   .qua-dem.het { color: #8A756A; font-weight: 600; font-size: 13px; }
-  /* Ô quà 60 phút trong ô nâng cấp sau khi giữ chỗ miễn phí: nổi bật hơn ô quà ở form */
-  .qua-vip.qua-vip-noi-bat { margin: 12px 0 4px; padding: 14px; background: linear-gradient(135deg, #FFF3DC 0%, #FFE6C2 100%); border: 2px solid #E8B87A; box-shadow: 0 4px 14px rgba(232,184,122,0.35); animation: quaNhay 2.4s ease-in-out infinite; }
-  .qua-vip-noi-bat .qua-nhan { font-size: 12px; padding: 4px 12px; }
-  .qua-vip-noi-bat .qua-nhan::before { content: '🎁 '; }
-  .qua-vip-noi-bat b.qua-ten { font-family: 'Fraunces', serif; font-size: 18px; margin-top: 2px; }
-  .qua-vip-noi-bat .qua-dem { margin-top: 10px; background: #2E2420; color: #FFE1A8; border-radius: 10px; padding: 9px 12px; text-align: center; font-size: 17px; font-variant-numeric: tabular-nums; }
-  .qua-vip-noi-bat .qua-dem:empty { display: none; }
-  .qua-vip-noi-bat .qua-dem.het { background: transparent; color: #8A756A; padding: 0; font-size: 13px; text-align: left; }
-  @keyframes quaNhay { 0%, 100% { box-shadow: 0 4px 14px rgba(232,184,122,0.35); } 50% { box-shadow: 0 0 0 4px rgba(232,184,122,0.5); } }
-  @media (prefers-reduced-motion: reduce) { .qua-vip.qua-vip-noi-bat { animation: none; } }
+  /* ===== Khối kích cầu vé VIP gọn (thẻ giá VIP, khung VIP trong form, ô nâng cấp sau khi giữ chỗ) =====
+     Một đồng hồ duy nhất · 3 lý do chính · nút bấm · phần chi tiết thu gọn */
+  .vg-dong-ho { background: #2E2420; color: #FFE1A8; border-radius: 10px; padding: 9px 12px; text-align: center; font-size: 15px; font-weight: 700; line-height: 1.4; font-variant-numeric: tabular-nums; }
+  .vg-dong-ho[hidden] { display: none; }
+  .vg-qua { display: flex; gap: 8px; align-items: flex-start; background: linear-gradient(135deg, #FFF3DC 0%, #FFE6C2 100%); border: 1.5px solid #E8B87A; border-radius: 10px; padding: 10px 12px; font-size: 13.5px; line-height: 1.5; color: #5A4B44; text-align: left; }
+  .vg-qua[hidden] { display: none; }
+  .vg-qua > i { font-style: normal; font-size: 18px; line-height: 1.2; }
+  .vg-qua b { color: #2E2420; }
+  .vg-qua .qua-mo-ta { display: block; margin-top: 2px; font-size: 12.5px; color: #8A756A; }
+  .vg-loi { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; text-align: left; }
+  .vg-loi li { position: relative; padding-left: 30px; font-size: 14.5px; line-height: 1.5; color: #3A2E2A; }
+  .vg-loi li::before { content: '✓'; position: absolute; left: 0; top: 1px; width: 21px; height: 21px; border-radius: 50%; background: #C0654A; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .vg-loi b { color: #2E2420; }
+  .vg-chi-tiet { font-size: 13.5px; color: #5A4B44; text-align: left; }
+  .vg-chi-tiet summary { cursor: pointer; color: #B5482F; font-weight: 600; list-style: none; }
+  .vg-chi-tiet summary::-webkit-details-marker { display: none; }
+  .vg-chi-tiet summary::before { content: '▸ '; }
+  .vg-chi-tiet[open] summary::before { content: '▾ '; }
+  .vg-chi-tiet ul { margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; line-height: 1.5; }
+  .vg-chi-tiet li::before { content: '✓ '; color: #C0654A; font-weight: 700; }
+  @media (max-width: 620px) { #theVip > .gia-nhan-uu-dai { left: 16px; right: 16px; } }
+  #upgradeBox .vg-dong-ho { animation: quaNhay 2.4s ease-in-out infinite; }
+  @keyframes quaNhay { 0%, 100% { box-shadow: 0 0 0 0 rgba(232,184,122,0); } 50% { box-shadow: 0 0 0 4px rgba(232,184,122,0.55); } }
+  @media (prefers-reduced-motion: reduce) { #upgradeBox .vg-dong-ho { animation: none; } }
   .vip-them-chon { align-self: flex-start; background: #FFFFFF; color: #B5482F; border: 1.5px solid #C0654A; border-radius: 100px; padding: 8px 16px; font-size: 13.5px; font-weight: 700; font-family: 'Work Sans', sans-serif; cursor: pointer; }
 
   /* Thanh CTA dính trên điện thoại */
@@ -556,22 +570,30 @@
           <div class="gia-nhan-uu-dai" style="position: absolute; top: -12px; right: 24px; background: #C0654A; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.3px; padding: 5px 14px; border-radius: 100px; text-align: center;">GIÁ ƯU ĐÃI CHO NGƯỜI THAM DỰ · ĐẾN 23H59 TỐI BUỔI 2</div>
           <div style="margin-top: 10px;">
             <div style="font-size: 19px; font-weight: 700; color: #2E2420;">VÉ VIP</div>
-            <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;">Ra về với kế hoạch 21 ngày của riêng bạn</div>
-            <div style="margin-top: 8px;"><span class="gia-goc" style="font-size: 16px; color: #B5A89C; text-decoration: line-through;">189.000đ</span> <span class="gia-ban" style="font-size: 22px; font-weight: 700; color: #C0654A;">99.000đ</span></div>
+            <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;">Buổi 3, video xem lại và 21 ngày đồng hành cùng Thắm</div>
+            <div style="margin-top: 8px;"><span class="gia-goc" style="font-size: 16px; color: #B5A89C; text-decoration: line-through;">189.000đ</span> <span class="gia-ban" style="font-size: 24px; font-weight: 700; color: #C0654A;">99.000đ</span></div>
             <div class="gia-ghi-chu" style="font-size: 12.5px; color: #8A756A; font-style: italic;">Sau 23h59 tối Buổi 2, vé VIP về giá 189.000đ.</div>
             <div class="dem-uu-dai" hidden></div>
             <div class="gia-dot-sau" hidden style="font-size: 12.5px; color: #8A756A; font-style: italic; margin-top: 8px; line-height: 1.5;"></div>
           </div>
-          <div style="height: 1px; background: #E6C4B4;"></div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Tất cả quyền lợi vé tiêu chuẩn</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Mở khóa Buổi 3: Lớp 3 (Không Gian), chỉ dành riêng cho vé VIP</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Bảng Tự Đánh Giá Thói Quen: xác định bạn nên ưu tiên điều gì trước</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Video xem lại cả 3 buổi học</div>
-          <div style="font-size: 14.5px; color: #3A2E2A; line-height: 1.6;">✓ Nhóm Zalo VIP: Thắm hỗ trợ trực tiếp 21 ngày sau workshop</div>
+          <div class="vg-qua" data-qua hidden><i>🎁</i><span>Đăng ký xong, thanh toán trong <span class="qua-so-phut">60</span> phút: tặng thêm ebook <b class="qua-ten"></b>.</span></div>
+          <ul class="vg-loi">
+            <li><b>Buổi 3 cùng Thắm:</b> hoàn thiện Kế Hoạch 21 Ngày theo bảng tự đánh giá của bạn</li>
+            <li><b>Video xem lại cả 3 buổi,</b> xem lúc nào tiện</li>
+            <li><b>21 ngày đồng hành:</b> Thắm hỗ trợ trực tiếp trong nhóm Zalo VIP</li>
+          </ul>
           <div style="flex-grow: 1;"></div>
-          <a href="#form" data-ticket="vip" class="btn" style="margin-top: 8px; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border-radius: 100px; text-align: center;">Mở Khóa Buổi 3: Đăng Ký Vé VIP (<span class="gia-k">99K</span>)</a>
-          <div style="background: #EAF2E7; border: 1.5px dashed #7C8A6E; border-radius: 10px; padding: 12px 14px; font-size: 13px; line-height: 1.55; color: #44513C;">🎥 Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày trong nhóm VIP.</div>
+          <a href="#form" data-ticket="vip" class="btn" style="background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 15px; border-radius: 100px; text-align: center;">Mở Khóa Buổi 3 · <span class="gia-k">99K</span></a>
+          <details class="vg-chi-tiet">
+            <summary>Xem đủ quyền lợi vé VIP</summary>
+            <ul>
+              <li>Tất cả quyền lợi vé tiêu chuẩn (Buổi 1 và 2)</li>
+              <li>Buổi 3: Lớp 3 (Không Gian), chỉ dành riêng cho vé VIP</li>
+              <li>Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</li>
+              <li>Bảng Tự Đánh Giá Thói Quen: xác định bạn nên ưu tiên điều gì trước</li>
+              <li>Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày</li>
+            </ul>
+          </details>
         </div>
       </div>
     </div>
@@ -653,15 +675,13 @@
           </label>
           <p id="vipDotNote" hidden style="margin: 0; font-size: 12.5px; color: #8A756A; font-style: italic;"></p>
           <div class="vip-them">
-            <div class="vip-them-tieu-de">Vé VIP có thêm 2 điều vé miễn phí không có</div>
-            <div class="vip-noi-bat"><span>1</span><div><b>Buổi 3 · Thực hành chuyển hóa</b>Cùng Thắm đi qua Lớp 3 và hoàn thiện Kế Hoạch 21 Ngày của riêng bạn.</div></div>
-            <div class="vip-noi-bat"><span>2</span><div><b>21 ngày Thắm đồng hành sau workshop</b>Thắm hỗ trợ trực tiếp trong nhóm Zalo VIP khi bạn bắt đầu áp dụng.</div></div>
-            <div class="qua-vip" data-qua hidden>
-              <div class="qua-nhan">Quà khi mua VIP trong <span class="qua-so-phut">60</span> phút</div>
-              <b class="qua-ten"></b>
-              <div class="qua-mo-ta"></div>
-              <div class="qua-ghi-chu"><span class="qua-so-phut">60</span> phút tính từ lúc bạn đăng ký. Quà gửi vào email ngay sau khi thanh toán.</div>
-            </div>
+            <div class="vip-them-tieu-de" style="font-size: 14px;">Thêm <span class="gia-k">99K</span> để đi trọn 3 buổi</div>
+            <ul class="vg-loi" style="gap: 6px;">
+              <li style="font-size: 13.5px;"><b>Buổi 3 cùng Thắm:</b> hoàn thiện Kế Hoạch 21 Ngày của riêng bạn</li>
+              <li style="font-size: 13.5px;"><b>Video xem lại cả 3 buổi</b></li>
+              <li style="font-size: 13.5px;"><b>21 ngày đồng hành</b> trong nhóm Zalo VIP</li>
+            </ul>
+            <div class="vg-qua" data-qua hidden><i>🎁</i><span>Thanh toán trong <span class="qua-so-phut">60</span> phút từ lúc đăng ký: tặng thêm ebook <b class="qua-ten"></b>, gửi vào email ngay sau khi thanh toán.</span></div>
             <div class="dem-uu-dai" hidden></div>
             <button type="button" class="vip-them-chon" id="chonVipBtn">Chọn vé VIP (<span class="gia-k">99K</span>)</button>
           </div>
@@ -683,31 +703,35 @@
         </div>
 
         <!-- Ô nâng cấp VIP đặt TRÊN nút Zalo: khách đọc lời mời trước khi rời trang. Nút Zalo mở ở tab mới. -->
-        <div id="upgradeBox" style="width: 100%; margin-top: 8px; background: #FFF5EE; border: 2px solid #C0654A; border-radius: 14px; padding: 20px; text-align: left; box-shadow: 0 4px 16px rgba(192,101,74,0.15);">
-          <div class="gia-nhan-uu-dai" style="display: inline-block; background: #C0654A; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.3px; padding: 5px 12px; border-radius: 100px; margin-bottom: 10px;">GIÁ ƯU ĐÃI CHO NGƯỜI THAM DỰ · ĐẾN 23H59 TỐI BUỔI 2</div>
-          <div style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; color: #2E2420;">Nâng cấp lên VÉ VIP</div>
-          <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;">Ra về với kế hoạch 21 ngày của riêng bạn</div>
-          <!-- Ô quà 60 phút: đặt ngay dưới tiêu đề (trên giá) để khách thấy đầu tiên -->
-          <div class="qua-vip qua-vip-noi-bat" data-qua hidden>
-            <div class="qua-nhan">Quà khi mua VIP trong <span class="qua-so-phut">60</span> phút</div>
-            <b class="qua-ten"></b>
-            <div class="qua-mo-ta"></div>
-            <div class="qua-dem" id="quaDemNangCap"></div>
+        <!-- Một đồng hồ: quà 60 phút còn hạn thì hiện #quaDemNangCap, hết hạn (hoặc quà tắt) thì hiện .dem-uu-dai (hạn giá 99K). Xem dongBoDongHoNangCap(). -->
+        <div id="upgradeBox" style="width: 100%; margin-top: 8px; background: #FFF5EE; border: 2px solid #C0654A; border-radius: 14px; padding: 18px; text-align: left; box-shadow: 0 4px 16px rgba(192,101,74,0.15); display: flex; flex-direction: column; gap: 12px;">
+          <div class="vg-dong-ho" id="quaDemNangCap" hidden></div>
+          <div class="dem-uu-dai" hidden style="margin-top: 0;"></div>
+          <div>
+            <div style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 19px; color: #2E2420;">Nâng cấp lên VÉ VIP</div>
+            <div style="font-size: 14px; color: #5A4B44; margin-top: 4px; line-height: 1.55;">Buổi 1 và 2 giúp bạn hiểu. Buổi 3 là lúc cùng Thắm biến điều đã hiểu thành kế hoạch của riêng bạn.</div>
           </div>
-          <div style="margin-top: 8px;"><span class="gia-goc" style="font-size: 16px; color: #B5A89C; text-decoration: line-through;">189.000đ</span> <span class="gia-ban" style="font-size: 22px; font-weight: 700; color: #C0654A;">99.000đ</span></div>
-          <div class="gia-ghi-chu" style="font-size: 12.5px; color: #8A756A; font-style: italic; margin-bottom: 12px;">Sau 23h59 tối Buổi 2, vé VIP về giá 189.000đ.</div>
-          <div class="dem-uu-dai" hidden style="margin-bottom: 12px;"></div>
-          <div style="height: 1px; background: #E6C4B4; margin-bottom: 12px;"></div>
-          <div class="vip-noi-bat"><span>1</span><div><b>Buổi 3 · Thực hành chuyển hóa</b>Cùng Thắm đi qua Lớp 3 và hoàn thiện Kế Hoạch 21 Ngày của riêng bạn. Chỉ dành cho vé VIP.</div></div>
-          <div class="vip-noi-bat" style="margin-bottom: 12px;"><span>2</span><div><b>21 ngày Thắm đồng hành sau workshop</b>Thắm hỗ trợ trực tiếp trong nhóm Zalo VIP khi bạn bắt đầu áp dụng.</div></div>
-          <div style="font-size: 13px; font-weight: 700; color: #5A4B44; margin-bottom: 4px;">Kèm theo:</div>
-          <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6;">✓ Tất cả quyền lợi vé tiêu chuẩn</div>
-          <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6;">✓ Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</div>
-          <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6;">✓ Bảng Tự Đánh Giá Thói Quen: xác định bạn nên ưu tiên điều gì trước</div>
-          <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6; margin-bottom: 14px;">✓ Video xem lại cả 3 buổi học</div>
-          <button type="button" id="upgradeBtn" style="display: block; width: 100%; background: #C0654A; color: #FFFFFF; font-weight: 600; font-size: 15px; padding: 14px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer;">Mở Khóa Buổi 3: Đăng Ký Vé VIP (<span class="gia-k">99K</span>)</button>
-          <p id="upgradeLoi" style="display: none; color: #B5482F; font-size: 13px; margin: 8px 0 0; line-height: 1.5;"></p>
-          <div style="margin-top: 12px; background: #EAF2E7; border: 1.5px dashed #7C8A6E; border-radius: 10px; padding: 12px 14px; font-size: 13px; line-height: 1.55; color: #44513C;">🎥 Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày trong nhóm VIP.</div>
+          <div class="vg-qua" data-qua hidden><i>🎁</i><span>Lên VIP lúc này, bạn nhận thêm ebook <b class="qua-ten"></b>.<span class="qua-mo-ta"></span></span></div>
+          <div><span class="gia-goc" style="font-size: 16px; color: #B5A89C; text-decoration: line-through;">189.000đ</span> <span class="gia-ban" style="font-size: 24px; font-weight: 700; color: #C0654A;">99.000đ</span>
+            <div class="gia-ghi-chu" style="font-size: 12.5px; color: #8A756A; font-style: italic;">Sau 23h59 tối Buổi 2, vé VIP về giá 189.000đ.</div></div>
+          <ul class="vg-loi">
+            <li><b>Buổi 3 cùng Thắm:</b> hoàn thiện Kế Hoạch 21 Ngày theo bảng tự đánh giá của bạn</li>
+            <li><b>Video xem lại cả 3 buổi,</b> xem lúc nào tiện</li>
+            <li><b>21 ngày đồng hành:</b> Thắm hỗ trợ trực tiếp trong nhóm Zalo VIP</li>
+          </ul>
+          <div>
+            <button type="button" id="upgradeBtn" style="display: block; width: 100%; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 15px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer;">Mở Khóa Buổi 3 · <span class="gia-k">99K</span></button>
+            <p id="upgradeLoi" style="display: none; color: #B5482F; font-size: 13px; margin: 8px 0 0; line-height: 1.5;"></p>
+          </div>
+          <details class="vg-chi-tiet">
+            <summary>Xem đủ quyền lợi vé VIP</summary>
+            <ul>
+              <li>Tất cả quyền lợi vé tiêu chuẩn (Buổi 1 và 2)</li>
+              <li>Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</li>
+              <li>Bảng Tự Đánh Giá Thói Quen: xác định bạn nên ưu tiên điều gì trước</li>
+              <li>Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày</li>
+            </ul>
+          </details>
         </div>
 
         <p style="font-size: 14.5px; color: #5A4B44; line-height: 1.6; margin: 8px 0 0;">Bước tiếp theo: vào nhóm Zalo của lớp để nhận link phòng học, lịch nhắc và tài liệu trước Buổi 1.</p>
@@ -860,14 +884,30 @@
       if (!el.hidden) {
         el.textContent = 'Giá ' + window.tienK(g.uuDaiGia) + ' dành cho đợt này đến 23h59 tối ' + d.label[1].split(', ').pop() +
           '. Sau đó vé VIP là ' + window.tienK(g.thuongGia) + ', và đợt kế tiếp phải chờ đến ' + thangCua(dotSauVip) + '.';
+        // Dòng này đã nói hạn và giá thường → ẩn dòng "Sau 23h59 tối … về giá …" trong cùng khối cho khỏi lặp
+        vung.querySelectorAll('.gia-ghi-chu').forEach(function (x) { x.style.display = 'none'; });
+      } else {
+        vung.querySelectorAll('.gia-ghi-chu').forEach(function (x) { x.style.display = ''; });
       }
     });
     clearInterval(dongHoGia[ten]);
     var hienDongHo = g.uuDai && g.han - Date.now() <= (CONFIG.DEM_NGUOC_TRUOC_SO_NGAY || 14) * 86400000;
     vung.querySelectorAll('.dem-uu-dai').forEach(function (el) {
       el.hidden = !hienDongHo;
+      el.dataset.coDongHo = hienDongHo ? '1' : ''; // ô nâng cấp dùng để chọn hiện đồng hồ quà hay đồng hồ giá
       if (hienDongHo) dongHoGia[ten] = window.demNguocUuDai(el, g.han, function () { apGiaVip(vung, d, ten); });
     });
+    if (ten === 'nangCap') dongBoDongHoNangCap();
+  }
+
+  // Ô nâng cấp chỉ hiện MỘT đồng hồ: quà 60 phút còn hạn → đồng hồ quà (kèm dòng quà); hết hạn hoặc quà tắt → đồng hồ giá 99K.
+  var quaHanNangCap = 0;
+  function dongBoDongHoNangCap() {
+    var hop = document.getElementById('upgradeBox');
+    var quaConHan = !!(QUA_BAT && quaHanNangCap && quaHanNangCap > Date.now());
+    document.getElementById('quaDemNangCap').hidden = !quaConHan;
+    hop.querySelectorAll('[data-qua]').forEach(function (el) { el.hidden = !quaConHan; });
+    hop.querySelectorAll('.dem-uu-dai').forEach(function (el) { el.hidden = quaConHan || !el.dataset.coDongHo; });
   }
   function apGiaTrang() {
     apGiaVip(document.getElementById('theVip'), DOT_VIP, 'theVip');
@@ -913,6 +953,7 @@
 
   // Quà VIP 60 phút: chỉ hiện khi bật trong config.js (QUA_VIP.BAT)
   var QUA_BAT = window.hienKhoiQua();
+  dongBoDongHoNangCap(); // dòng quà trong ô nâng cấp chỉ hiện khi đồng hồ quà chạy (sau khi khách giữ chỗ)
 
   // ============ Section 2: dấu hiệu bấm chọn được ============
   (function () {
@@ -1183,9 +1224,12 @@
 
   function demNguocQuaNangCap(han) {
     if (!QUA_BAT) return;
+    quaHanNangCap = Number(han) || 0;
+    dongBoDongHoNangCap();
+    // Hết giờ quà → dongBoDongHoNangCap ẩn đồng hồ quà và dòng quà, hiện đồng hồ giá 99K
     window.demNguocQua(document.getElementById('quaDemNangCap'), han,
-      function (mmss) { return 'Còn ' + mmss + ' để nhận quà'; },
-      'Đã hết thời gian nhận quà. Giá 99K vẫn giữ đến 23h59 tối Buổi 2.');
+      function (mmss) { return '🎁 Còn ' + mmss + ' để nhận thêm ebook khi lên VIP'; },
+      '', function () { quaHanNangCap = 0; dongBoDongHoNangCap(); }); // đồng hồ báo hết khi còn < 1 giây → coi như hết hẳn
   }
 
   /**
