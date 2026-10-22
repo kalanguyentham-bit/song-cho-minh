@@ -22,8 +22,8 @@ window.APP_CONFIG = {
   QUA_VIP: {
     BAT: true,
     SO_PHUT: 60,
-    TEN: 'Ebook Nhật Ký Năng Lượng 3 Ngày',
-    MO_TA: 'Sách thực hành 12 trang: ghi chép 3 tối, mỗi tối 5 phút, để thấy nhịp năng lượng của chính bạn và chọn 1 điều chỉnh nhỏ đầu tiên.'
+    TEN: 'Nhật Ký Năng Lượng 3 Ngày',
+    MO_TA: 'Ghi lại ăn, ngủ, sinh hoạt trong 3 ngày học để mang vào Buổi 3, làm Kế Hoạch 21 Ngày sát với nhịp sống của bạn hơn.'
   },
 
   // Nhịp đợt: 2 tháng 1 đợt (tháng 1, 3, 5, 7, 9, 11), Buổi 1 = Thứ Ba thứ 3 của tháng (luôn rơi vào ngày 15–21:
