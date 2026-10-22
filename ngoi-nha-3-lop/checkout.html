@@ -50,6 +50,15 @@
   .save-qr-btn:active { transform: scale(0.97); }
   .qr-hint { margin-top: 10px; font-size: 13px; color: var(--text-muted); line-height: 1.55; text-align: left; background: var(--surface-2); border-radius: 8px; padding: 10px 12px; }
   .qr-hint ol { padding-left: 18px; }
+  .save-qr-btn.da-luu { background: #2F7A56; }
+  .bank-apps { margin-top: 12px; text-align: left; border: 1.5px solid var(--accent); border-radius: 10px; padding: 12px; }
+  .bank-apps[hidden] { display: none; }
+  .bank-apps-tieu-de { font-weight: 700; font-size: 14.5px; color: var(--text); }
+  .bank-apps-phu { font-size: 12.5px; color: var(--text-muted); margin: 2px 0 10px; line-height: 1.5; }
+  .bank-apps-luoi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .bank-app { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--text); font-size: 11px; line-height: 1.25; text-align: center; padding: 6px 2px; border-radius: 8px; background: var(--surface-2); }
+  .bank-app img { width: 40px; height: 40px; border-radius: 10px; }
+  .bank-app:active { transform: scale(0.96); }
   .qua-vip { background: #FFF6EC; border: 1.5px solid #E8B87A; border-radius: 10px; padding: 12px 14px; font-size: 13.5px; line-height: 1.5; color: var(--text-muted); margin-bottom: 8px; }
   .qua-vip[hidden] { display: none; }
   .qua-nhan { display: inline-block; background: #E8B87A; color: #3A2A22; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; margin-bottom: 6px; }
@@ -89,6 +98,12 @@
   <div class="qr-section">
     <img id="qrImg" alt="QR thanh toán" width="280" height="280">
     <button type="button" class="save-qr-btn" id="saveQrBtn">Lưu mã QR về máy</button>
+    <!-- Chỉ hiện trên điện thoại: bấm logo để mở app ngân hàng (link mở app của VietQR, chỉ mở app, không tự điền) -->
+    <div class="bank-apps" id="bankApps" hidden>
+      <div class="bank-apps-tieu-de">Mở app ngân hàng của bạn</div>
+      <div class="bank-apps-phu">Bấm vào ngân hàng bạn dùng. Trong app, chọn <strong>Quét mã QR</strong> rồi chọn ảnh mã QR vừa lưu: số tiền và nội dung đã có sẵn.</div>
+      <div class="bank-apps-luoi" id="bankAppsLuoi"></div>
+    </div>
     <div class="qr-hint">
       <strong>Đang xem trên điện thoại?</strong>
       <ol>
@@ -249,12 +264,47 @@
         a.click();
         a.remove();
       }
-      btn.textContent = 'Đã lưu ✓ Mở app ngân hàng để quét';
+      // Nút chỉ báo đã lưu (bấm lại thì lưu thêm lần nữa); việc mở app nằm ở khối logo ngân hàng ngay bên dưới
+      btn.textContent = 'Đã lưu ảnh ✓ (bấm để lưu lại)';
+      btn.classList.add('da-luu');
+      var khoiApp = document.getElementById('bankApps');
+      if (!khoiApp.hidden) khoiApp.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } catch (err) {
       if (err && err.name === 'AbortError') return; // khách tự đóng bảng chia sẻ
       window.open(qrUrl, '_blank');
     }
   });
+
+  // Khối "Mở app ngân hàng": chỉ trên điện thoại. Danh sách app + logo lấy từ VietQR theo hệ điều hành,
+  // xếp theo số người dùng, lấy 12 app đầu. Lỗi mạng thì ẩn khối, khách vẫn làm theo hướng dẫn bên trên.
+  (function () {
+    var ua = navigator.userAgent;
+    var heDieuHanh = /iPhone|iPad|iPod/i.test(ua) ? 'ios' : /Android/i.test(ua) ? 'android' : '';
+    if (!heDieuHanh) return;
+    fetch('https://api.vietqr.io/v2/' + heDieuHanh + '-app-deeplinks')
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var ds = (j && j.apps || []).filter(function (a) { return a.appId && a.deeplink; })
+          .sort(function (a, b) { return (b.monthlyInstall || 0) - (a.monthlyInstall || 0); })
+          .slice(0, 12);
+        if (!ds.length) return;
+        var luoi = document.getElementById('bankAppsLuoi');
+        ds.forEach(function (a) {
+          var el = document.createElement('a');
+          el.className = 'bank-app';
+          el.href = 'https://dl.vietqr.io/pay?app=' + encodeURIComponent(a.appId);
+          el.rel = 'noopener';
+          var img = document.createElement('img');
+          img.src = a.appLogo; img.alt = ''; img.loading = 'lazy';
+          var ten = document.createElement('span');
+          ten.textContent = String(a.appName || a.appId).replace(/\s*-\s*Ngân hàng số.*$/i, '');
+          el.appendChild(img); el.appendChild(ten);
+          luoi.appendChild(el);
+        });
+        document.getElementById('bankApps').hidden = false;
+      })
+      .catch(function () {});
+  })();
 
   updateQR(Number(order.totalAmount) || BASE_PRICE); // giá lấy từ máy chủ (đơn đã tạo), không tự gõ cứng
   document.getElementById('base').textContent = formatVnd(Number(order.totalAmount) || BASE_PRICE) + 'đ'; // 99K hoặc 189K sau hạn ưu đãi
