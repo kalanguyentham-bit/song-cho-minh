@@ -122,6 +122,16 @@
   .qua-ghi-chu { font-size: 12px; color: #8A756A; font-style: italic; margin-top: 4px; }
   .qua-dem { margin-top: 8px; font-weight: 700; color: #B5482F; font-size: 15px; }
   .qua-dem.het { color: #8A756A; font-weight: 600; font-size: 13px; }
+  /* Ô quà 60 phút trong ô nâng cấp sau khi giữ chỗ miễn phí: nổi bật hơn ô quà ở form */
+  .qua-vip.qua-vip-noi-bat { margin: 12px 0 4px; padding: 14px; background: linear-gradient(135deg, #FFF3DC 0%, #FFE6C2 100%); border: 2px solid #E8B87A; box-shadow: 0 4px 14px rgba(232,184,122,0.35); animation: quaNhay 2.4s ease-in-out infinite; }
+  .qua-vip-noi-bat .qua-nhan { font-size: 12px; padding: 4px 12px; }
+  .qua-vip-noi-bat .qua-nhan::before { content: '🎁 '; }
+  .qua-vip-noi-bat b.qua-ten { font-family: 'Fraunces', serif; font-size: 18px; margin-top: 2px; }
+  .qua-vip-noi-bat .qua-dem { margin-top: 10px; background: #2E2420; color: #FFE1A8; border-radius: 10px; padding: 9px 12px; text-align: center; font-size: 17px; font-variant-numeric: tabular-nums; }
+  .qua-vip-noi-bat .qua-dem:empty { display: none; }
+  .qua-vip-noi-bat .qua-dem.het { background: transparent; color: #8A756A; padding: 0; font-size: 13px; text-align: left; }
+  @keyframes quaNhay { 0%, 100% { box-shadow: 0 4px 14px rgba(232,184,122,0.35); } 50% { box-shadow: 0 0 0 4px rgba(232,184,122,0.5); } }
+  @media (prefers-reduced-motion: reduce) { .qua-vip.qua-vip-noi-bat { animation: none; } }
   .vip-them-chon { align-self: flex-start; background: #FFFFFF; color: #B5482F; border: 1.5px solid #C0654A; border-radius: 100px; padding: 8px 16px; font-size: 13.5px; font-weight: 700; font-family: 'Work Sans', sans-serif; cursor: pointer; }
 
   /* Thanh CTA dính trên điện thoại */
@@ -677,18 +687,19 @@
           <div class="gia-nhan-uu-dai" style="display: inline-block; background: #C0654A; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.3px; padding: 5px 12px; border-radius: 100px; margin-bottom: 10px;">GIÁ ƯU ĐÃI CHO NGƯỜI THAM DỰ · ĐẾN 23H59 TỐI BUỔI 2</div>
           <div style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; color: #2E2420;">Nâng cấp lên VÉ VIP</div>
           <div style="font-size: 13.5px; color: #8A756A; margin-top: 2px;">Ra về với kế hoạch 21 ngày của riêng bạn</div>
+          <!-- Ô quà 60 phút: đặt ngay dưới tiêu đề (trên giá) để khách thấy đầu tiên -->
+          <div class="qua-vip qua-vip-noi-bat" data-qua hidden>
+            <div class="qua-nhan">Quà khi mua VIP trong <span class="qua-so-phut">60</span> phút</div>
+            <b class="qua-ten"></b>
+            <div class="qua-mo-ta"></div>
+            <div class="qua-dem" id="quaDemNangCap"></div>
+          </div>
           <div style="margin-top: 8px;"><span class="gia-goc" style="font-size: 16px; color: #B5A89C; text-decoration: line-through;">189.000đ</span> <span class="gia-ban" style="font-size: 22px; font-weight: 700; color: #C0654A;">99.000đ</span></div>
           <div class="gia-ghi-chu" style="font-size: 12.5px; color: #8A756A; font-style: italic; margin-bottom: 12px;">Sau 23h59 tối Buổi 2, vé VIP về giá 189.000đ.</div>
           <div class="dem-uu-dai" hidden style="margin-bottom: 12px;"></div>
           <div style="height: 1px; background: #E6C4B4; margin-bottom: 12px;"></div>
           <div class="vip-noi-bat"><span>1</span><div><b>Buổi 3 · Thực hành chuyển hóa</b>Cùng Thắm đi qua Lớp 3 và hoàn thiện Kế Hoạch 21 Ngày của riêng bạn. Chỉ dành cho vé VIP.</div></div>
           <div class="vip-noi-bat" style="margin-bottom: 12px;"><span>2</span><div><b>21 ngày Thắm đồng hành sau workshop</b>Thắm hỗ trợ trực tiếp trong nhóm Zalo VIP khi bạn bắt đầu áp dụng.</div></div>
-          <div class="qua-vip" data-qua hidden style="margin-bottom: 12px;">
-            <div class="qua-nhan">Quà khi mua VIP trong <span class="qua-so-phut">60</span> phút</div>
-            <b class="qua-ten"></b>
-            <div class="qua-mo-ta"></div>
-            <div class="qua-dem" id="quaDemNangCap"></div>
-          </div>
           <div style="font-size: 13px; font-weight: 700; color: #5A4B44; margin-bottom: 4px;">Kèm theo:</div>
           <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6;">✓ Tất cả quyền lợi vé tiêu chuẩn</div>
           <div style="font-size: 14px; color: #3A2E2A; line-height: 1.6;">✓ Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</div>
