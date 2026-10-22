@@ -167,9 +167,12 @@ window.hienKhoiQua = function () {
   return true;
 };
 
-/** Đồng hồ đếm ngược trong el tới thời điểm han. chuCon(mm:ss) và chuHet là chữ hiển thị. */
+/** Đồng hồ đếm ngược trong el tới thời điểm han. chuCon(mm:ss) và chuHet là chữ hiển thị.
+ *  Gọi lại trên cùng el (vd. khi máy chủ trả về hạn chính xác) thì đồng hồ cũ tự dừng. */
 window.demNguocQua = function (el, han, chuCon, chuHet) {
   if (!el || !han) return;
+  clearInterval(el._dongHoQua);
+  el.classList.remove('het');
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function ve() {
     var con = Math.floor((han - Date.now()) / 1000);
@@ -177,5 +180,7 @@ window.demNguocQua = function (el, han, chuCon, chuHet) {
     el.textContent = chuCon(pad(Math.floor(con / 60)) + ':' + pad(con % 60));
   }
   var t = setInterval(ve, 1000);
+  el._dongHoQua = t;
   ve();
+  return t;
 };
