@@ -22,6 +22,8 @@
 
 <!-- Cấu hình + hàm tính lịch học: sửa trong config.js -->
 <script src="/ngoi-nha-3-lop/config.js"></script>
+<!-- Khối giữ chỗ thành công: lịch Google/iPhone, QR nhóm Zalo, quà và video chào (dùng chung với trang xác nhận VIP) -->
+<script src="/ngoi-nha-3-lop/thanh-cong.js"></script>
 
 <!-- Meta Pixel -->
 <script>
@@ -175,7 +177,7 @@
       </div>
       <a href="#form" id="heroCta" class="btn" style="margin-top: 8px; background: #FFFFFF; color: #B5482F; font-weight: 600; font-size: 16px; padding: 16px 36px; border-radius: 100px;">Đăng Ký Giữ Chỗ Miễn Phí</a>
       <a href="#form" data-ticket="vip" id="heroVip" class="lien-ket-vip">Hoặc giữ chỗ VIP <span class="gia-k">99K</span>: có Buổi 3 và video xem lại cả 3 buổi</a>
-      <div style="font-size: 12.5px; color: #E6C4B4; font-style: italic;">Link phòng học gửi qua email và nhóm Zalo của lớp ngay sau khi đăng ký.</div>
+      <div style="font-size: 12.5px; color: #E6C4B4; font-style: italic;">Link phòng học gửi trong nhóm Zalo của lớp lúc 19h mỗi ngày học.</div>
 
       <div style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
         <div style="font-size: 14px; color: #FFFFFF; text-align: left;">Cùng <b>Nguyễn Thắm</b><br><span style="color: #E6C4B4; font-size: 13px;">Coach Chuyển Hóa Sức Khỏe</span></div>
@@ -591,7 +593,6 @@
               <li>Buổi 3: Lớp 3 (Không Gian), chỉ dành riêng cho vé VIP</li>
               <li>Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</li>
               <li>Bảng Tự Đánh Giá Thói Quen: xác định bạn nên ưu tiên điều gì trước</li>
-              <li>Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày</li>
             </ul>
           </details>
         </div>
@@ -687,22 +688,52 @@
           </div>
         </div>
         <button type="submit" id="submitBtn" style="margin-top: 4px; background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 16px; padding: 16px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer; transition: opacity 0.15s;">XÁC NHẬN ĐĂNG KÝ GIỮ CHỖ</button>
-        <p style="font-size: 12.5px; color: #8A756A; text-align: center; font-style: italic; margin: 0;">Link phòng học và lịch nhắc được gửi qua email và nhóm Zalo của lớp.</p>
+        <p style="font-size: 12.5px; color: #8A756A; text-align: center; font-style: italic; margin: 0;">Link phòng học gửi trong nhóm Zalo của lớp lúc 19h mỗi ngày học.</p>
         <p style="font-size: 11.5px; color: #B0A094; text-align: center; margin: 0;">Bằng việc đăng ký, bạn đồng ý để Thắm liên hệ qua Zalo/email về workshop. Thông tin của bạn được bảo mật, không chia sẻ cho bên thứ ba, và bạn có thể yêu cầu xóa bất cứ lúc nào.</p>
         <p id="error" style="color: #B5482F; font-size: 13px; margin: 0; display: none;"></p>
       </form>
 
-      <div id="thankyou" style="display: none; background: #FFFFFF; border-radius: 18px; padding: 32px 28px; text-align: center; flex-direction: column; gap: 14px; align-items: center;">
-        <div style="width: 56px; height: 56px; background: #C0654A; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">✓</div>
-        <h3 style="font-size: 21px; color: #2E2420;">Bạn đã giữ chỗ thành công!</h3>
-        <p id="thankyouLich" style="font-size: 15px; color: #2E2420; font-weight: 600; line-height: 1.6; margin: 0;"></p>
+      <!-- Trang cảm ơn vé miễn phí. Thứ tự: thanh 3 bước → tiêu đề → nút Zalo (nằm trong màn hình đầu ở bề rộng 375px) → lịch →
+           việc nhỏ → quà trong buổi → video chào → dòng email → ô nâng cấp VIP. Phần lịch, QR, quà, video do thanh-cong.js điền. -->
+      <div id="thankyou" style="display: none; background: #FFFFFF; border-radius: 18px; padding: 22px 18px 26px; text-align: center; flex-direction: column; gap: 14px; align-items: center; scroll-margin-top: 8px;">
+        <ol class="tc-buoc" aria-label="Các bước">
+          <li class="xong" data-buoc="1">✓ Giữ chỗ</li>
+          <li class="dang" data-buoc="2">2. Vào nhóm Zalo</li>
+          <li data-buoc="3">3. Thêm vào lịch</li>
+        </ol>
+        <h3 class="tc-tieu-de" style="font-family: 'Fraunces', serif;">Còn 1 bước. Đừng đóng trang này.</h3>
+        <p class="tc-phu">Link phòng học và tài liệu trước buổi chỉ gửi trong nhóm Zalo.</p>
         <!-- Chỉ hiện khi gửi đơn ở nền thất bại sau 3 lần (mạng chập chờn) -->
         <div id="thankyouLoiGui" style="display: none; width: 100%; background: #FDECE8; border: 1.5px solid #B5482F; border-radius: 12px; padding: 14px; font-size: 14px; line-height: 1.55; color: #7A2E1E; text-align: left;">
           Mạng đang chập chờn nên đăng ký của bạn <b>chưa gửi được</b> tới Thắm. Bạn giữ nguyên trang này và bấm nút dưới đây để gửi lại.
           <button type="button" id="thankyouGuiLaiBtn" style="display: block; width: 100%; margin-top: 10px; background: #B5482F; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 12px; border: none; border-radius: 100px; font-family: 'Work Sans', sans-serif; cursor: pointer;">Gửi lại đăng ký</button>
         </div>
+        <!-- href ghi sẵn link nhóm lớp để nút vẫn đúng nếu script chưa chạy; có mã đơn thì script đổi sang trang vao-nhom (ghi nhận lượt bấm) -->
+        <a id="thankyouZaloBtn" class="tc-zalo" href="https://zalo.me/g/afweoiaxvoywcsm4nsxh" target="_blank" rel="noopener">Vào nhóm Zalo của lớp</a>
+        <p class="tc-zalo-ghi-chu">Mở trên điện thoại có Zalo, bấm Tham gia nhóm. 10 giây.</p>
+        <div class="tc-qr-hop" hidden><div class="tc-qr"></div>Đang dùng máy tính? Quét mã này bằng Zalo trên điện thoại.</div>
 
-        <!-- Ô nâng cấp VIP đặt TRÊN nút Zalo: khách đọc lời mời trước khi rời trang. Nút Zalo mở ở tab mới. -->
+        <div class="tc-khoi tc-lich">
+          <div class="tc-khoi-tieu-de">Thêm vào lịch</div>
+          <p id="thankyouLich" style="display: none; margin: 0 0 8px; font-weight: 600; color: #B5482F;"></p>
+          <ul class="tc-lich-ds"></ul>
+          <button type="button" class="tc-ics">Tải lịch cho iPhone</button>
+        </div>
+        <div class="tc-khoi">
+          <div class="tc-khoi-tieu-de">Việc nhỏ 5 phút</div>
+          <p>Hôm nay, ghi lại giờ bạn thấy tụt năng lượng nhất và lúc đó bạn vừa ăn gì. Mang theo vào Buổi 1.</p>
+        </div>
+        <div class="tc-khoi tc-qua" hidden>
+          <div class="tc-khoi-tieu-de">🎁 Quà trong buổi</div>
+          <p class="tc-qua-chu"></p>
+        </div>
+        <div class="tc-khoi tc-video" hidden>
+          <div class="tc-khoi-tieu-de">Lời chào từ Thắm</div>
+          <div class="tc-video-khung"></div>
+        </div>
+        <p class="tc-thu-rac">Không thấy email xác nhận? Xem tab Quảng cáo hoặc Thư rác, kéo email sang Hộp thư chính.</p>
+
+        <!-- Ô nâng cấp VIP đặt dưới các bước giữ chỗ. -->
         <!-- Một đồng hồ: quà 60 phút còn hạn thì hiện #quaDemNangCap, hết hạn (hoặc quà tắt) thì hiện .dem-uu-dai (hạn giá 99K). Xem dongBoDongHoNangCap(). -->
         <div id="upgradeBox" style="width: 100%; margin-top: 8px; background: #FFF5EE; border: 2px solid #C0654A; border-radius: 14px; padding: 18px; text-align: left; box-shadow: 0 4px 16px rgba(192,101,74,0.15); display: flex; flex-direction: column; gap: 12px;">
           <div class="vg-dong-ho" id="quaDemNangCap" hidden></div>
@@ -729,15 +760,9 @@
               <li>Tất cả quyền lợi vé tiêu chuẩn (Buổi 1 và 2)</li>
               <li>Bản Kế Hoạch Cá Nhân Hóa 21 Ngày (bản đầy đủ)</li>
               <li>Bảng Tự Đánh Giá Thói Quen: xác định bạn nên ưu tiên điều gì trước</li>
-              <li>Bận đột xuất tối Buổi 3? Bạn vẫn có video xem lại và được Thắm hỗ trợ đủ 21 ngày</li>
             </ul>
           </details>
         </div>
-
-        <p style="font-size: 14.5px; color: #5A4B44; line-height: 1.6; margin: 8px 0 0;">Bước tiếp theo: vào nhóm Zalo của lớp để nhận link phòng học, lịch nhắc và tài liệu trước Buổi 1.</p>
-        <!-- href ghi sẵn link nhóm lớp để nút vẫn đúng nếu script chưa chạy; script ghi đè bằng LINK_NHOM_LOP trong config.js (đổi nhóm thì sửa cả 2 chỗ) -->
-        <a id="thankyouZaloBtn" href="https://zalo.me/g/afweoiaxvoywcsm4nsxh" target="_blank" rel="noopener" class="btn" style="background: #C0654A; color: #FFFFFF; font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 100px;">Vào Nhóm Zalo Ngôi Nhà 3 Lớp</a>
-        <p style="font-size: 12.5px; color: #8A756A; font-style: italic; margin: 0;">Hướng dẫn tham gia cũng đã được gửi vào email của bạn.</p>
       </div>
 
     </div>
@@ -949,7 +974,9 @@
       })
       .catch(function () {});
   }
-  document.getElementById('thankyouZaloBtn').href = CONFIG.LINK_NHOM_LOP;
+  var THANK_YOU = document.getElementById('thankyou');
+  window.ganNutZalo(THANK_YOU, CONFIG.LINK_NHOM_LOP);
+  window.veQuaVaVideo(THANK_YOU);
 
   // Quà VIP 60 phút: chỉ hiện khi bật trong config.js (QUA_VIP.BAT)
   var QUA_BAT = window.hienKhoiQua();
@@ -1174,7 +1201,8 @@
         email: data.email,
         phone: data.phone,
         goal: data.goal,
-        quaHan: quaHan
+        quaHan: quaHan,
+        dotHoc: dotDon // ngày 3 buổi cho khối lịch ở trang xác nhận VIP
       }));
       fireLead('ve-vip', json.orderId);
       fireOncePerOrder('InitiateCheckout', json.orderId, json.totalAmount);
@@ -1208,18 +1236,25 @@
   }
 
   /** Trang cảm ơn vé miễn phí theo đợt d (daChuyen: máy chủ đã xếp sang đợt sau vì đợt này vừa đủ chỗ). */
+  var DOT_CAM_ON = null; // đợt của vé miễn phí vừa giữ chỗ (dùng khi nâng cấp VIP)
   function hienCamOnMienPhi(d, daChuyen) {
     if (d) {
+      DOT_CAM_ON = d;
       document.getElementById('f-dot').value = d.dot;
       document.getElementById('f-ngay1').value = d.ngay[0];
       document.getElementById('f-ngay2').value = d.ngay[1];
       document.getElementById('f-ngay3').value = d.ngay[2];
       apGiaVip(document.getElementById('upgradeBox'), d, 'nangCap'); // giá + đồng hồ theo đúng đợt của khách
-      document.getElementById('thankyouLich').textContent = (daChuyen ? 'Đợt bạn chọn vừa đủ chỗ, Thắm đã giữ chỗ cho bạn ở đợt sau. ' : '') +
-        'Lịch học của bạn: Buổi 1 lúc ' + GIO + ' ' + d.label[0] + ', Buổi 2 lúc ' + GIO + ' ' + d.label[1] + '.';
+      var ghiChuDot = document.getElementById('thankyouLich');
+      ghiChuDot.textContent = 'Đợt bạn chọn vừa đủ chỗ, Thắm đã giữ chỗ cho bạn ở đợt sau.';
+      ghiChuDot.style.display = daChuyen ? 'block' : 'none';
+      window.veKhoiLich(THANK_YOU, d, false); // vé miễn phí: Buổi 1 và 2
     }
     document.getElementById('orderForm').style.display = 'none';
-    document.getElementById('thankyou').style.display = 'flex';
+    var daHien = THANK_YOU.style.display === 'flex';
+    THANK_YOU.style.display = 'flex';
+    window.ganNutZalo(THANK_YOU, null, CONFIG.LINK_NHOM_LOP); // QR nhóm lớp (chỉ màn hình rộng)
+    if (!daHien) THANK_YOU.scrollIntoView(); // đưa nút Zalo vào màn hình đầu
   }
 
   function demNguocQuaNangCap(han) {
@@ -1262,7 +1297,7 @@
         }
         demNguocQuaNangCap(quaHan);
         fireLead('ve-mien-phi', json.orderId);
-        document.getElementById('thankyouZaloBtn').href = CONFIG.DUONG_DAN_WORKSHOP + '/vao-nhom?n=lop&d=' + encodeURIComponent(json.orderId);
+        window.ganNutZalo(THANK_YOU, CONFIG.DUONG_DAN_WORKSHOP + '/vao-nhom?n=lop&d=' + encodeURIComponent(json.orderId));
         if (json.daChuyenDot && dotSau && json.dot === dotSau.dot) hienCamOnMienPhi(dotSau, true);
       }).catch(function () {
         if (lan < 3) { setTimeout(gui, lan * 3000); return; }
@@ -1332,7 +1367,8 @@
         email: current.email || '',
         phone: current.phone || '',
         goal: 'Vé VIP (99K)',
-        quaHan: Number(json.quaHan) || current.quaHan || window.quaVipHan() // hạn quà tính từ lúc đăng ký vé miễn phí
+        quaHan: Number(json.quaHan) || current.quaHan || window.quaVipHan(), // hạn quà tính từ lúc đăng ký vé miễn phí
+        dotHoc: DOT_CAM_ON // cùng đợt với vé miễn phí vừa giữ chỗ
       }));
       fireOncePerOrder('InitiateCheckout', json.orderId, json.totalAmount);
       goCheckout();

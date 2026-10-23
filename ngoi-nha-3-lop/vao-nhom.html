@@ -16,26 +16,25 @@
 </head>
 <body>
 <div class="box">
-  <h1 style="font-size: 20px; margin-bottom: 8px;">Đang mở nhóm Zalo...</h1>
-  <p>Nếu Zalo không tự mở sau vài giây, bạn bấm nút dưới đây.</p>
-  <!-- href ghi sẵn nhóm lớp; script đổi sang đúng nhóm (lớp/VIP) theo LINK_NHOM_LOP / LINK_NHOM_VIP trong config.js -->
+  <h1 style="font-size: 20px; margin-bottom: 8px;" id="tieuDe">Đang mở nhóm Zalo...</h1>
+  <p id="moTa">Nếu Zalo không tự mở sau vài giây, bạn bấm nút dưới đây.</p>
+  <!-- href ghi sẵn nhóm lớp; nhóm VIP thì script hỏi máy chủ link nhóm (chỉ trả khi đơn đã thanh toán) -->
   <a class="btn" id="linkNhom" href="https://zalo.me/g/afweoiaxvoywcsm4nsxh">Mở Nhóm Zalo</a>
 </div>
 
 <script src="/ngoi-nha-3-lop/config.js"></script>
 <script>
-  // Trang trung gian cho nút "Vào nhóm Zalo" (trang cảm ơn, trang xác nhận, email).
+  // Trang trung gian cho nút "Vào nhóm Zalo" (trang cảm ơn, email cũ).
   // ?n=lop (nhóm lớp, vé miễn phí) hoặc ?n=vip (nhóm VIP); ?d=mã đơn.
-  // Gửi lượt bấm về Apps Script (ghi cột daBamLinkNhom; vé miễn phí tự tích daVaoNhomZaloFree) rồi mở Zalo ngay.
-  // Chỉ mở 2 link nhóm có sẵn trong config.js, không mở link nào khác.
+  // Gửi lượt bấm về Apps Script (ghi cột daBamLinkNhom; vé miễn phí tự tích daVaoNhomZaloFree) rồi mở Zalo.
+  // Nhóm lớp: link trong config.js. Nhóm VIP: link KHÔNG có trong trang, máy chủ (getStatus) chỉ trả về khi đơn đã thanh toán.
   (function () {
     var GAS_URL = 'https://script.google.com/macros/s/AKfycbyVg-mCaMDv_4HNpKLCrXv6oY4Yfb2K5cwc-9FXFyehFOnJ9xR2kZ8SZ2mqxjyZ6HJB/exec';
     var cfg = window.APP_CONFIG || {};
     var q = new URLSearchParams(location.search);
     var nhom = q.get('n') === 'vip' ? 'vip' : 'lop';
     var orderId = (q.get('d') || '').slice(0, 40);
-    var zalo = nhom === 'vip' ? cfg.LINK_NHOM_VIP : cfg.LINK_NHOM_LOP;
-    document.getElementById('linkNhom').href = zalo;
+    var nut = document.getElementById('linkNhom');
 
     if (orderId) {
       var body = JSON.stringify({ action: 'daBamNhom', orderId: orderId, nhom: nhom });
@@ -43,7 +42,30 @@
       try { daGui = navigator.sendBeacon && navigator.sendBeacon(GAS_URL, new Blob([body], { type: 'text/plain' })); } catch (e) {}
       if (!daGui) { try { fetch(GAS_URL, { method: 'POST', body: body, mode: 'no-cors', keepalive: true }); } catch (e) {} }
     }
-    setTimeout(function () { location.replace(zalo); }, 150);
+
+    if (nhom === 'lop') {
+      nut.href = cfg.LINK_NHOM_LOP;
+      setTimeout(function () { location.replace(cfg.LINK_NHOM_LOP); }, 150);
+      return;
+    }
+
+    nut.style.display = 'none';
+    document.getElementById('moTa').textContent = 'Thắm đang kiểm tra đơn VIP của bạn, có thể mất vài giây.';
+    function khongCoLink() {
+      document.getElementById('tieuDe').textContent = 'Chưa mở được nhóm VIP';
+      document.getElementById('moTa').textContent = 'Link nhóm Zalo VIP có trong email xác nhận thanh toán của bạn. Không thấy email? Nhắn Fanpage kèm mã đơn để Thắm hỗ trợ.';
+    }
+    if (!orderId) return khongCoLink();
+    fetch(GAS_URL + '?action=getStatus&orderId=' + encodeURIComponent(orderId))
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || j.status !== 'PAID' || !j.linkNhomVip) return khongCoLink();
+        nut.href = j.linkNhomVip;
+        nut.style.display = '';
+        document.getElementById('moTa').textContent = 'Nếu Zalo không tự mở sau vài giây, bạn bấm nút dưới đây.';
+        location.replace(j.linkNhomVip);
+      })
+      .catch(khongCoLink);
   })();
 </script>
 </body>

@@ -7,9 +7,17 @@ window.APP_CONFIG = {
   DUONG_DAN_WORKSHOP: '/ngoi-nha-3-lop',
 
   LINK_NHOM_LOP: 'https://zalo.me/g/afweoiaxvoywcsm4nsxh',   // nhóm lớp (vé miễn phí)
-  LINK_NHOM_VIP: 'https://zalo.me/g/hh6v7z42bcuiz7jio8au',   // nhóm VIP 21 ngày (vé VIP đã thanh toán)
+  // Link nhóm VIP KHÔNG để ở đây (file này ai cũng xem được). Link nằm trong Apps Script (LINK_NHOM_VIP),
+  // máy chủ chỉ trả về sau khi đơn VIP đã thanh toán, và gửi trong email xác nhận VIP.
   PIXEL_ID: '26885894507775293',
   GIO_HOC: '20h',
+  PHUT_MOI_BUOI: 90,
+
+  // Khối "Quà trong buổi" ở trang cảm ơn. Để trống ('') thì khối tự ẩn.
+  // Chỉ ghi quà có thật, trao đúng như ghi (trang hứa mà không trao là vi phạm chính sách Meta).
+  QUA_TRONG_BUOI: '',
+  // Video chào ở trang cảm ơn: dán link YouTube (vd. 'https://youtu.be/abc123XYZ'). Để trống ('') thì khối tự ẩn.
+  VIDEO_CHAO: '',
 
   // Giá vé VIP: giá ưu đãi đến 23h59 tối Buổi 2 của đợt, sau đó là giá thường (máy chủ Apps Script tính giá giống hệt).
   // Đổi giá thì đổi ở ĐÂY và ở CONFIG trong Apps Script (PRODUCT_PRICE, PRODUCT_PRICE_THUONG).
